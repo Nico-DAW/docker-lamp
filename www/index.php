@@ -33,7 +33,7 @@
                                 <a href="https://manuais.pages.iessanclemente.net/plantillas/daw/dwcs-d/ud02/9.anexos/3.tarea_ud02_formularios/index.html" target="_blank">Boletín 3. Formularios</a><br />
                                 <a href="https://manuais.pages.iessanclemente.net/plantillas/daw/dwcs-d/ud02/9.anexos/4.tarea_ud02_funciones/index.html" target="_blank">Boletín 4. Funciones</a><br />
                                 <a href="https://manuais.pages.iessanclemente.net/plantillas/daw/dwcs-d/ud02/9.anexos/5.tarea_ud02_librerias/index.html" target="_blank">Boletín 5. Librerías</a><br />
-                                <a href="#">Tarea</a>
+                                <a href="UD2/entregaTarea/index.php" target="_blank">Tarea</a>
                             </td>
                             <td>
                                 <a href="UD2/anexos/1.introduccion.php" target="_blank">Solución 1. Introducción</a><br />
