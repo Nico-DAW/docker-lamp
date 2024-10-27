@@ -1,3 +1,10 @@
+<?php
+session_start(); // Iniciar la sesión
+
+if (!isset($_SESSION['almacen'])) {
+    $_SESSION['almacen'] = []; // Inicializar la sesión si no existe
+} 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

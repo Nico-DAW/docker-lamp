@@ -8,9 +8,9 @@
 </head>
 <body>
 <?php
-$almacen=[];
+//$almacen=[];
 function guardar($title, $content, $progress){
-    global $almacen;
+    //global $almacen;
 
     $tarea =[
         //Cuidado aquí con la coma (no es punto y coma...)
@@ -19,8 +19,8 @@ function guardar($title, $content, $progress){
         'estado'=>$progress
     ];
     //array_push() en PHP es función que se diferencia del .push() de JS en que no le antece el nombre del array... 
-    array_push($almacen, $tarea);
-
+    //array_push($almacen, $tarea);
+    array_push($_SESSION['almacen'], $tarea);
     echo "<div class=\"border d-flex align-items-center justify-content-center\" style=\"height: 100vh;\"><div class=\"text-center\"><p>Se ha almacenado la nueva tarea con éxito. </p><a href=\"nuevaForm.php\" class=\"btn btn-primary\">Volver</a></div></div>";
     
     /*
@@ -30,6 +30,17 @@ function guardar($title, $content, $progress){
     echo "<pre>";
     print_r($almacen);
     echo "</pre>";
+    */
+    echo "<pre>";
+    //array_push($_SESSION['almacen'], "$tarea");
+    print_r($_SESSION['almacen']);
+    echo "</pre>";
+    /*
+    1. Uso de $_SESSION
+    La forma más sencilla y efectiva de mantener datos entre diferentes páginas es utilizar la sesión de PHP. Para hacer esto, debes iniciar la sesión donde necesites acceder a la variable.
+
+    Al inicio de tu archivo, inicia la sesión usando session_start().
+    Almacena el array en $_SESSION.
     */
 }
   
