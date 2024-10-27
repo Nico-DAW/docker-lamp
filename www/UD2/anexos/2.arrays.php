@@ -139,10 +139,17 @@
             {
                 echo 'Name: ' . $array[$i][0];
                 $datos = $array[$i][1];
+                
                 foreach ($datos as $dato)
                 {
                     echo ' - '. $dato;
                 }
+                /*
+                Equivalente a -->
+                for($j = 0; $j<count($datos);$j++){
+                    echo $datos[$j].' - ';
+                }
+                */
                 echo '<br />';
             }
             ?>
@@ -154,6 +161,7 @@
             <p>1. Crea una matriz con 30 posiciones y que contenga números aleatorios entre 0 y 20 (inclusive). Uso de la función <a href="https://www.php.net/manual/es/function.rand.php">rand</a>. Imprime la matriz creada anteriormente.</p>
             <?php
             $array = array();
+            //$array = [];
             for ($i = 0; $i < 30; $i++)
             {
                 array_push($array, rand(0, 20));
