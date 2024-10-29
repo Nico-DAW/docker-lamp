@@ -1,8 +1,8 @@
 <?php
-session_start(); // Iniciar la sesión
+session_start(); // Iniciamos la sesión
 
 if (!isset($_SESSION['almacen'])) {
-    $_SESSION['almacen'] = []; // Inicializar la sesión si no existe
+    $_SESSION['almacen'] = []; // Inicializamos la variable de sesion si no existe
 } 
 ?>
 <!DOCTYPE html>

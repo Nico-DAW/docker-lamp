@@ -23,6 +23,9 @@
                 </div>
                 <div class="container">
                     <!--<p>Aquí va el contenido </p>-->
+                    <!--5. Crea un fichero PHP nuevaForm.php que contenga el formulario para crear una nueva tarea. La estructura será igual a la página de inicio y habrá que cambiar
+                    el título del contenido y el contenido en si mismo con el propio formulario. Este formulario se enviará mediante POST a un fichero nueva.php que lo procesará
+                    y mostrará un mensaje en la zona central confirmando o indicando qué campo da el error. Utiliza el método que simula guardar de utils.php-->
                     <form class="mb-5" method="POST" action="nueva.php">
                         <div class="mb-3">
                             <label class="form-label" for="titulo">Título de la nueva tarea: </label>

@@ -1,5 +1,5 @@
 <?php
-session_start(); // Iniciar la sesión
+session_start(); // Iniciamos la sesión para recuperar las variables de $_SESSION
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -37,6 +37,7 @@ session_start(); // Iniciar la sesión
                             </thead>
                             <tbody>
                                 <?php
+                                /* Aquí refactorizamos... antes tenía aquí directamente el contenido de la función mostrarAlmacen() 
                                 if(isset($_SESSION['almacen'])){
                                     foreach($_SESSION['almacen'] as $tarea){
                                         echo '<tr>';
@@ -46,6 +47,15 @@ session_start(); // Iniciar la sesión
                                         echo '</tr>';
                                     }
                                 };
+                                Según el enunciado del ejercicio: 
+
+                                6. Crea un fichero listaTareas.php que recupere las tareas (de utils.php) y las muestre
+                                a modo de tabla. Deberás crear un bucle para generar cada una de las filas.
+                                */
+                                include_once("utils.php");
+                                if(isset($_SESSION['almacen'])){
+                                mostrarAlmacen();
+                                }
                                 ?>
                                 <tr>
                                     <td></td>

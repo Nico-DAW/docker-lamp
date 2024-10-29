@@ -22,7 +22,7 @@
                     <h2>Título del contenido</h2>
                 </div>
                 <div class="container">
-                    <p>Aquí va el contenido </p>
+                    <p>Aquí hablo brevemente sobre mí... Mi nombre es José Nicolás García Peñalver y estoy cursando el módulo de DWCS.</p>
                 </div>
             </main>
         </div>
