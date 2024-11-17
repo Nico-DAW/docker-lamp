@@ -15,7 +15,7 @@ echo "La conexion se ha realizado con éxito.<br>";
 //Iniciamos la transaccion con beginTransaction();
 $conexion->beginTransaction();
 
-//!!! Ojo aqui los campos de las tablas van sin comillas... 
+//!!! Ojo aqui los campos de las tablas van sin comillas... git add
 $sql ="INSERT INTO Clientes(nombre,apellido,email) VALUES ('Pedro','Machado','pedro@daw.gal');";
 $conexion->exec($sql);
 
