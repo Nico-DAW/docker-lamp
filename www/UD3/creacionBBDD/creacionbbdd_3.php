@@ -9,7 +9,7 @@ $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 echo "La conexión se ha realizado con exito<br>"; 
 $sql = 'CREATE DATABASE myDBop';
 // La conexion también se puede crear en vez de con if de la siguiente manera --> exec() porque no devuelve resultados
-    $conn->exec($sql);
+    $conexion->exec($sql);
 // !!!Ojo   En PDO se ejecuta con exec no se hace el if...
 /*
 if($conexion->query($sql)){
