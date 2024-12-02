@@ -1,15 +1,17 @@
 <?php 
 function conecta($servername, $dbname, $username, $userpass){
-    $conexion = new PDO("mysql.host=$servername; dbname=$dbname",$username,$userpass);
+    $conexion = new PDO("mysql:host=$servername; dbname=$dbname",$username,$userpass);
     return $conexion;
 }
 
 function nuevoUser($id,$username,$nombre,$apellidos,$contrasena){
+    echo ("Aqui_1");
     try{
-        $conexion = conecta('db', 'usuarios', 'root', 'test');
+    echo ("Aqui_2");
+        $conexion = conecta('db','tareas','root','test');
+    echo ("Aqui_3");
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql= "INSERT INTO usuarios (id, username, nombre, apellidos, contrasena) 
-        VALUES (:id, :username, :nombre, :apellidos, :contrasena)";
+        $sql= "INSERT INTO usuarios (id, username, nombre, apellidos, contrasena) VALUES (:id, :username, :nombre, :apellidos, :contrasena)";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);

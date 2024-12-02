@@ -21,9 +21,9 @@
                 </div>
 
                 <div class="container justify-content-between">
-                    <form method="GET" action="#" class="mb-5 w-50">
+                    <form method="GET" action="nuevoUsuario.php" class="mb-5 w-50">
                         <div class="mb-3">
-                            <input type="hidden" name="id" id="id"/>
+                            <input type="hidden" name="id" id="id" value=1/>
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
