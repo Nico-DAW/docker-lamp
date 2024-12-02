@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<p> 
+    Cuando no sincronice ---> 
+    Troubleshooting keychain issues
+    https://code.visualstudio.com/docs/editor/settings-sync
+</p>
+<p> 
+    Al hacer git push origin main tenemos que hacer login en la cuenta de Github...
+</p>
+    Linea de Código para Git para no tener que hacer login continuamente y que el sistema recuerde
+    nuestras credenciales podemos utilizar la siguiente línea de código y ejecutar en Git -->
+<p> 
+    code --verbose --vmodule="*/components/os_crypt/*=1"
+<br>
+    O podríamos emplear weaker encryption (presionando el botón)
+<br>
+    Se trabajará con 2 repositorios remotos. El nuestro y el del profesor. Pasos a sesguir -->
+</p> 
+<ul>
+    <li>
+    1. Clonamos 
+    git clone <url de tu fork>
+    </li>
+    <li>
+    2. Añadimos como repositorio remoto el del profesor
+    git remote add profesor <url-repoProfesor>
+    </li>
+    Ejemplo -->
+
+    git remote add profesor https://github.com/marco-sanclemente/docker-lamp
+</ul>
+<H2>
+    Trabajando día a día
+</H2>
+<p>
+    Comprobamos en que rama estamos con git branch o git status.<br>
+    Nos traemos los cambios del remoto del profesor en 2 pasos con fetch-->
+
+    git fetch profesor main
+
+    Y depués hacemos un merge
+
+    git merge profesor/master
+</p>
+<p>
+    Para añadir cambios: <br>
+    # Añade los cambios <br>
+    git add .<br>
+
+    # Confirma los cambios<br>
+    git commit -m "mensaje"<br>
+
+    # Sube los cambios a tu repositorio<br>
+    git push -u origin rama_de_trabajo<br>
+</p>
+<H2>
+    Otras cuestiones 
+</H2>
+<p>git remote -v</p>
+<p>Para tener información de la conexiones remotas</p>
+<p>Para trazar... var_dump()</p>
+</body>
+</html>
+
