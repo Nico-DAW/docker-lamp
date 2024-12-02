@@ -17,7 +17,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="nuevoUsuarioForm.php">
+                <a class="nav-link" href="#">
                     Nuevo usuario (PDO)
                 </a>
             </li>
