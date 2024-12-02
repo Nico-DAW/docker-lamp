@@ -23,7 +23,7 @@ function createDB(){
         $checkMsg = "";
         //Comprobamos si se produce algún error en la conexion. 
         if($error!=null){
-            //Si se produce algún error devolvemo un array con false y el mensaje a motrar.
+            //Si se produce algún error devolvemos un array con false y el mensaje a mostrar.
             $checkMsg .= "<p class=\"alert alert-danger\" role=\"alert\">Se ha producido un error en la conexion. Error con número. ".$error."</p>";
                 return [false, $checkMsg];
         }else{
