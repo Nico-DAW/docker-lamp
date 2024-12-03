@@ -79,7 +79,59 @@ function borraUsuario($id){
     }
     finally
     {
-        $conn = null;
+        $conexion = null;
+    }
+}
+
+function buscaUsuario($id)
+{
+    try {
+        $conexion = conecta('db','tareas','root','test');
+        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($resultados) === 1) {
+            return [true, $resultados[0]];
+        } else {
+            return [false, 'No se pudo recuperar el usuario.'];
+        }
+        
+    }catch (PDOException $e) {
+        return [false, $e->getMessage()];
+    }finally{
+        if (isset($conexion)) {
+            $conexion = null;
+        }
+    }
+}
+
+function actualizaUsuario($id, $username, $nombre, $apellidos, $contrasena)
+{
+    try {
+        $conexion = conecta('db','tareas','root','test');
+        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "UPDATE usuarios SET username = :username, nombre = :nombre, apellidos = :apellidos, contrasena = :contrasena WHERE id = :id";
+        $stmt = $conexion->prepare($sql);
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+        $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
+        $stmt->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return [true, 'Usuario actualizado correctamente.'];
+
+    } catch (PDOException $e) {
+        return [false, $e->getMessage()];
+    } finally {
+        $conexion = null;
     }
 }
 

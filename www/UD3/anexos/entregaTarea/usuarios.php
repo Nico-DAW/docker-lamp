@@ -50,7 +50,7 @@
                                 echo '<td>' . htmlspecialchars_decode($usuario['apellidos']) . '</td>';
                                 echo '<td>' . htmlspecialchars_decode($usuario['contrasena']) . '</td>';
                                 echo '<td>';
-                                    echo '<a class="btn btn-sm btn-outline-success me-2" href="donacionForm.php?id=' . $usuario['id'] . '" role="button">Editar</a>';
+                                    echo '<a class="btn btn-sm btn-outline-success me-2" href="editaUsuarioForm.php?id=' . $usuario['id'] . '" role="button">Editar</a>';
                                     echo '<a class="btn btn-sm btn-outline-danger" href="borraUsuario.php?id=' . $usuario['id'] . '" role="button">Borrar</a>';
                                 echo '</td>';
                             echo '</tr>';
