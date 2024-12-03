@@ -5,11 +5,9 @@ function conecta($servername, $dbname, $username, $userpass){
 }
 
 function nuevoUser($id,$username,$nombre,$apellidos,$contrasena){
-    echo ("Aqui_1");
+    //Debug - echo ("Aqui_1");
     try{
-    echo ("Aqui_2");
         $conexion = conecta('db','tareas','root','test');
-    echo ("Aqui_3");
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql= "INSERT INTO usuarios (id, username, nombre, apellidos, contrasena) VALUES (:id, :username, :nombre, :apellidos, :contrasena)";
         $stmt = $conexion->prepare($sql);

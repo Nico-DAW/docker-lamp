@@ -21,12 +21,18 @@
                 </div>
 
                 <div class="container justify-content-between">
-                    <?php include_once('pdo.php'); 
-                        
-                        $resultado = nuevoUser($_GET['id'],$_GET['username'],$_GET['nombre'],$_GET['apellidos'],$_GET['contrasena']);
-                        var_dump($resultado);
+                    <?php
+                        include_once('utils.php');
+                        $id = $_GET['id'];
+                        $username = $_GET['username'];
+                        $nombre = $_GET['nombre'];
+                        $apellidos = $_GET['apellidos'];
+                        $contrasena = $_GET['contrasena'];
                        
- 
+                        include_once('pdo.php');
+                        $resultado = nuevoUser($_GET['id'],$_GET['username'],$_GET['nombre'],$_GET['apellidos'],$_GET['contrasena']);
+                        //Debug - var_dump($resultado);
+                       
                     ?>
                 </div>
             </main>
