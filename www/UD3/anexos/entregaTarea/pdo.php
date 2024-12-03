@@ -31,4 +31,56 @@ function nuevoUser($id,$username,$nombre,$apellidos,$contrasena){
 
 }
 
+function listaUsuarios(){
+    try {
+        $conexion = conecta('db','tareas','root','test');
+        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql= "SELECT * FROM usuarios";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $resultados = $stmt->fetchAll();
+        return $resultados;
+    }
+    catch (PDOException $e) {
+        return null;
+    }
+    finally
+    {
+        $conexion = null;
+    }
+}
+
+function borraUsuario($id){
+
+    try {
+        $conexion = conecta('db','tareas','root','test');
+        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $conexion->beginTransaction();
+        /*
+        $sqlTareas = "DELETE FROM tareas WHERE id_usuario = :usuarioId";
+        $sqlTareas = $conn->prepare($sqlDonaciones);
+        $sqlTareas->bindParam(':usuarioId', $id, PDO::PARAM_INT);
+        $sqlTareas->execute();
+        */
+        $sqlUsuarios = "DELETE FROM usuarios WHERE id = :usuarioId";
+        $stmtUsuarios = $conexion->prepare($sqlUsuarios);
+        $stmtUsuarios->bindParam(':usuarioId', $id, PDO::PARAM_INT);
+        $stmtUsuarios->execute();
+
+        $conexion->commit();
+        return true;
+    }
+    catch (PDOException $e) {
+        error_log("Error al eliminar el usuario: " . $e->getMessage());
+        return false;
+    }
+    finally
+    {
+        $conn = null;
+    }
+}
+
 ?>

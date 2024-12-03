@@ -23,7 +23,7 @@
 
                 <div class="container justify-content-between">
                     <?php 
-                    include_once('database.php');
+                    include_once('mysqli.php');
                     $resultado = createDB();
                     echo $resultado[1];
                     $tabla = tablaUsuarios();
