@@ -16,7 +16,10 @@ function nuevoUser($id,$username,$nombre,$apellidos,$contrasena){
         $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
         $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
         $stmt->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
-
+        /*
+        https://www.php.net/manual/en/pdostatement.execute.php
+        execute() Returns true on success or false on failure.
+        */
         return $stmt->execute();
 
     }catch(PDOException $e){

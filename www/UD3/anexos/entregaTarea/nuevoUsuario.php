@@ -28,9 +28,44 @@
                         $nombre = $_GET['nombre'];
                         $apellidos = $_GET['apellidos'];
                         $contrasena = $_GET['contrasena'];
-                       
-                        include_once('pdo.php');
-                        $resultado = nuevoUser($_GET['id'],$_GET['username'],$_GET['nombre'],$_GET['apellidos'],$_GET['contrasena']);
+
+                        $checkFlag = true;
+                        
+                        if(!valida($username)){
+                           $checkFlag = false;
+                           echo "<p class=\"alert alert-danger\" role=\"alert\">Revisa el campo del username.</p>";
+                        };
+
+                        if(!valida($nombre)){
+                            $checkFlag = false;
+                            echo "<p class=\"alert alert-danger\" role=\"alert\">Revisa el campo del nombre.</p>";
+                        };
+
+                        if(!valida($apellidos)){
+                            $checkFlag = false;
+                            echo "<p class=\"alert alert-danger\" role=\"alert\">Revisa el campo del apellido</p>";
+                        };
+
+                        if(!valida($contrasena)){
+                            $checkFlag = false;
+                            echo "<p class=\"alert alert-danger\" role=\"alert\">Revisa el campo de la contrasena de la contraseña.</p>";
+                        };
+
+                        if($checkFlag){
+                            include_once('pdo.php');
+                            $resultado = nuevoUser($id,$username,$nombre,$apellidos,$contrasena);
+
+                            if($resultado){
+                                echo '<p class="alert alert-success" role="alert">Usuario registrado correctamente.</p>';
+                            }else{
+                                echo '<div class="alert alert-danger" role="alert">Se ha producido un error registrando al usuario.</div>';
+                            }
+                        }else{
+                            echo '<div class="alert alert-warning" role="alert">No se pudo procesar el contenido del formulario.</div>';
+                        };
+
+
+                        
                         //Debug - var_dump($resultado);
                        
                     ?>
