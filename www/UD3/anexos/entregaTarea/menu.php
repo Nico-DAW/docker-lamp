@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="nuevaForm.php">
                     Nueva tarea (mysqli)
                 </a>
             </li>
