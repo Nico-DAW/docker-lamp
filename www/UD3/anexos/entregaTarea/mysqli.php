@@ -167,7 +167,7 @@ function devuelveUsuarios(){
             if($conexion->connect_error){
                 return false;
             }
-        $sql="SELECT nombre FROM usuarios;";
+        $sql="SELECT id, nombre FROM usuarios;";
         $resultado = $conexion->query($sql);
             if($resultado){
                 /*
@@ -176,16 +176,50 @@ function devuelveUsuarios(){
                     return $nombre;}
                 */
                 //fectch_assoc --> devuelve un array asociativo clave-valor
-                $nombres = []; 
+                $consulta = []; 
                 while($fila = $resultado->fetch_assoc()){
-                    $nombres[]=$fila['nombre'];
+                    /*
+                    Esta es la clave. El array no se sobreescribe sino que 
+                    añade una fila al final del array en cada iteración.
+                    */
+                    $consulta[]=$fila;
                 }
                 $conexion->close();
-                return $nombres;
+                return $consulta;
+            }else {
+                $conexion->close();
+                return false;
             }
     }catch(mysqli_sql_exception $e){
         error_log($e->getMessage());
         return false;
     }
 }
+
+function guardaNueva($titulo, $desc, $estado, $idUsuario){
+    try{
+        $conexion = conecta('db', 'root', 'test', 'tareas');
+            if($conexion->connect_error){
+                return false;
+            }
+        /* 
+        $sql="INSERT INTO tareas (titulo, descripcion, estado, usuario) VALUES  VALUES ('$titulo', '$desc', '$estado', '$usuario')";
+        */
+        $sql = "INSERT INTO tareas (titulo, descripcion, estado, id_usuario) VALUES (?, ?, ?, ?)";
+        //Por seguridad utilizar prepared statements    
+        $stmt = $conexion->prepare($sql);
+            if ($stmt) {
+                $stmt->bind_param('ssss', $titulo, $desc, $estado, $idUsuario);
+                $stmt->execute();
+                $stmt->close();
+                // Debug - echo "Yes";
+                return true;
+            }
+    }catch(mysqli_sql_exception $e){
+            //Debug - echo "No, no!";
+            echo $e->getMessage(); 
+        return false;
+    }
+}
+
 ?>

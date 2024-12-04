@@ -27,6 +27,7 @@
                         $titulo = $_POST['titulo'];
                         $desc = $_POST['descripcion'];
                         $estado = $_POST['estado'];
+                        $usuario = $_POST['usuario'];
                         $valido = true;
                         if (!esCampoValido($titulo))
                         {
@@ -40,15 +41,27 @@
                         {
                             $valido = false;
                         }
-                        if (!guardar($id, $desc, $estado))
+                        if (!esCampoValido($usuario))
+                        {
+                            $valido = false;
+                        }
+                        /* 
+                        Esta comprobación no es necesaria 
+                        if (!guardar($titulo, $desc, $estado, $usuario))
                         {
                             $validao = false;
                         }
+                        */
                         if ($valido)
                         {
+                            /*
                             echo "<p>La tarea $id se almacenó correctamente:</p>";
                             echo "<ul><li>Descripción: $desc</li><li>Estado: $estado</li></ul>";
-                        }
+                            */
+                            include_once('mysqli.php');
+                            guardaNueva($titulo, $desc, $estado, $usuario);
+
+                            }
                         else
                         {
                             echo '<p class="error">Alguno de los campos no es válido.</p>';
