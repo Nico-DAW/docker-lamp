@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="container justify-content-between">
-                    <p>Aquí va el contenido </p>
+                    
                     <form action="nueva.php" method="POST" class="mb-5 w-50">
                         <div class="mb-3">
                             <label for="titulo" class="form-label">Título</label>
@@ -40,7 +40,24 @@
                                 <option value="completada">Completada</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="usuario" class="form-label">Estado</label>
+                            <select class="form-select" id="usuario" name="usuario" required>
+                                <option value="" selected disabled>Seleccione un usuario</option>
+
+                                <?php 
+                                include_once('mysqli.php');
+                                $usuarios = devuelveUsuarios();
+                                // Debug - var_dump($usuarios);
+                                foreach($usuarios as $key=>$value){
+                                    echo "<option value=".$value.">".$value."</option>";  
+                                }
+                                ?>
+                                
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
+ 
                     </form>
                 </div>
             </main>

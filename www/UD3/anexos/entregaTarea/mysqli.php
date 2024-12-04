@@ -160,4 +160,32 @@ try{
     desconecta($conexion);
 }
 }
+
+function devuelveUsuarios(){
+    try{
+        $conexion=conecta('db','root','test','tareas');
+            if($conexion->connect_error){
+                return false;
+            }
+        $sql="SELECT nombre FROM usuarios;";
+        $resultado = $conexion->query($sql);
+            if($resultado){
+                /*
+                Aqui el foreach no vale
+                foreach($resultado as $nombre){
+                    return $nombre;}
+                */
+                //fectch_assoc --> devuelve un array asociativo clave-valor
+                $nombres = []; 
+                while($fila = $resultado->fetch_assoc()){
+                    $nombres[]=$fila['nombre'];
+                }
+                $conexion->close();
+                return $nombres;
+            }
+    }catch(mysqli_sql_exception $e){
+        error_log($e->getMessage());
+        return false;
+    }
+}
 ?>
