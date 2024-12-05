@@ -247,4 +247,36 @@ function listaTareas(){
         return $resultado; 
 }
 
+function buscaTarea($idUsuario){
+    try{
+    $conexion = conecta('db', 'root', 'test', 'tareas');
+    if($conexion->connect_error){
+        return false; 
+    }
+    $stmt = $conexion->prepare("SELECT t.titulo, t.descripcion, t.estado, t.id_usuario, u.nombre FROM tareas t JOIN usuarios u ON t.id_usuario = u.id WHERE u.id = ?");
+    $stmt->bind_param('i', $idUsuario);
+    /*
+    Asi no...
+    $resultados = $stmt->execute();
+    $tareas=[];
+    Es necesario -->
+    */
+    $stmt->execute();
+    $resultados = $stmt->get_result();
+    $tareas=[];
+    
+    while($fila = $resultados->fetch_assoc()){
+        $tareas[]=$fila;
+    }
+
+    $stmt->close();
+    $conexion->close();
+    return $tareas;
+
+    }catch(mysqli_sql_exception $e){
+        error_log($e->getMessage());
+        return false;
+    }
+}
+
 ?>
