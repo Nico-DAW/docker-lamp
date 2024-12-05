@@ -24,8 +24,9 @@
                     <?php
                     include_once('mysqli.php');
                     $tareas = listaTareas();
-                    if( $tareas === null){
-                        echo "<p class=\"alert alert-danger\" role=\"alert\">No existen usuarios registrados.</p>";
+                    //var_dump($tareas);
+                    if($tareas === false){
+                        echo "<p class=\"alert alert-danger\" role=\"alert\">No existen tareas registradas.</p>";
                     }else{
                         echo '<div class="table-responsive">';
                         echo '<table class="table table-bordered table-striped">';

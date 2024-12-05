@@ -140,7 +140,7 @@ try{
         descripcion VARCHAR(250), 
         estado VARCHAR(50), 
         id_usuario INT,
-        CONSTRAINT fk_tar_use FOREIGN KEY (`id_usuario`) REFERENCES `usuarios`(`id`) 
+        CONSTRAINT fk_tar_use FOREIGN KEY (`id_usuario`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE
         )"; 
         //Comprobamos que la tabla se cree correctamente
         if ($conexion->query($sql)){
