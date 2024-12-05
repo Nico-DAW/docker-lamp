@@ -259,7 +259,7 @@ function buscaTarea($idUsuario){
     Asi no...
     $resultados = $stmt->execute();
     $tareas=[];
-    Es necesario -->
+    Es necesario get_result() -->
     */
     $stmt->execute();
     $resultados = $stmt->get_result();
@@ -279,4 +279,31 @@ function buscaTarea($idUsuario){
     }
 }
 
+function actualizaTarea($titulo, $desc, $estado, $idUsuario){
+    try{
+        $conexion = conecta('db', 'root', 'test', 'tareas');
+
+        if($conexion->connect_error){
+            return false;
+        }
+        //UPDATE se hace con SET
+        $sql = "UPDATE tareas SET titulo=?, descripcion=?, estado=?, id_usuario=? WHERE id_usuario = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("sssii",$titulo, $desc, $estado,$idUsuario, $idUsuario);
+        $stmt->execute();
+        $conexion->close();
+        $stmt->close();
+        return true; 
+
+    }catch(mysqli_sql_exception $e){
+        echo($e->getMessage());
+        if (isset($stmt)) {
+            $stmt->close();
+        }
+        if (isset($conexion)) {
+            $conexion->close();
+        }
+        return false;
+    }
+}
 ?>

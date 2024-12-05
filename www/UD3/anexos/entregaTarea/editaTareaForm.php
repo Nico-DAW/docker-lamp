@@ -21,17 +21,21 @@
                 </div>
 
                 <div class="container justify-content-between">
-                <form action="editaUsuario.php" method="GET" class="mb-2 w-50">
+                <form action="editaTarea.php" method="GET" class="mb-2 w-50">
                     <?php 
                     require_once('mysqli.php');
                     if (!empty($_GET))
                     {
                         $id = $_GET['id'];
                         $resultado = buscaTarea($id);
-                        //Debug - var_dump($resultado);
+                        /*Debug - 
+                        var_dump($resultado[0]);
+                        echo "-------------------";
+                        var_dump($resultado[1]);
+                        */
                         if (!empty($id) && $resultado[0])
                         {
-                            $tarea = $resultado[1];
+                            $tarea = $resultado[0];
                             $id = $tarea['id_usuario'];
                             $titulo = $tarea['titulo'];
                             $descripcion = $tarea['descripcion'];
