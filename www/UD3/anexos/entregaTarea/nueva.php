@@ -17,11 +17,10 @@
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="container justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h2>Inicio</h2>
+                    <h2>Gestión de usuario</h2>
                 </div>
 
                 <div class="container justify-content-between">
-                    <p>Aquí va el contenido </p>
                     <?php
                         require_once('utils.php');
                         $titulo = $_POST['titulo'];
@@ -60,11 +59,11 @@
                             */
                             include_once('mysqli.php');
                             guardaNueva($titulo, $desc, $estado, $usuario);
-
+                            echo '<div class="alert alert-success" role="alert">Tarea guardada correctamente.</div>';
                             }
                         else
                         {
-                            echo '<p class="error">Alguno de los campos no es válido.</p>';
+                            echo '<p class=\"alert alert-danger\" role=\"alert\">Alguno de los campos no es válido.</p>";';
                         }
 
                     ?>

@@ -222,4 +222,29 @@ function guardaNueva($titulo, $desc, $estado, $idUsuario){
     }
 }
 
+function listaTareas(){
+    $conexion = conecta('db', 'root', 'test', 'tareas');
+    if($conexion->connect_error){
+        return false; 
+    }
+    $sql = "SELECT t.titulo, t.descripcion, t.estado, t.id_usuario, u.nombre FROM tareas t JOIN usuarios u ON t.id_usuario = u.id";
+    /*
+    Se podría hacer con una consulta preparada - 
+    $stmt = $conexion->prepare($sql); 
+    pero en esta ocasión lo haremos con una query
+    */
+    $resultado = [];
+    $stmt = $conexion->query($sql);
+        if($stmt->num_rows > 0){
+            while($fila = $stmt->fetch_assoc()){
+                $resultado[]=$fila;
+            }
+        }
+        else{
+            return false;
+        }
+        $conexion->close();
+        return $resultado; 
+}
+
 ?>

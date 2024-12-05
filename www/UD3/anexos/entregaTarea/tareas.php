@@ -17,14 +17,14 @@
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="container justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h2>Usuarios</h2>
+                    <h2>Tareas</h2>
                 </div>
 
                 <div class="container justify-content-between">
                     <?php
-                    include_once('pdo.php');
-                    $usuarios = listaUsuarios();
-                    if( $usuarios === null){
+                    include_once('mysqli.php');
+                    $tareas = listaTareas();
+                    if( $tareas === null){
                         echo "<p class=\"alert alert-danger\" role=\"alert\">No existen usuarios registrados.</p>";
                     }else{
                         echo '<div class="table-responsive">';
@@ -32,29 +32,31 @@
                         echo '<thead class="">';
                         echo '<tr>';
                         echo '<th>ID</th>';
-                        echo '<th>Username</th>';
-                        echo '<th>Nombre</th>';
-                        echo '<th>Apellidos</th>';
-                        echo '<th>Contraseña</th>';
+                        echo '<th>Título</th>';
+                        echo '<th>Descripción</th>';
+                        echo '<th>Estado</th>';
+                        echo '<th>Usuario</th>';
                         echo '<th>Acciones</th>';
                         echo '</tr>';
                         echo '</thead>';
                         echo '<tbody>';
 
                         // Recorrer y mostrar cada donante
-                        foreach ($usuarios as $usuario) {
+                       
+                        foreach ($tareas as $tarea) {
                             echo '<tr>';
-                                echo '<td>' . htmlspecialchars_decode($usuario['id']) . '</td>';
-                                echo '<td>' . htmlspecialchars_decode($usuario['username']) . '</td>';
-                                echo '<td>' . htmlspecialchars_decode($usuario['nombre']) . '</td>';
-                                echo '<td>' . htmlspecialchars_decode($usuario['apellidos']) . '</td>';
-                                echo '<td>' . htmlspecialchars_decode($usuario['contrasena']) . '</td>';
+                                echo '<td>' . htmlspecialchars_decode($tarea['id_usuario']) . '</td>';
+                                echo '<td>' . htmlspecialchars_decode($tarea['titulo']) . '</td>';
+                                echo '<td>' . htmlspecialchars_decode($tarea['descripcion']) . '</td>';
+                                echo '<td>' . htmlspecialchars_decode($tarea['estado']) . '</td>';
+                                echo '<td>' . htmlspecialchars_decode($tarea['nombre']) . '</td>';
                                 echo '<td>';
-                                    echo '<a class="btn btn-sm btn-outline-success me-2" href="editaUsuarioForm.php?id=' . $usuario['id'] . '" role="button">Editar</a>';
-                                    echo '<a class="btn btn-sm btn-outline-danger" href="borraUsuario.php?id=' . $usuario['id'] . '" role="button">Borrar</a>';
+                                    echo '<a class="btn btn-sm btn-outline-success me-2" href="editaUsuarioForm.php?id=' . $tarea['id_usuario'] . '" role="button">Editar</a>';
+                                    echo '<a class="btn btn-sm btn-outline-danger" href="borraUsuario.php?id=' . $tarea['id_usuario'] . '" role="button">Borrar</a>';
                                 echo '</td>';
                             echo '</tr>';
                         }
+                        // Debug - var_dump($tareas);
                         echo '</tbody>';
                         echo '</table>';
                         echo '</div>';
@@ -63,6 +65,7 @@
                 </div>
             </main>
         </div>
+        <br>
     </div>
 
     <?php include_once('footer.php');
