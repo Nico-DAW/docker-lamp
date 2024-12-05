@@ -24,7 +24,7 @@
                     <?php 
                         
                         include_once('utils.php');
-                        $id = $_GET['id_usuario'];
+                        $id = $_GET['id'];
                         $titulo = $_GET['titulo'];
                         $descripcion = $_GET['descripcion'];
                         $estado = $_GET['estado'];
@@ -56,7 +56,7 @@
                         if($checkFlag){
                             //include_once('pdo.php');
                             include_once('mysqli.php');
-                            $resultado = actualizaTarea($titulo, $descripcion, $estado, $id);
+                            $resultado = actualizaTarea($id, $titulo, $descripcion, $estado);
                             //Debug - var_dump($resultado);
                             if($resultado){
                                 echo '<p class="alert alert-success" role="alert">Tarea actualizada correctamente.</p>';

@@ -36,7 +36,7 @@
                         if (!empty($id) && $resultado[0])
                         {
                             $tarea = $resultado[0];
-                            $id = $tarea['id_usuario'];
+                            $id = $tarea['id'];
                             $titulo = $tarea['titulo'];
                             $descripcion = $tarea['descripcion'];
                             $estado = $tarea['estado'];
@@ -46,7 +46,7 @@
 
                             
                             <div class="mb-3">
-                            <input type="hidden" name="id_usuario" value="<?php echo $id ?>"/>
+                            <input type="hidden" name="id" value="<?php echo $id ?>"/>
                             </div>
                             <div class="mb-3">
                                 <label for="titulo" class="form-label">Título</label>

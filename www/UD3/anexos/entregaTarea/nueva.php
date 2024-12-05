@@ -23,6 +23,7 @@
                 <div class="container justify-content-between">
                     <?php
                         require_once('utils.php');
+                        $idTarea = $_POST['idTarea'];
                         $titulo = $_POST['titulo'];
                         $desc = $_POST['descripcion'];
                         $estado = $_POST['estado'];

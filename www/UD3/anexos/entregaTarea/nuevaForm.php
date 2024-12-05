@@ -23,6 +23,7 @@
                 <div class="container justify-content-between">
                     
                     <form action="nueva.php" method="POST" class="mb-5 w-50">
+                        <input type="hidden" class="form-control" id="idTarea" name="idTarea">
                         <div class="mb-3">
                             <label for="titulo" class="form-label">Título</label>
                             <input type="text" class="form-control" id="titulo" name="titulo" required>

@@ -45,14 +45,14 @@
                        
                         foreach ($tareas as $tarea) {
                             echo '<tr>';
-                                echo '<td>' . htmlspecialchars_decode($tarea['id_usuario']) . '</td>';
+                                echo '<td>' . htmlspecialchars_decode($tarea['id']) . '</td>';
                                 echo '<td>' . htmlspecialchars_decode($tarea['titulo']) . '</td>';
                                 echo '<td>' . htmlspecialchars_decode($tarea['descripcion']) . '</td>';
                                 echo '<td>' . htmlspecialchars_decode($tarea['estado']) . '</td>';
                                 echo '<td>' . htmlspecialchars_decode($tarea['nombre']) . '</td>';
                                 echo '<td>';
-                                    echo '<a class="btn btn-sm btn-outline-success me-2" href="editaTareaForm.php?id=' . $tarea['id_usuario'] . '" role="button">Editar</a>';
-                                    echo '<a class="btn btn-sm btn-outline-danger" href="borraUsuario.php?id=' . $tarea['id_usuario'] . '" role="button">Borrar</a>';
+                                    echo '<a class="btn btn-sm btn-outline-success me-2" href="editaTareaForm.php?id=' . $tarea['id'] . '" role="button">Editar</a>';
+                                    echo '<a class="btn btn-sm btn-outline-danger" href="borrarTarea.php?id=' . $tarea['id'] . '" role="button">Borrar</a>';
                                 echo '</td>';
                             echo '</tr>';
                         }

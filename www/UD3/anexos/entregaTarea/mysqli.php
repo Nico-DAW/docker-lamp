@@ -227,7 +227,7 @@ function listaTareas(){
     if($conexion->connect_error){
         return false; 
     }
-    $sql = "SELECT t.titulo, t.descripcion, t.estado, t.id_usuario, u.nombre FROM tareas t JOIN usuarios u ON t.id_usuario = u.id";
+    $sql = "SELECT t.id, t.titulo, t.descripcion, t.estado, t.id_usuario, u.nombre FROM tareas t JOIN usuarios u ON t.id_usuario = u.id";
     /*
     Se podría hacer con una consulta preparada - 
     $stmt = $conexion->prepare($sql); 
@@ -247,14 +247,14 @@ function listaTareas(){
         return $resultado; 
 }
 
-function buscaTarea($idUsuario){
+function buscaTarea($idTarea){
     try{
     $conexion = conecta('db', 'root', 'test', 'tareas');
     if($conexion->connect_error){
         return false; 
     }
-    $stmt = $conexion->prepare("SELECT t.titulo, t.descripcion, t.estado, t.id_usuario, u.nombre FROM tareas t JOIN usuarios u ON t.id_usuario = u.id WHERE u.id = ?");
-    $stmt->bind_param('i', $idUsuario);
+    $stmt = $conexion->prepare("SELECT t.id, t.titulo, t.descripcion, t.estado, t.id_usuario, u.nombre FROM tareas t JOIN usuarios u ON t.id_usuario = u.id WHERE t.id = ?");
+    $stmt->bind_param('i', $idTarea);
     /*
     Asi no...
     $resultados = $stmt->execute();
@@ -279,7 +279,7 @@ function buscaTarea($idUsuario){
     }
 }
 
-function actualizaTarea($titulo, $desc, $estado, $idUsuario){
+function actualizaTarea($id, $titulo, $desc, $estado){
     try{
         $conexion = conecta('db', 'root', 'test', 'tareas');
 
@@ -287,9 +287,9 @@ function actualizaTarea($titulo, $desc, $estado, $idUsuario){
             return false;
         }
         //UPDATE se hace con SET
-        $sql = "UPDATE tareas SET titulo=?, descripcion=?, estado=?, id_usuario=? WHERE id_usuario = ?";
+        $sql = "UPDATE tareas SET titulo=?, descripcion=?, estado=? WHERE id = ?";
         $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("sssii",$titulo, $desc, $estado,$idUsuario, $idUsuario);
+        $stmt->bind_param("sssi",$titulo, $desc, $estado, $id);
         $stmt->execute();
         $conexion->close();
         $stmt->close();
@@ -306,4 +306,33 @@ function actualizaTarea($titulo, $desc, $estado, $idUsuario){
         return false;
     }
 }
+
+function borrarTarea($id){
+    try{
+        $conexion = conecta('db', 'root', 'test', 'tareas');
+
+        if($conexion->connect_error){
+            return false;
+        }
+        
+        $sql = "DELETE FROM tareas WHERE id = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+        $conexion->close();
+        $stmt->close();
+        return true; 
+
+    }catch(mysqli_sql_exception $e){
+        echo($e->getMessage());
+        if (isset($stmt)) {
+            $stmt->close();
+        }
+        if (isset($conexion)) {
+            $conexion->close();
+        }
+        return false;
+    }
+}
+
 ?>
