@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="buscaTareas.php">
                     Buscador de tareas (PDO)
                 </a>
             </li>

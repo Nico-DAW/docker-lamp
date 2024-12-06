@@ -22,6 +22,7 @@
 
                 <div class="container justify-content-between">
                     <p>Aquí va el contenido </p>
+
                 </div>
             </main>
         </div>

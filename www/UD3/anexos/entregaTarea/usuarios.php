@@ -23,7 +23,7 @@
                 <div class="container justify-content-between">
                     <?php
                     include_once('pdo.php');
-                    $usuarios = listaUsuarios();
+                    $usuarios = listaUsuarios(null);
                     if( $usuarios === null){
                         echo "<p class=\"alert alert-danger\" role=\"alert\">No existen usuarios registrados.</p>";
                     }else{

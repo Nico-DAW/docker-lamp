@@ -22,8 +22,12 @@
 
                 <div class="container justify-content-between">
                     <?php
+                    include_once('pdo.php');
+                    //Debug --> var_dump(listaTareasUsuario(5)[]);
+                    //var_dump(listaTareasUsuario($_POST['usuario']));
                     include_once('mysqli.php');
-                    $tareas = listaTareas();
+                    //$tareas = listaTareasUsuario($_POST['usuario']);
+                    $tareas = listaTareasUsuario($_POST['usuario']);
                     //var_dump($tareas);
                     if($tareas === false){
                         echo "<p class=\"alert alert-danger\" role=\"alert\">No existen tareas registradas.</p>";

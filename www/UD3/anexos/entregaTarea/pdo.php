@@ -1,5 +1,5 @@
 <?php 
-function conecta($servername, $dbname, $username, $userpass){
+function conectaPDO($servername, $dbname, $username, $userpass){
     $conexion = new PDO("mysql:host=$servername; dbname=$dbname",$username,$userpass);
     return $conexion;
 }
@@ -7,7 +7,7 @@ function conecta($servername, $dbname, $username, $userpass){
 function nuevoUser($id,$username,$nombre,$apellidos,$contrasena){
     //Debug - echo ("Aqui_1");
     try{
-        $conexion = conecta('db','tareas','root','test');
+        $conexion = conectaPDO('db','tareas','root','test');
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql= "INSERT INTO usuarios (id, username, nombre, apellidos, contrasena) VALUES (:id, :username, :nombre, :apellidos, :contrasena)";
         $stmt = $conexion->prepare($sql);
@@ -30,12 +30,15 @@ function nuevoUser($id,$username,$nombre,$apellidos,$contrasena){
     }
 
 }
-
-function listaUsuarios(){
+// Podemos meter un parámetro opcional ... Ejemplo --> 
+function listaUsuarios($id){
     try {
-        $conexion = conecta('db','tareas','root','test');
+        $conexion = conectaPDO('db','tareas','root','test');
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql= "SELECT * FROM usuarios";
+        if($id!==null){
+        $sql = $sql." WHERE id='$id'";
+        }
         $stmt = $conexion->prepare($sql);
         $stmt->execute();
 
@@ -52,10 +55,29 @@ function listaUsuarios(){
     }
 }
 
+function listaTareasUsuario($id){
+    try {
+        $conexion = conectaPDO('db','tareas','root','test');
+        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql= "SELECT t.id, t.titulo, t.descripcion, t.estado, u.nombre FROM tareas t JOIN usuarios u ON u.id = t.id_usuario WHERE u.id = '$id'";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $resultados = $stmt->fetchAll();
+        return $resultados;
+    }catch(PDOException $e){
+        return null;
+    }
+    finally
+    {
+        $conexion = null;
+    }
+}
+
 function borraUsuario($id){
 
     try {
-        $conexion = conecta('db','tareas','root','test');
+        $conexion = conectaPDO('db','tareas','root','test');
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $conexion->beginTransaction();
@@ -86,7 +108,7 @@ function borraUsuario($id){
 function buscaUsuario($id)
 {
     try {
-        $conexion = conecta('db','tareas','root','test');
+        $conexion = conectaPDO('db','tareas','root','test');
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -112,7 +134,7 @@ function buscaUsuario($id)
 function actualizaUsuario($id, $username, $nombre, $apellidos, $contrasena)
 {
     try {
-        $conexion = conecta('db','tareas','root','test');
+        $conexion = conectaPDO('db','tareas','root','test');
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "UPDATE usuarios SET username = :username, nombre = :nombre, apellidos = :apellidos, contrasena = :contrasena WHERE id = :id";
