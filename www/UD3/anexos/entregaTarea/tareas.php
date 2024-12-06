@@ -27,7 +27,14 @@
                     //var_dump(listaTareasUsuario($_POST['usuario']));
                     include_once('mysqli.php');
                     //$tareas = listaTareasUsuario($_POST['usuario']);
-                    $tareas = listaTareasUsuario($_POST['usuario']);
+                   
+                    //... Bueno ... Si usuarios isset() una y sino la otra -->
+                    if(isset($_POST['usuario'])){
+                        $tareas = listaTareasUsuario($_POST['usuario']);
+                    }else{
+                        $tareas = listaTareas();
+                    }
+                    //$tareas = listaTareas();
                     //var_dump($tareas);
                     if($tareas === false){
                         echo "<p class=\"alert alert-danger\" role=\"alert\">No existen tareas registradas.</p>";
