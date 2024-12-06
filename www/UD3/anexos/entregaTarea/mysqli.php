@@ -24,36 +24,32 @@ function createDB(){
         //Comprobamos si se produce algún error en la conexion. 
         if($error!=null){
             //Si se produce algún error devolvemos un array con false y el mensaje a mostrar.
-            $checkMsg .= "<p class=\"alert alert-danger\" role=\"alert\">Se ha producido un error en la conexion. Error con número. ".$error."</p>";
-                return [false, $checkMsg];
+            $checkMsg = "Se ha producido un error en la conexion. Error con número. ".$error;
+            return [false, $checkMsg];
         }else{
-            //Si no se ha producido error mostramos un mensaje. 
-            $checkMsg .="<p class=\"alert alert-success\" role=\"alert\">La conexión a la BBDD se ha realizado con exito. </p>";
+            //Si no se ha producido error mostramos un mensaje. Esto podríamos omitirlo - se sobrentiende
+            // $checkMsg = "La conexión a la BBDD se ha realizado con exito.";
             //Creamos la consulta para comprobar si existe la BBDD
             $sqldbCheck = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'tareas'";
             //!!!! Añadimos el resultado de la consulta a una varibale... Este paso es importante 
             $resultado = $conexion->query($sqldbCheck);
                 //Si la query es TRUE la BBDD ya existe.
                 if($resultado && $resultado->num_rows > 0){
-                    $checkMsg .= "<p class=\"alert alert-warning\" role=\"alert\">La BBDD \"tareas\" ya existía. </p>";
+                    $checkMsg ="La BBDD \"tareas\" ya existía.";
                     //Devolvemos FALSE con el mensaje asociado. 
-                    return [false, $checkMsg];
+                    return [false, $checkMsg,"warning"];
                 }else{
                     //En caso de que la consulta sea FALSE (es decir no exista la BBDD) creamos la BBDD
                     $sqldb = "CREATE DATABASE IF NOT EXISTS tareas";
                     if($conexion->query($sqldb)){
-                        $checkMsg .= "<p class=\"alert alert-success\" role=\"alert\">Se ha creado la BBDD correctamente.</p>";
+                        $checkMsg = "Se ha creado la BBDD correctamente.";
                         return [true, $checkMsg];
-                    }else{
-                        $checkMsg .= "<p class=\"alert alert-danger\" role=\"alert\">Se ha producido un error alintentar crear la BBDD.</p>";
-                        return [false, $checkMsg];
                     }
-                    
                 }
         }
     //Si se produce un error durante el proceso capturamos la excepción
     }catch(mysqli_sql_exception $e){
-        $checkMsg .= "<p class=\"alert alert-danger\" role=\"alert\">Se ha producido un error al intentar crear la BBDD: ".$e->getMessage()."</p>";
+        $checkMsg = $e->getMessage();
         return [false, $checkMsg];
     }
     //Finalmente se cierra la conexion

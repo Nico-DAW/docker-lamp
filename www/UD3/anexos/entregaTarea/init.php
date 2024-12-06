@@ -24,8 +24,20 @@
                 <div class="container justify-content-between">
                     <?php 
                     include_once('mysqli.php');
+                    /*
                     $resultado = createDB();
                     echo $resultado[1];
+                    */
+                    $resultado = createDB();
+                    if(count($resultado)>2){
+                        //var_dump($resultado);
+                        //echo count($resultado);
+                        echo "<p class=\"alert alert-warning\" role=\"alert\">".$resultado[1]."</p>";
+                    }elseif($resultado){
+                        echo "<p class=\"alert alert-success\" role=\"alert\">".$resultado[1]."</p>";
+                    }else{
+                        echo "<p class=\"alert alert-danger\" role=\"alert\">".$resultado[1]."</p>";
+                    }
                     $tabla = tablaUsuarios();
                     echo $tabla[1];
                     $tablaTareas = tablaTareas();
