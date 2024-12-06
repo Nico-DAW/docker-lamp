@@ -55,11 +55,11 @@ function listaUsuarios($id){
     }
 }
 
-function listaTareasUsuario($id){
+function listaTareasUsuario($id, $estado){
     try {
         $conexion = conectaPDO('db','tareas','root','test');
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql= "SELECT t.id, t.titulo, t.descripcion, t.estado, u.nombre FROM tareas t JOIN usuarios u ON u.id = t.id_usuario WHERE u.id = '$id'";
+        $sql= "SELECT t.id, t.titulo, t.descripcion, t.estado, u.nombre FROM tareas t JOIN usuarios u ON u.id = t.id_usuario WHERE u.id = '$id' AND t.estado = '$estado'";
         $stmt = $conexion->prepare($sql);
         $stmt->execute();
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);

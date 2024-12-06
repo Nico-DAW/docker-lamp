@@ -30,7 +30,7 @@
                    
                     //... Bueno ... Si usuarios isset() una y sino la otra -->
                     if(isset($_POST['usuario'])){
-                        $tareas = listaTareasUsuario($_POST['usuario']);
+                        $tareas = listaTareasUsuario($_POST['usuario'], $_POST['estado']);
                     }else{
                         $tareas = listaTareas();
                     }
@@ -38,6 +38,8 @@
                     //var_dump($tareas);
                     if($tareas === false){
                         echo "<p class=\"alert alert-danger\" role=\"alert\">No existen tareas registradas.</p>";
+                    }elseif(count($tareas)==0){
+                        echo "<p class=\"alert alert-danger\" role=\"alert\">No existen tareas registradas con los criterios de búsqueda empleados.</p>";
                     }else{
                         echo '<div class="table-responsive">';
                         echo '<table class="table table-bordered table-striped">';
@@ -54,7 +56,7 @@
                         echo '<tbody>';
 
                         // Recorrer y mostrar cada donante
-                       
+                       // Debug - var_dump(count($tareas));
                         foreach ($tareas as $tarea) {
                             echo '<tr>';
                                 echo '<td>' . htmlspecialchars_decode($tarea['id']) . '</td>';
