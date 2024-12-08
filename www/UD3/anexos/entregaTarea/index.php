@@ -22,9 +22,6 @@
 
                 <div class="container justify-content-between">
                     <p>Aquí va el contenido </p>
-                        <?php 
-                        echo "Check cambio."
-                        ?>
                 </div>
             </main>
         </div>
