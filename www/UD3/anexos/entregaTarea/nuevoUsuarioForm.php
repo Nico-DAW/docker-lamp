@@ -42,6 +42,11 @@
                             <input type="text" name="contrasena" id="contrasena" class="form-control"/>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
+                        <!-- Cuando le damos a guardar se envía lo siguiente en este caso:
+                        nuevoUsuario.php?id=&username=P5&nombre=Paibol&apellidos=Gutierrez&contrasena=12
+
+                        Es decir campo id vacio =  - id= y se concatena con &username... - id=&username=P5&...
+                        -->
                     </form>
                 </div>
             </main>
