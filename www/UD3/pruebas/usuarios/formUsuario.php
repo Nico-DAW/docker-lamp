@@ -54,18 +54,18 @@
                     </div>
                     <div class="mb-3">
                         <p>Seleccione una fruta</p>
-                        <input type="radio" name="fruit" id="manzana"/>
-                        <label for="manzana"> Manzana</label>
-                        <input type="radio" name="fruit" id="banana"/>
-                        <label for="banana"> Banana</label>
+                        <input type="radio" name="fruit" value="manzana"/> Manzana
+
+                        <input type="radio" name="fruit" value="banana"/> Banana
+
                     </div>
                     <div class="mb-3"> 
                     <p>De que vehículo dispones?</p>
-                    <input type="checkbox" name="vehiculo1" id="vehiculo1" value="bici">
+                    <input type="checkbox" name="vehiculo1" id="vehiculo1" value="bici"/>
                     <label for="vehiculo1">Tengo bici</label><br>
-                    <input type="checkbox" name="vehiculo2" id="vehiculo2" value="coche">
+                    <input type="checkbox" name="vehiculo2" id="vehiculo2" value="coche"/>
                     <label for="vehiculo2">Tengo coche</label><br>
-                    <input type="checkbox" name="vehiculo3" id="vehiculo3" value="barco">
+                    <input type="checkbox" name="vehiculo3" id="vehiculo3" value="barco"/>
                     <label for="vehiculo3">Tengo barco</label><br>
                     </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
