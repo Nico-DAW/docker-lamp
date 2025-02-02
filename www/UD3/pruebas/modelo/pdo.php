@@ -83,6 +83,7 @@ function creaTabla(){
         $conexion=null;
     }
 }
+
 /*Una manera de hacerlo -->
 
 function nuevoUser($nombre,$pass,$fecha,$color,$fruit,$vehiculo1,$vehiculo2,$vehiculo3){
@@ -120,6 +121,7 @@ function nuevoUser($nombre,$pass,$fecha,$color,$fruit,$vehiculo1,$vehiculo2,$veh
 */
 
 //En este caso no se incluye un NULL autentico sino campo vacio
+/*
 function nuevoUser($nombre,$pass,$fecha,$color,$fruit,$vehiculo1,$vehiculo2,$vehiculo3){
     try{
         $conexion =conecta();
@@ -128,6 +130,28 @@ function nuevoUser($nombre,$pass,$fecha,$color,$fruit,$vehiculo1,$vehiculo2,$veh
         $sql="INSERT INTO usuarios(nombre,pass,fecha,color,fruta,vehiculo1,vehiculo2,vehiculo3) VALUES ('$nombre','$pass','$fecha','$color','$fruit','$vehiculo1','$vehiculo2','$vehiculo3')";
         
         $conexion->exec($sql);
+  
+        return true;
+    }catch(PDOException $e){
+
+        return $e->getMessage();
+    }finally{
+        $conexion=null;
+    }
+    
+}
+*/
+
+//Prueba sin que la consulta sql sea referenciada. 
+
+function nuevoUser($nombre,$pass,$fecha,$color,$fruit,$vehiculo1,$vehiculo2,$vehiculo3){
+    try{
+        $conexion =conecta();
+        $conexion->exec("USE pruebas");
+
+
+        
+        $conexion->exec("INSERT INTO usuarios(nombre,pass,fecha,color,fruta,vehiculo1,vehiculo2,vehiculo3) VALUES ('$nombre','$pass','$fecha','$color','$fruit','$vehiculo1','$vehiculo2','$vehiculo3')");
   
         return true;
     }catch(PDOException $e){

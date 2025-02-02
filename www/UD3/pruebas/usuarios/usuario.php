@@ -10,6 +10,6 @@ echo creaTabla();
 //$vehiculo1 = is_null($_GET['vehiculo1']) ? NULL : $_GET['vehiculo1'];   $GET['vehiculo1']??null  $GET['vehiculo1']??PDO::PARAM_NULL
 //echo $_GET['fruit'];
 
-echo nuevoUser($_GET['userNam'],$_GET['pass'],$_GET['fecha'],$_GET['color'],$_GET['fruit'],$_GET['vehiculo1']??NULL,$_GET['vehiculo2']??NULL,$_GET['vehiculo3']);
+echo nuevoUser($_GET['userNam'],$_GET['pass'],$_GET['fecha'],$_GET['color'],$_GET['fruit'],$_GET['vehiculo1']??NULL,$_GET['vehiculo2']??NULL,$_GET['vehiculo3']??NULL);
 
 ?>
