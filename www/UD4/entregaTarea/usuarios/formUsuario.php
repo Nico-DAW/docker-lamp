@@ -11,6 +11,6 @@
     <input type="text" class="form-control" id="username" name="username" value="<?php echo isset($username) ? ($username) : '' ?>" required>
 </div>
 <div class="mb-3">
-    <label for="rol" class="form-label">Rol</label>
+    <label for="rol" class="form-label">Rolgit </label>
     <input type="text" class="form-control" id="rol" name="rol" value="<?php echo isset($rol) ? ($rol) : '' ?>" required>
 </div>
