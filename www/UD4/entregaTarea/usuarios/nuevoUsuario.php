@@ -26,6 +26,7 @@
                         $nombre = $_POST['nombre'];
                         $apellidos = $_POST['apellidos'];
                         $username = $_POST['username'];
+                        $rol = $_POST['rol'];
                         $contrasena = $_POST['contrasena'];
                         $error = false;
                         //verificar nombre
