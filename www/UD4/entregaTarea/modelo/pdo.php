@@ -68,11 +68,12 @@ function nuevoUsuario($nombre, $apellidos, $username, $rol, $contrasena)
     try{
         $con = conectaPDO();
         $stmt = $con->prepare("INSERT INTO usuarios (nombre, apellidos, username, rol, contrasena) VALUES (:nombre, :apellidos, :username, :rol, :contrasena)");
+        $hasheado = password_hash($contrasena, PASSWORD_DEFAULT);
         $stmt->bindParam(':nombre', $nombre);
         $stmt->bindParam(':apellidos', $apellidos);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':rol', $rol);
-        $stmt->bindParam(':contrasena', $contrasena);
+        $stmt->bindParam(':contrasena', $hasheado);
         $stmt->execute();
         
         $stmt->closeCursor();
