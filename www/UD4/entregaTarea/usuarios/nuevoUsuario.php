@@ -56,7 +56,7 @@
                         if (!$error)
                         {
                             require_once('../modelo/pdo.php');
-                            $resultado = nuevoUsuario(filtraCampo($nombre), filtraCampo($apellidos), filtraCampo($username), $rol, $contrasena);
+                            $resultado = nuevoUsuario(filtraCampo($nombre), filtraCampo($apellidos), filtraCampo($username), filtraCampo($rol), $contrasena);
                             if ($resultado[0])
                             {
                                 echo '<div class="alert alert-success" role="alert">Usuario guardado correctamente.</div>';

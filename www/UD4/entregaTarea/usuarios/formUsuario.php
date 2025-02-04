@@ -12,5 +12,10 @@
 </div>
 <div class="mb-3">
     <label for="rol" class="form-label">Rol</label>
-    <input type="text" class="form-control" id="rol" name="rol" value="<?php echo isset($rol) ? ($rol) : '' ?>" required>
+    
+    <select class="form-control" id="rol" name="rol" required>
+        <option <?php echo isset($rol) ? '' : 'selected'; ?> disabled>Seleccione tipo de usuario</option>
+        <option value="0" <?php echo (isset($rol) && $rol == 0) ? 'selected' : ''; ?>>Usuario registrado</option>
+        <option value="1" <?php echo (isset($rol) && $rol == 1) ? 'selected' : ''; ?>>Administrador</option>
+    </select>
 </div>
