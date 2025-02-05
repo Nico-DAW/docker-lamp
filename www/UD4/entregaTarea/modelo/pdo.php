@@ -104,11 +104,12 @@ function actualizaUsuario($id, $nombre, $apellidos, $username, $rol, $contrasena
         $sql = $sql . ' WHERE id = :id';
 
         $stmt = $con->prepare($sql);
+        $hasheado = password_hash($contrasena, PASSWORD_DEFAULT);
         $stmt->bindParam(':nombre', $nombre);
         $stmt->bindParam(':apellidos', $apellidos);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':rol', $rol);
-        if (isset($contrasena)) $stmt->bindParam(':contrasena', $contrasena);
+        if (isset($contrasena)) $stmt->bindParam(':contrasena', $hasheado);
         $stmt->bindParam(':id', $id);
 
         $stmt->execute();

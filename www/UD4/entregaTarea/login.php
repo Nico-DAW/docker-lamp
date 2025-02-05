@@ -39,7 +39,7 @@
             }
             ?>
 
-            <form action="auth.php" method="POST">
+            <form action="./modelo/loginAuth.php" method="POST">
                 <input name="usuario" id="usuario" type="text" placeholder="Usuario" required>
                 <input name="pass" id="pass" type="password" placeholder="Contraseña" required>
                 

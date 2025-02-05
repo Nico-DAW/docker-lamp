@@ -36,6 +36,11 @@
                    Buscador de tareas (PDO)
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/UD4/entregaTarea/logout.php">
+                   Salir
+                </a>
+            </li>
             
         </ul>
     </div>
