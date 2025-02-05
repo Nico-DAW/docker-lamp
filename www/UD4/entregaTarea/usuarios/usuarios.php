@@ -51,7 +51,7 @@
                                             echo '<td>' . $usuario['nombre'] . '</td>';
                                             echo '<td>' . $usuario['apellidos'] . '</td>';
                                             echo '<td>' . $usuario['username'] . '</td>';
-                                            echo '<td>' . $usuario['rol'] . '</td>';
+                                            echo '<td>' . ($usuario['rol'] == 0 ? 'Usuario registrado' : 'Administrador') . '</td>';
                                             echo '<td>';
                                             echo '<a class="btn btn-sm btn-outline-success" href="editaUsuarioForm.php?id=' . $usuario['id'] . '" role="button">Editar</a>';
                                             echo '<a class="btn btn-sm btn-outline-danger ms-2" href="borraUsuario.php?id=' . $usuario['id'] . '" role="button">Borrar</a>';
