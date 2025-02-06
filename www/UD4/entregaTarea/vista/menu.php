@@ -6,6 +6,11 @@
                     Home
                 </a>
             </li>
+
+            <?php
+                if (isset($_SESSION['usuario'])&&$_SESSION['usuario']['rol']==1) {	
+            ?>
+
             <li class="nav-item">
                 <a class="nav-link" href="/UD4/entregaTarea/init.php">
                     Inicializar (mysqli)
@@ -22,6 +27,16 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/UD4/entregaTarea/tareas/buscaTareas.php">
+                   Buscador de tareas (PDO)
+                </a>
+            </li>
+
+            <?php
+                }
+            ?>
+
+            <li class="nav-item">
                 <a class="nav-link" href="/UD4/entregaTarea/tareas/tareas.php">
                     Lista de tareas (mysqli)
                 </a>
@@ -29,11 +44,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/UD4/entregaTarea/tareas/nuevaForm.php">
                     Nueva tarea (mysqli)
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/UD4/entregaTarea/tareas/buscaTareas.php">
-                   Buscador de tareas (PDO)
                 </a>
             </li>
             <li class="nav-item">
