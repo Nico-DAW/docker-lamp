@@ -8,7 +8,7 @@
             </li>
 
             <?php
-                if (isset($_SESSION['usuario'])&&$_SESSION['usuario']['rol']==1) {	
+                if (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol']==1) {	
             ?>
 
             <li class="nav-item">
