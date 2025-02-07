@@ -198,7 +198,7 @@ function listaTareas()
             while ($row = $resultados->fetch_assoc())
             {
                 $usuario = buscaUsuarioMysqli($row['id_usuario']);
-                $row['id_usuario'] = $usuario['username'];
+                $row['id_nombre'] = $usuario['username'];
                 array_push($tareas, $row);
             }
             return [true, $tareas];

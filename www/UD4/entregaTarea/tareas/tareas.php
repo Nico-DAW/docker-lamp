@@ -65,9 +65,9 @@
                                             echo '<td>' . $tarea['titulo'] . '</td>';
                                             echo '<td>' . $tarea['descripcion'] . '</td>';
                                             echo '<td>' . $tarea['estado'] . '</td>';
-                                            echo '<td>' . $tarea['id_usuario'] . '</td>';
+                                            echo '<td>' . $tarea['id_nombre'] . '</td>';
                                             echo '<td>';
-                                            echo '<a class="btn btn-sm btn-outline-primary" href="tarea.php?id=' . $tarea['id'] . '" role="button">Mostrar</a>';
+                                            echo '<a class="btn btn-sm btn-outline-primary" href="tarea.php?id=' . $tarea['id_usuario'] . '" role="button">Mostrar</a>';
                                             echo '<a class="btn btn-sm btn-outline-success ms-2" href="editaTareaForm.php?id=' . $tarea['id'] . '" role="button">Editar</a>';
                                             echo '<a class="btn btn-sm btn-outline-danger ms-2" href="borraTarea.php?id=' . $tarea['id'] . '" role="button">Borrar</a>';
                                             echo '</td>';

@@ -66,50 +66,9 @@
                         ?>
                         </table>
                         </div>
-                        <p class="card-text">Detalles tarea</p>
                     </div>
                     </div>
-                    <div class="table">
-                        <table class="table table-sm table-striped table-hover">
-                            <thead class="thead">
-                                <tr>                            
-                                    <th>ID</th>
-                                    <th>Título</th>
-                                    <th>Descripción</th>
-                                    <th>Estado</th>
-                                    <th>Usuario</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $lista = $resultado[1];
-                                    if (count($lista) > 0)
-                                    {
-                                        foreach ($lista as $tarea)
-                                        {
-                                            echo '<tr>';
-                                            echo '<td>' . $tarea['id'] . '</td>';
-                                            echo '<td>' . $tarea['titulo'] . '</td>';
-                                            echo '<td>' . $tarea['descripcion'] . '</td>';
-                                            echo '<td>' . $tarea['estado'] . '</td>';
-                                            echo '<td>' . $tarea['id_usuario'] . '</td>';
-                                            echo '<td>';
-                                            echo '<a class="btn btn-sm btn-outline-primary" href="tarea.php?id=' . $tarea['id'] . '" role="button">Mostrar</a>';
-                                            echo '<a class="btn btn-sm btn-outline-success ms-2" href="editaTareaForm.php?id=' . $tarea['id'] . '" role="button">Editar</a>';
-                                            echo '<a class="btn btn-sm btn-outline-danger ms-2" href="borraTarea.php?id=' . $tarea['id'] . '" role="button">Borrar</a>';
-                                            echo '</td>';
-                                            echo '</tr>';
-                                        }
-                                    }
-                                    else
-                                    {
-                                        echo '<tr><td colspan="100">No hay tareas</td></tr>';
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                    &nbsp;
                 <?php
                     }
                     else
