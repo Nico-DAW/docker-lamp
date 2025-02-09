@@ -214,6 +214,32 @@ function listaTareas()
     }
 }
 
+function destallesTarea($id){
+    try {
+        $conexion = conectaTareas();
+
+        if ($conexion->connect_error)
+        {
+            return [false, $conexion->error];
+        }
+        else
+        {
+            $sql = "SELECT * FROM tareas WHERE id='$id'";
+            $resultados = $conexion->query($sql);
+            $detalles=$resultados->fetch_assoc();
+            return [true, $detalles];
+        }
+        
+    }
+    catch (mysqli_sql_exception $e) {
+        return [false, $e->getMessage()];
+    }
+    finally
+    {
+        cerrarConexion($conexion);
+    }
+}
+
 function nuevaTarea($titulo, $descripcion, $estado, $usuario)
 {
     try {
@@ -349,5 +375,67 @@ function buscaUsuarioMysqli($id)
         {
             return null;
         }
+    }
+}
+
+function nuevoFichero($nombre, $fileUp, $descripcion, $id_tarea){
+//Revisar aquí el cuerpo !
+    try {
+        $conexion = conectaTareas();
+        
+        if ($conexion->connect_error)
+        {
+            return [false, $conexion->error];
+        }
+        else
+        {
+            $stmt = $conexion->prepare("INSERT INTO ficheros (nombre, file, descripcion, id_tarea) VALUES (?,?,?,?)");
+            $stmt->bind_param("ssss", $nombre, $fileUp, $descripcion, $id_tarea);
+
+            $stmt->execute();
+
+            return [true, 'Fichero creado correctamente.'];
+        }
+    }
+    catch (mysqli_sql_exception $e)
+    {
+        return [false, $e->getMessage()];
+    }
+    finally
+    {
+        cerrarConexion($conexion);
+    }
+
+}
+
+function verFicheros($id_tarea){
+    try {
+        $conexion = conectaTareas();
+
+        if ($conexion->connect_error)
+        {
+            return [false, $conexion->error];
+        }
+        else
+        {   
+            //La clave está en esta consulta
+            $sql = "SELECT * FROM ficheros f JOIN tareas t ON f.id_tarea=t.id_usuario WHERE t.id='$id_tarea'";
+            //$sql = "SELECT * FROM ficheros f JOIN tareas t ON f.id_tarea=t.id_usuario";
+            $resultados = $conexion->query($sql);
+            $ficheros = array();
+            while ($row = $resultados->fetch_assoc())
+            {
+                array_push($ficheros, $row);
+            }
+            return [true, $ficheros];
+        }
+        
+    }
+    catch (mysqli_sql_exception $e) {
+        return [false, $e->getMessage()];
+    }
+    finally
+    {
+        cerrarConexion($conexion);
     }
 }

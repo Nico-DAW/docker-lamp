@@ -25,20 +25,24 @@
                 <?php
 
                     $resultado = null;
+                    /*
                     if (!empty($_GET))
                     {
+                        //Por aquí no está entrando
                         $estado = isset($_GET['estado']) ? $_GET['estado'] : null;
-                        $id_usuario = $_GET['id_usuario'];
+                        $id_tarea = $_GET['id'];
                         require_once('../modelo/pdo.php');
-                        $resultado = listaTareasPDO($id_usuario, $estado);
-                    }
-                    else
-                    {
-                        require_once('../modelo/mysqli.php');
-                        $resultado = listaTareas();
+                        $resultado = listaTareasPDO($id_tarea, $estado);
                     }
                     
-                    if ($resultado && $resultado[0])
+                    else
+                    {
+                    */
+                        require_once('../modelo/mysqli.php');
+                        $resultado = listaTareas();
+                    //}
+                    
+                    if ($resultado)
                     {
                 ?>
                     <div class="table">
@@ -67,7 +71,7 @@
                                             echo '<td>' . $tarea['estado'] . '</td>';
                                             echo '<td>' . $tarea['id_nombre'] . '</td>';
                                             echo '<td>';
-                                            echo '<a class="btn btn-sm btn-outline-primary" href="tarea.php?id=' . $tarea['id_usuario'] . '" role="button">Mostrar</a>';
+                                            echo '<a class="btn btn-sm btn-outline-primary" href="tarea.php?id=' . $tarea['id'] . '" role="button">Mostrar</a>';
                                             echo '<a class="btn btn-sm btn-outline-success ms-2" href="editaTareaForm.php?id=' . $tarea['id'] . '" role="button">Editar</a>';
                                             echo '<a class="btn btn-sm btn-outline-danger ms-2" href="borraTarea.php?id=' . $tarea['id'] . '" role="button">Borrar</a>';
                                             echo '</td>';

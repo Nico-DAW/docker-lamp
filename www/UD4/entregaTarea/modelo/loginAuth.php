@@ -5,7 +5,8 @@ include_once('pdo.php');
 
 function comprobarUsuario($nombre, $pass, $conPDO)
 {
-    $consulta = "SELECT contrasena, rol FROM usuarios WHERE nombre=:nombreTecleado";
+    //Incorporamos el id para tenerlo diponible en $_SESSION - UD4 Tarea
+    $consulta = "SELECT contrasena, rol, id FROM usuarios WHERE nombre=:nombreTecleado";
     $stmt = $conPDO->prepare($consulta);
     try
     {
@@ -19,12 +20,14 @@ function comprobarUsuario($nombre, $pass, $conPDO)
     
         $passBD=$fila['contrasena'];
         $rol = $fila['rol'];
+        $id = $fila['id'];
 
         //Primero comprobamos que haya un usuario y después comprobamos la contraseña introducida
         if ($stmt->rowCount() == 1 && password_verify($pass, $passBD))
         {
             $usuario['nombre']=$nombre;
             $usuario['rol']=$rol;
+            $usuario['id']=$id;
             return $usuario;
         }
         else
