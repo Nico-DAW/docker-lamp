@@ -214,7 +214,7 @@ function listaTareas()
     }
 }
 
-function destallesTarea($id){
+function detallesTarea($id){
     try {
         $conexion = conectaTareas();
 
@@ -419,8 +419,9 @@ function verFicheros($id_tarea){
         else
         {   
             //La clave está en esta consulta
-            $sql = "SELECT * FROM ficheros f JOIN tareas t ON f.id_tarea=t.id_usuario WHERE t.id='$id_tarea'";
-            //$sql = "SELECT * FROM ficheros f JOIN tareas t ON f.id_tarea=t.id_usuario";
+            //$sql = "SELECT * FROM ficheros f JOIN tareas t ON f.id_tarea=t.id_usuario WHERE t.id='$id_tarea'";
+            //$sql = "SELECT * FROM ficheros f JOIN tareas t ON f.id_tarea=t.id WHERE f.id_tarea='$id_tarea'";
+            $sql = "SELECT * FROM ficheros WHERE id_tarea='$id_tarea'";
             $resultados = $conexion->query($sql);
             $ficheros = array();
             while ($row = $resultados->fetch_assoc())

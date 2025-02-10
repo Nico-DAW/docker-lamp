@@ -51,7 +51,7 @@ echo var_dump($_SESSION);
                         $id_tarea = $_GET['id'];
                         //require_once('../modelo/pdo.php');
                         //require_once('../modelo/mysqli.php');
-                        $resultado = destallesTarea($id_tarea);//listaTareasPDO($id_usuario, $estado);
+                        $resultado = detallesTarea($id_tarea);//listaTareasPDO($id_usuario, $estado);
                     }
                     /* Borrar
                     else
@@ -76,6 +76,10 @@ echo var_dump($_SESSION);
                             echo '<tr><th>Descripción:</th><td>'.$lista['descripcion'].'</td></tr>';
                             echo '<tr><th>Estado:</th><td>'.$lista['estado'].'</td></tr>';
                             echo '<tr><th>Usuario:</th><td>'.$lista['id_usuario'].'</td></tr>';
+                            //Cada vez que se pase por aquí se actualiza
+                            $_SESSION['usuario']['idUsuarioTarea'] = $lista['id_usuario'];
+                            //Pruebas
+                            var_dump($_SESSION['usuario']);
                         }
                     else
                     {
