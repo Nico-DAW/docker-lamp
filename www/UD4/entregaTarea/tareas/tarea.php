@@ -62,7 +62,8 @@ echo var_dump($_SESSION);
                     */
                     if ($resultado && $resultado[0])
                     {
-                ?>
+                        var_dump($_SESSION['usuario']);
+                ?>  
                     <div class="card">
                     <h5 class="card-header">Detalles</h5>
                     <div class="card-body">
@@ -97,7 +98,7 @@ echo var_dump($_SESSION);
                             $ficheros=verFicheros($_SESSION['usuario']['tarea']);
                             if($ficheros[0]){
                                 foreach($ficheros[1] as $fichero){
-                                    //var_dump($fichero);
+                                    var_dump($fichero);
                             ?>
                             <div class="col-md-4 col-sm-4 col-xs-4">
                                     <div class="card">
@@ -106,8 +107,10 @@ echo var_dump($_SESSION);
                                     <?php echo $fichero['nombre'];?> 
                                     </h5>
                                     <p class="card-text"><?php echo $fichero['descripcion'];?> </p>
-                                    <a href="#" class="btn btn-outline-primary">Descargar</a>
-                                    <a href="#" class="btn btn-outline-danger">Eliminar</a>
+                                    <?php echo $fichero['nombre'] ?> 
+                                    <button onclick="#" class="btn btn-outline-primary">Descargar</a></button>
+                                    <button onclick="<?php borraFichero($fichero['nombre']);?>" class="btn btn-outline-danger">Eliminar</a></button>
+                                    
                                     </div>
                                     </div>
                             </div>

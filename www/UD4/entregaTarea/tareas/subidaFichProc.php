@@ -94,7 +94,7 @@
         require_once('../modelo/mysqli.php');
         
         //strval($_SESSION['usuario']['id'])
-        $resultado = nuevoFichero(filtraCampo($nombre), filtraCampo($fileUp['name']), filtraCampo($descripcion), strval($_SESSION['usuario']['id']));
+        $resultado = nuevoFichero(filtraCampo($nombre), filtraCampo($fileUp['name']), filtraCampo($descripcion), $_SESSION['usuario']['id']);
         if ($resultado[0])
         {
             $_SESSION['usuario']['upMsg'] = '<div class="alert alert-success" role="alert">Fichero guardado correctamente en la BBDD.</div>';
