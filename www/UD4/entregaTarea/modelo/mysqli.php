@@ -441,7 +441,7 @@ function verFicheros($id_tarea){
     }
 }
 
-function borraFichero($nombre)
+function borraFichero($id)
 {
     try {
         $conexion = conectaTareas();
@@ -452,7 +452,8 @@ function borraFichero($nombre)
         }
         else
         {
-            $sql = "DELETE FROM ficheros WHERE nombre = '$nombre'";
+            //$sql = "DELETE FROM ficheros WHERE nombre = '$nombre'";
+            $sql = "DELETE FROM ficheros WHERE id = ". $id;
             if ($conexion->query($sql))
             {
                 return [true, 'Tarea borrada correctamente.'];
