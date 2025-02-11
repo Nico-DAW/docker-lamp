@@ -62,7 +62,7 @@ echo var_dump($_SESSION);
                     */
                     if ($resultado && $resultado[0])
                     {
-                        var_dump($_SESSION['usuario']);
+                        //Pruebas--> var_dump($_SESSION['usuario']);
                 ?>  
                     <div class="card">
                     <h5 class="card-header">Detalles</h5>
@@ -79,8 +79,7 @@ echo var_dump($_SESSION);
                             echo '<tr><th>Usuario:</th><td>'.$lista['id_usuario'].'</td></tr>';
                             //Cada vez que se pase por aquí se actualiza
                             $_SESSION['usuario']['idUsuarioTarea'] = $lista['id_usuario'];
-                            //Pruebas
-                            var_dump($_SESSION['usuario']);
+                            //Pruebas--> var_dump($_SESSION['usuario']);
                         }
                     else
                     {
@@ -102,7 +101,7 @@ echo var_dump($_SESSION);
                             $ficheros=verFicheros($_SESSION['usuario']['tarea']);
                             if($ficheros[0]){
                                 foreach($ficheros[1] as $fichero){
-                                    var_dump($fichero);
+                                    //Pruebas --> var_dump($fichero);
                             ?>
                             <div class="col-md-4 col-sm-4 col-xs-4">
                                     <div class="card">
@@ -111,9 +110,11 @@ echo var_dump($_SESSION);
                                     <?php echo $fichero['nombre'];?> 
                                     </h5>
                                     <p class="card-text"><?php echo $fichero['descripcion'];?> </p>
-                                    <?php echo $fichero['nombre'] ?> 
                                     <button onclick="#" class="btn btn-outline-primary">Descargar</a></button>
-                                    <button onclick="<?php borraFichero($fichero['nombre']);?>" class="btn btn-outline-danger">Eliminar</a></button>
+                                    <!--<button onclick="<?php //borraFichero($fichero['id']); ?>" class="btn btn-outline-danger">Eliminar</button>-->
+                                    <!--<a class="btn btn-outline-danger" href="<?php //borraFichero($fichero['nombre']); ?>" role="button">Eliminar</a>-->
+                                    <a class="btn btn-outline-danger" href="borraFich.php?id_fichero=<?php echo $fichero['id'];?>" role="button">Eliminar</a>
+
                                     
                                     </div>
                                     </div>
