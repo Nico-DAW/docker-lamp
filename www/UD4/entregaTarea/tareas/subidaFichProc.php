@@ -93,8 +93,13 @@
     {
         require_once('../modelo/mysqli.php');
         
-        //strval($_SESSION['usuario']['id'])
-        $resultado = nuevoFichero(filtraCampo($nombre), filtraCampo($fileUp['name']), filtraCampo($descripcion), $_SESSION['usuario']['id']);
+        /*
+        strval($_SESSION['usuario']['id']) ---> Este es el id del usuario de la sesion... Y para la consulta necesitamos de la tarea
+        Las tablas se relacionan de la siguiente manera del id de la tarea (PK) con id_tarea(FK) de ficheros y usuario con tarea a través de id_usuario de 
+        tareas(FK). Por lo tanto ---> 
+        */
+        $resultado = nuevoFichero(filtraCampo($nombre), filtraCampo($fileUp['name']), filtraCampo($descripcion), $_SESSION['usuario']['tarea']);
+        //Esto está, ahora bien, como se muestran las tareas?
         if ($resultado[0])
         {
             $_SESSION['usuario']['upMsg'] = '<div class="alert alert-success" role="alert">Fichero guardado correctamente en la BBDD.</div>';
