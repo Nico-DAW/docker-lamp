@@ -440,3 +440,36 @@ function verFicheros($id_tarea){
         cerrarConexion($conexion);
     }
 }
+
+function borraFichero($nombre)
+{
+    try {
+        $conexion = conectaTareas();
+
+        if ($conexion->connect_error)
+        {
+            return [false, $conexion->error];
+        }
+        else
+        {
+            $sql = "DELETE FROM ficheros WHERE nombre = '$nombre'";
+            if ($conexion->query($sql))
+            {
+                return [true, 'Tarea borrada correctamente.'];
+            }
+            else
+            {
+                return [false, 'No se pudo borrar la tarea.'];
+            }
+            
+        }
+        
+    }
+    catch (mysqli_sql_exception $e) {
+        return [false, $e->getMessage()];
+    }
+    finally
+    {
+        cerrarConexion($conexion);
+    }
+}

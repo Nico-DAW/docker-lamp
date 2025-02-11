@@ -110,8 +110,9 @@ echo var_dump($_SESSION);
                                     <?php echo $fichero['nombre'];?> 
                                     </h5>
                                     <p class="card-text"><?php echo $fichero['descripcion'];?> </p>
-                                    <a href="#" class="btn btn-outline-primary">Descargar</a>
-                                    <a href="#" class="btn btn-outline-danger">Eliminar</a>
+                                    <button onclick="#" class="btn btn-outline-primary">Descargar</a></button>
+                                    <button onclick="#" class="btn btn-outline-danger">Eliminar</a></button>
+                                    
                                     </div>
                                     </div>
                             </div>
