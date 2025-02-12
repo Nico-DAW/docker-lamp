@@ -114,6 +114,7 @@
             /*A diferencia del caso anterior en nombre del fichero subido debe ser alaetorio según el enunciado, este nombre 
             debe ser generado con bin2hex(random_bytes(8)) -->
             */
+            //Seguir Aquí
             $type = strtolower(pathinfo(basename($fileUp['name']), PATHINFO_EXTENSION));
             $nombreAutogenerado = bin2hex(random_bytes(8)) . "." . $type;
             $destPath = $target_dir . $nombreAutogenerado;
