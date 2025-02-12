@@ -21,8 +21,14 @@ services:
             - "80:80"
         volumes:
             - ./www:/var/www/html
+        links:
+            - db
+        networks:
+            - default
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         env_file:
-            - .env
+            - .env.default
     phpmyadmin:
         image: phpmyadmin:5.2.1
         links: 
