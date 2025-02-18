@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$raiz = $_ENV['RAIZ_UD4'];
+$raiz = $_ENV['RAIZ_UD5'];
 
 if (!checkSession()) {	
     redirectLogin();
