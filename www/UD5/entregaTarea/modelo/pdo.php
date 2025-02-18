@@ -64,16 +64,23 @@ function listaTareasPDO($id_usuario, $estado)
     
 }
 
-/*
+
 function nuevoUsuario($usuario){
     try{
         $con = conectaPDO();
         $stmt = $con->prepare("INSERT INTO usuarios (nombre, apellidos, username, rol, contrasena) VALUES (:nombre, :apellidos, :username, :rol, :contrasena)");
-        $stmt->bindParam(':nombre', $usuario.getNom());
-        $stmt->bindParam(':apellidos', $usuario.getApel());
-        $stmt->bindParam(':username', $usuario.getUsername());
-        $stmt->bindParam(':rol', $usuario.getRol());
-        $hasheado = password_hash($usuario.getPass(), PASSWORD_DEFAULT);
+        //Sino lo haces así -->
+        $nombre = $usuario->getNom();
+        $stmt->bindParam(':nombre', $nombre);
+        //Obtienes el siguente error: Only variables should be passed by reference... 
+        $apellidos = $usuario->getApel();
+        $stmt->bindParam(':apellidos', $apellidos);
+        $username = $usuario->getUsername();
+        $stmt->bindParam(':username', $username);
+        $rol = $usuario->getRol();
+        $stmt->bindParam(':rol', $rol);
+        $pass = $usuario->getPass();
+        $hasheado = password_hash($pass, PASSWORD_DEFAULT);
         $stmt->bindParam(':contrasena', $hasheado);
         $stmt->execute();
         
@@ -81,7 +88,7 @@ function nuevoUsuario($usuario){
 
         return [true, null];
     }
-    catch (PDOExcetion $e)
+    catch (PDOException $e)
     {
         return [false, $e->getMessage()];
     }
@@ -90,8 +97,8 @@ function nuevoUsuario($usuario){
         $con = null;
     }
 }
-*/
 
+/*
 function nuevoUsuario($nombre, $apellidos, $username, $contrasena, $rol=0)
 {
     try{
@@ -118,7 +125,7 @@ function nuevoUsuario($nombre, $apellidos, $username, $contrasena, $rol=0)
         $con = null;
     }
 }
-
+*/
 
 function actualizaUsuario($id, $nombre, $apellidos, $username, $contrasena, $rol)
 {
