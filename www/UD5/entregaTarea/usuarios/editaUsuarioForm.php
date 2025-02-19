@@ -29,6 +29,7 @@
                                 $apellidos = $usuario['apellidos'];
                                 $username = $usuario['username'];
                                 $rol = $usuario['rol'];
+                                //var_dump($usuario);
                         ?>
                             <input type="hidden" name="id" value="<?php echo $id ?>">
                             <?php include_once('formUsuario.php'); ?>

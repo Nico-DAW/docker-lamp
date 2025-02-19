@@ -173,6 +173,7 @@ function actualizaUsuario($usuario)
 {
     try{
         $con = conectaPDO();
+        //$sql = "UPDATE usuarios SET username = :username, rol = :rol, nombre = :nombre, apellidos = :apellidos, contrasena = :contrasena WHERE id = :id" ;
         $sql = "UPDATE usuarios SET username = :username, rol = :rol, nombre = :nombre, apellidos = :apellidos" ;
         $pass = $usuario->getPass();
         
@@ -180,7 +181,6 @@ function actualizaUsuario($usuario)
         {
             $sql = $sql . ', contrasena = :contrasena';
         }
-
         $sql = $sql . ' WHERE id = :id';
 
         $stmt = $con->prepare($sql);
@@ -192,7 +192,8 @@ function actualizaUsuario($usuario)
         $stmt->bindParam(':username', $username);
         $rol = $usuario->getRol();
         $stmt->bindParam(':rol', $rol);
-        
+        $pass = $usuario->getPass();
+
         if (isset($pass))
         {
             $hasheado = password_hash($pass, PASSWORD_DEFAULT);

@@ -53,6 +53,7 @@
                                             echo '</td>';
                                             echo '</tr>';
                                         }
+                                        //var_dump($_SESSION);
                                     }
                                     else
                                     {

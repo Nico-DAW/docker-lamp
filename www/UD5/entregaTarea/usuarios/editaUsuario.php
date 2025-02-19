@@ -39,16 +39,18 @@ if (!$error && !empty($contrasena) && !validaContrasena($contrasena))
 }
 if (!$error)
 {
-    require_once('../modelo/pdo.php');
+    
     if (empty($contrasena)) $contrasena = null;
     $nombre = filtraCampo($nombre);
     $apellidos = filtraCampo($apellidos);
     $username = filtraCampo($username);
-    $usuario = new Usuario(null, $nombre, $apellidos, $username, $contrasena, $rol);
+    require_once('../modelo/pdo.php');
+    require_once('usuario.php');
+    $usuario = new Usuario($id, $nombre, $apellidos, $username, $contrasena, $rol);
     $resultado = actualizaUsuario($usuario);
     if ($resultado[0])
     {
-        $message = 'Usuario actualizado correctamente.';
+        $message = 'Usuario actualizado correctamente.';//.var_dump($usuario);
     }
     else
     {
