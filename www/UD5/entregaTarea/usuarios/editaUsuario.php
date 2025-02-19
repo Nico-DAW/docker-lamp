@@ -41,7 +41,11 @@ if (!$error)
 {
     require_once('../modelo/pdo.php');
     if (empty($contrasena)) $contrasena = null;
-    $resultado = actualizaUsuario($id, filtraCampo($nombre), filtraCampo($apellidos), filtraCampo($username), $contrasena, $rol);
+    $nombre = filtraCampo($nombre);
+    $apellidos = filtraCampo($apellidos);
+    $username = filtraCampo($username);
+    $usuario = new Usuario(null, $nombre, $apellidos, $username, $contrasena, $rol);
+    $resultado = actualizaUsuario($usuario);
     if ($resultado[0])
     {
         $message = 'Usuario actualizado correctamente.';

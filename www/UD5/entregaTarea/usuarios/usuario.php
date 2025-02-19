@@ -55,11 +55,11 @@ class Usuario{
         return $this->rol;
     }
 
-    public function __construct($id, $username, $nom, $apel, $pass, $rol){
+    public function __construct($id, $nom, $apel, $username, $pass, $rol){
         $this->id = $id;
-        $this->username = $username;
         $this->nom = $nom;
         $this->apel = $apel;
+        $this->username = $username;
         $this->pass = $pass;
         $this->rol = $rol;
     }

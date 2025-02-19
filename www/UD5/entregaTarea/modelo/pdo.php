@@ -17,7 +17,7 @@ function listaUsuarios()
 {
     try {
         $con = conectaPDO();
-        $stmt = $con->prepare('SELECT id, username, nombre, apellidos, rol, contrasena FROM usuarios');
+        $stmt = $con->prepare('SELECT id, nombre, apellidos, username, rol, contrasena FROM usuarios');
         $stmt->execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -68,17 +68,17 @@ function listaTareasPDO($id_usuario, $estado)
 function nuevoUsuario($usuario){
     try{
         $con = conectaPDO();
-        $stmt = $con->prepare("INSERT INTO usuarios (nombre, apellidos, username, rol, contrasena) VALUES (:nombre, :apellidos, :username, :rol, :contrasena)");
+        $stmt = $con->prepare("INSERT INTO usuarios (username, rol, nombre, apellidos, contrasena) VALUES ( :username, :rol, :nombre, :apellidos, :contrasena)");
+        $username = $usuario->getUsername();
+        $stmt->bindParam(':username', $username);
+        $rol = $usuario->getRol();
+        $stmt->bindParam(':rol', $rol);
         //Sino lo haces así -->
         $nombre = $usuario->getNom();
         $stmt->bindParam(':nombre', $nombre);
         //Obtienes el siguente error: Only variables should be passed by reference... 
         $apellidos = $usuario->getApel();
         $stmt->bindParam(':apellidos', $apellidos);
-        $username = $usuario->getUsername();
-        $stmt->bindParam(':username', $username);
-        $rol = $usuario->getRol();
-        $stmt->bindParam(':rol', $rol);
         $pass = $usuario->getPass();
         $hasheado = password_hash($pass, PASSWORD_DEFAULT);
         $stmt->bindParam(':contrasena', $hasheado);
@@ -125,7 +125,7 @@ function nuevoUsuario($nombre, $apellidos, $username, $contrasena, $rol=0)
         $con = null;
     }
 }
-*/
+
 
 function actualizaUsuario($id, $nombre, $apellidos, $username, $contrasena, $rol)
 {
@@ -159,6 +159,55 @@ function actualizaUsuario($id, $nombre, $apellidos, $username, $contrasena, $rol
         return [true, null];
     }
     catch (PDOExcetion $e)
+    {
+        return [false, $e->getMessage()];
+    }
+    finally
+    {
+        $con = null;
+    }
+}
+*/
+
+function actualizaUsuario($usuario)
+{
+    try{
+        $con = conectaPDO();
+        $sql = "UPDATE usuarios SET username = :username, rol = :rol, nombre = :nombre, apellidos = :apellidos" ;
+        $pass = $usuario->getPass();
+        
+        if (isset($pass))
+        {
+            $sql = $sql . ', contrasena = :contrasena';
+        }
+
+        $sql = $sql . ' WHERE id = :id';
+
+        $stmt = $con->prepare($sql);
+        $nombre = $usuario->getNom();
+        $stmt->bindParam(':nombre', $nombre);
+        $apellidos = $usuario->getApel();
+        $stmt->bindParam(':apellidos', $apellidos);
+        $username = $usuario->getUsername();
+        $stmt->bindParam(':username', $username);
+        $rol = $usuario->getRol();
+        $stmt->bindParam(':rol', $rol);
+        
+        if (isset($pass))
+        {
+            $hasheado = password_hash($pass, PASSWORD_DEFAULT);
+            $stmt->bindParam(':contrasena', $hasheado);
+        }
+        $id = $usuario->getId();
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
+        
+        $stmt->closeCursor();
+
+        return [true, null];
+    }
+    catch (PDOException $e)
     {
         return [false, $e->getMessage()];
     }
