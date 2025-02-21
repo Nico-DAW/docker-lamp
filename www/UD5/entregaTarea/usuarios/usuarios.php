@@ -39,7 +39,7 @@
                                     $lista = $resultado[1];
                                     if (count($lista) > 0)
                                     {
-                                        foreach ($lista as $usuario)
+                                       /* foreach ($lista as $usuario)
                                         {
                                             echo '<tr>';
                                             echo '<td>' . $usuario['id'] . '</td>';
@@ -50,6 +50,21 @@
                                             echo '<td>';
                                             echo '<a class="btn btn-sm btn-outline-success" href="editaUsuarioForm.php?id=' . $usuario['id'] . '" role="button">Editar</a>';
                                             echo '<a class="btn btn-sm btn-outline-danger ms-2" href="borraUsuario.php?id=' . $usuario['id'] . '" role="button">Borrar</a>';
+                                            echo '</td>';
+                                            echo '</tr>';
+                                        }
+                                        */
+                                        foreach ($lista as $usuario)
+                                        {
+                                            echo '<tr>';
+                                            echo '<td>' . $usuario->getId() . '</td>';
+                                            echo '<td>' . $usuario->getNom() . '</td>';
+                                            echo '<td>' . $usuario->getApel() . '</td>';
+                                            echo '<td>' . $usuario->getUsername() . '</td>';
+                                            echo '<td>' . ($usuario->getRol() == 1 ? 'administrador' : 'usuario registrado') . '</td>';
+                                            echo '<td>';
+                                            echo '<a class="btn btn-sm btn-outline-success" href="editaUsuarioForm.php?id=' . $usuario->getId() . '" role="button">Editar</a>';
+                                            echo '<a class="btn btn-sm btn-outline-danger ms-2" href="borraUsuario.php?id=' . $usuario->getId() . '" role="button">Borrar</a>';
                                             echo '</td>';
                                             echo '</tr>';
                                         }

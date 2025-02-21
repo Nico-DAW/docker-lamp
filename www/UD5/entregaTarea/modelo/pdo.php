@@ -13,6 +13,7 @@ function conectaPDO()
     return $conPDO;
 }
 
+/*
 function listaUsuarios()
 {
     try {
@@ -23,6 +24,41 @@ function listaUsuarios()
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $resultados = $stmt->fetchAll();
         return [true, $resultados];
+    }
+    catch (PDOException $e) {
+        return [false, $e->getMessage()];
+    }
+    finally {
+        $con = null;
+    }
+    
+}
+*/
+
+function listaUsuarios()
+{
+    try {
+        $con = conectaPDO();
+        $stmt = $con->prepare('SELECT id, nombre, apellidos, username, rol, contrasena FROM usuarios');
+        $stmt->execute();
+
+        /* Esto esta mal:
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        */
+        //$resultados = $stmt->fetchAll();
+        $usuarios=[];
+        while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+            
+            $usuario=new Usuario(null, null, null, null, null, null);
+            $usuario->setId($row['id']);
+            $usuario->setUsername($row['username']);
+            $usuario->setNom($row['nombre']);
+            $usuario->setApel($row['apellidos']);
+            $usuario->setRol($row['rol']);
+            $usuario->setPass($row['contrasena']);
+            $usuarios[]=$usuario;
+        }
+        return [true, $usuarios];
     }
     catch (PDOException $e) {
         return [false, $e->getMessage()];
