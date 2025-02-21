@@ -6,13 +6,16 @@ $message = 'Error borrando el usuario.';
 $error = true;
 
 require_once('../modelo/pdo.php');
+require_once('usuario.php');
 
 if (!empty($_GET))
-{
+{   /*Ese $_GET podría recuperar un objeto?... mmmm... */
     $id = $_GET['id'];
     if (!empty($id))
     {
-        $resultado = borraUsuario($id);
+        /*Es necesario hacer una conexion a la BBDD?... mmmm...*/
+        $usuario = new Usuario($id,null,null,null,null,null);
+        $resultado = borraUsuario($usuario);
         if ($resultado[0])
         {
             $message = 'Usuario borrado correctamente.';

@@ -254,6 +254,7 @@ function actualizaUsuario($usuario)
     }
 }
 
+/*
 function borraUsuario($id)
 {
     try {
@@ -277,7 +278,34 @@ function borraUsuario($id)
         $con = null;
     }
 }
+*/
 
+function borraUsuario($usuario)
+{
+    try {
+        $con = conectaPDO();
+
+        $con->beginTransaction();
+        $id=$usuario->getId();
+
+        $stmt = $con->prepare('DELETE FROM tareas WHERE id_usuario = ' . $id);
+        $stmt->execute();
+        $stmt = $con->prepare('DELETE FROM usuarios WHERE id = ' . $id);
+        $stmt->execute();
+        
+        return [$con->commit(), ''];
+    }
+    catch (PDOExcetion $e)
+    {
+        return [false, $e->getMessage()];
+    }
+    finally
+    {
+        $con = null;
+    }
+}
+
+/* Se puede buscar un usuario por ID en la BBDD y que devuelva un objeto Usuario */
 function buscaUsuario($id)
 {
 
