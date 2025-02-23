@@ -1,5 +1,7 @@
 <?php
 
+include_once('../tareas/Tarea.php');
+
 function conecta($host, $user, $pass, $db)
 {
     $conexion = new mysqli($host, $user, $pass, $db);
@@ -220,6 +222,7 @@ function listaTareas()
     }
 }
 
+/*
 function nuevaTarea($titulo, $descripcion, $estado, $usuario)
 {
     try {
@@ -248,6 +251,31 @@ function nuevaTarea($titulo, $descripcion, $estado, $usuario)
         cerrarConexion($conexion);
     }
 }
+*/
+
+function nuevaTarea($tarea){
+    try{
+        $conexion=conectaTareas();
+        if($conexion->connect_error){
+            return [false, $conexion->error];
+        }else{
+            $stmt = $conexion->prepare("INSERT INTO tareas (titulo, descripcion, estado, id_usuario) VALUES (?, ?, ?, ?)");
+            $titulo = $tarea->getTit();
+            $descripcion = $tarea->getDesc();
+            $estado = $tarea->getEst();
+            $id_usuario = $tarea->getUsu();
+            $stmt->bind_param("sssi",$titulo,$descripcion,$estado,$id_usuario);
+            $stmt->execute();
+            return [true, 'Tarea creada correctamente.'];
+        }
+    }catch(mysqli_sql_exception $e){
+        return [false, $e->getMessage()];
+    }finally{
+        cerrarConexion($conexion);
+    }
+}
+
+
 
 function actualizaTarea($id, $titulo, $descripcion, $estado, $usuario)
 {
