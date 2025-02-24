@@ -1,6 +1,6 @@
 <?php
 
-include_once('../tareas/Tarea.php');
+include_once(__DIR__ ."/../tareas/Tarea.php");
 
 function conecta($host, $user, $pass, $db)
 {
