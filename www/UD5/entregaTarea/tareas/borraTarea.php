@@ -2,6 +2,7 @@
 
 require_once('../login/sesiones.php');    
 require_once('../modelo/mysqli.php');
+require_once('Tarea.php');
 
 $response = 'error';
 $messages = array();
@@ -15,7 +16,11 @@ if (!empty($_GET))
     {
         if (checkAdmin() || esPropietarioTarea($_SESSION['usuario']['id'], $id))
         {
-            $resultado = borraTarea($id);
+            //$resultado = borraTarea($id);
+            //var_dump($_SESSION['usuario']);
+            $tarea = new Tarea($id,null,null,null,null);
+            $resultado = borraTarea($tarea);
+            
             if ($resultado[0])
             {
                 $response = 'success';

@@ -1,6 +1,7 @@
 <?php
 
 include_once(__DIR__ ."/../tareas/Tarea.php");
+include_once(__DIR__ ."/../usuarios/usuario.php");
 
 function conecta($host, $user, $pass, $db)
 {
@@ -205,9 +206,14 @@ function listaTareas()
             $tareas = array();
             while ($row = $resultados->fetch_assoc())
             {
+                
                 $usuario = buscaUsuarioMysqli($row['id_usuario']);
-                $row['id_usuario'] = $usuario['username'];
-                array_push($tareas, $row);
+                $row['usuario'] = $usuario['username'];
+                /*
+                
+                */
+                $tarea = new Tarea ($row['id'], $row['titulo'], $row['descripcion'], $row['estado'], $row['usuario']);
+                array_push($tareas, $tarea);
             }
             return [true, $tareas];
         }
@@ -276,7 +282,7 @@ function nuevaTarea($tarea){
 }
 
 
-
+/*
 function actualizaTarea($id, $titulo, $descripcion, $estado, $usuario)
 {
     try {
@@ -306,8 +312,46 @@ function actualizaTarea($id, $titulo, $descripcion, $estado, $usuario)
         cerrarConexion($conexion);
     }
 }
+*/
 
-function borraTarea($id)
+function actualizaTarea($tarea)
+{
+    try {
+        $conexion = conectaTareas();
+        
+        if ($conexion->connect_error)
+        {
+            return [false, $conexion->error];
+        }
+        else
+        {
+            $sql = "UPDATE tareas SET titulo = ?, descripcion = ?, estado = ?, id_usuario = ? WHERE id = ?";
+            $stmt = $conexion->prepare($sql);
+
+            $id= $tarea->getId();
+            $titulo = $tarea->getTit();
+            $descripcion = $tarea->getDesc();
+            $estado = $tarea->getEst();
+            $id_usuario = $tarea->getUsu();
+            /**/
+            $stmt->bind_param("sssii", $titulo, $descripcion, $estado, $id_usuario, $id);
+
+            $stmt->execute();
+
+            return [true, 'Tarea actualizada correctamente.'];
+        }
+    }
+    catch (mysqli_sql_exception $e)
+    {
+        return [false, $e->getMessage()];
+    }
+    finally
+    {
+        cerrarConexion($conexion);
+    }
+}
+
+function borraTarea($tarea)
 {
     try {
         $conexion = conectaTareas();
@@ -318,6 +362,7 @@ function borraTarea($id)
         }
         else
         {
+            $id = $tarea->getId();
             $sql = "DELETE FROM tareas WHERE id = " . $id;
             if ($conexion->query($sql))
             {

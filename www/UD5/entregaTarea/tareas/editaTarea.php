@@ -1,6 +1,7 @@
 <?php
 require_once('../login/sesiones.php');
 require_once('../utils.php');
+require_once('Tarea.php');
 
 $id = $_POST['id'];
 $titulo = $_POST['titulo'];
@@ -45,7 +46,11 @@ if (!esNumeroValido($id_usuario))
 if (!$error)
 {
     require_once('../modelo/mysqli.php');
-    $resultado = actualizaTarea($id, filtraCampo($titulo), filtraCampo($descripcion), filtraCampo($estado), $id_usuario);
+    //$resultado = actualizaTarea($id, filtraCampo($titulo), filtraCampo($descripcion), filtraCampo($estado), $id_usuario);
+    $tarea = new Tarea($id, filtraCampo($titulo), filtraCampo($descripcion), filtraCampo($estado), $id_usuario);
+    //var_dump($tarea);
+    $resultado = actualizaTarea($tarea);
+    //var_dump($resultado);
     if ($resultado[0])
     {
         $response = 'success';
