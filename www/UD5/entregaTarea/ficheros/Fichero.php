@@ -44,7 +44,7 @@ class Fichero{
     }
 
     public function setTa($tarea){
-        $this->descripcion = $tarea;
+        $this->tarea = $tarea;
     }
 
     public function getTa(){
@@ -60,52 +60,72 @@ class Fichero{
     }
 
     /* 
-    public function validar(): array
-    {
-        $errores = [];
-
-        if (empty($this->nombre) || !is_string($this->nombre) || strlen($this->nombre) < 3) {
-            $errores['nombre'] = 'El nombre es obligatorio, debe ser una cadena de texto y tener al menos 3 caracteres.';
-        }
-
-        if (empty($this->apellidos) || !is_string($this->apellidos) || strlen($this->apellidos) < 3) {
-            $errores['apellidos'] = 'Los apellidos son obligatorios, deben ser una cadena de texto y tener al menos 3 caracteres.';
-        }
-
-        if (empty($this->edad) || !filter_var($this->edad, FILTER_VALIDATE_INT) || $this->edad < 0) {
-            $errores['edad'] = 'La edad es obligatoria y debe ser un número entero positivo.';
-        }
-
-        if (empty($this->provincia) || !is_string($this->provincia) || strlen($this->provincia) < 3) {
-            $errores['provincia'] = 'La provincia es obligatoria, debe ser una cadena de texto y tener al menos 3 caracteres.';
-        }
-
-        return $errores;
-    }
-    */
-
+    $this-> con static nanai... Para poder hacerlo  hay que pasarle un objeto Fichero => public static function validar(Fichero $fichero): array {...}
+    y acceder a los valores con getters.
+ 
     public static function validar(): array
     {
         $errores = [];
 
+        if (empty($this->id) || !filter_var($this->id, FILTER_VALIDATE_INT) || $this->id < 0) {
+            $errores['id'] = 'El id es obligatorio y debe ser un número entero positivo.';
+        }
+
         if (empty($this->nombre) || !is_string($this->nombre) || strlen($this->nombre) < 3) {
             $errores['nombre'] = 'El nombre es obligatorio, debe ser una cadena de texto y tener al menos 3 caracteres.';
         }
 
-        if (empty($this->apellidos) || !is_string($this->apellidos) || strlen($this->apellidos) < 3) {
-            $errores['apellidos'] = 'Los apellidos son obligatorios, deben ser una cadena de texto y tener al menos 3 caracteres.';
+        if (empty($this->file) || !is_string($this->file) || strlen($this->file) < 3) {
+            $errores['file'] = 'El archivo es obligatorio y deben ser una cadena de texto y tener al menos 3 caracteres.';
+        }elseif ($this->file['size'] > self::MAX_SIZE) {
+            $errores['file'] = 'El archivo no debe superar los 20MB.';
+        }elseif (!in_array($this->file['type'], self::FORMATOS)) {
+            $errores['file'] = 'El formato de archivo no es válido.';
         }
 
-        if (empty($this->edad) || !filter_var($this->edad, FILTER_VALIDATE_INT) || $this->edad < 0) {
-            $errores['edad'] = 'La edad es obligatoria y debe ser un número entero positivo.';
+        if (empty($this->descripcion) || !is_string($this->descripcion) || strlen($this->descripcion) < 3) {
+            $errores['descripcion'] = 'La descripción es obligatoria y deben ser una cadena de texto y tener al menos 3 caracteres.';
         }
 
-        if (empty($this->provincia) || !is_string($this->provincia) || strlen($this->provincia) < 3) {
-            $errores['provincia'] = 'La provincia es obligatoria, debe ser una cadena de texto y tener al menos 3 caracteres.';
+        if (empty($this->tarea) || !filter_var($this->tarea, FILTER_VALIDATE_INT) || $this->tarea < 0) {
+            $errores['tarea'] = 'La clave foránea que relaciona con la tarea es obligatoria y debe ser un número entero positivo.';
         }
 
         return $errores;
     }
+   */
 
+  public static function validar(Fichero $fichero): array
+    {
+        $errores = [];
+        
+        if (empty($fichero->getId()) || !filter_var($fichero->getId(), FILTER_VALIDATE_INT) || $fichero->getId() < 0) {
+            $errores['id'] = 'El id es obligatorio y debe ser un número entero positivo.';
+        }
+
+        if (empty($fichero->getNom()) || !is_string($fichero->getNom()) || strlen($fichero->getNom()) < 3) {
+            $errores['nombre'] = 'El nombre es obligatorio, debe ser una cadena de texto y tener al menos 3 caracteres.';
+        }
+
+        $file = $fichero->getFile();
+        //$file es un array de tipo $_FILE[]
+        if (empty($file['name']||!is_array($file))) {
+            $errores['file'] = 'El archivo es obligatorio y debe ser un array del tipo $_FILE[].';
+        }elseif ($file['size'] > self::MAX_SIZE) {
+            $errores['file'] = 'El archivo no debe superar los 20MB.';
+        }elseif (!in_array($file['type'], self::FORMATOS)) {
+            $errores['file'] = 'El formato de archivo no es válido.';
+        }
+
+        if (empty($fichero->getDesc()) || !is_string($fichero->getDesc()) || strlen($fichero->getDesc()) < 3) {
+            $errores['descripcion'] = 'La descripción es obligatoria y debe ser una cadena de texto y tener al menos 3 caracteres.';
+        }
+
+        if (empty($fichero->getTa()) || !filter_var($fichero->getTa(), FILTER_VALIDATE_INT) || $fichero->getTa() < 0) {
+            $errores['tarea'] = 'La clave foránea que relaciona con la tarea es obligatoria y debe ser un número entero positivo.';
+        }
+
+        return $errores;
+    }
 }
 ?>
