@@ -127,7 +127,8 @@ class Fichero{
             $errores['descripcion'] = 'La descripción es obligatoria y debe ser una cadena de texto y tener al menos 3 caracteres.';
         }
         // En este caso mejor isset() Ya que si tarea = 0, empty($fichero->getTarea()) lo considera vacío.
-        if ($fichero->getTa()!==null || !filter_var($fichero->getTa(), FILTER_VALIDATE_INT) || $fichero->getTa() < 0) {
+        $tarea = $fichero->getTa();
+        if (!isset($tarea) || !filter_var($tarea , FILTER_VALIDATE_INT) || $tarea < 0) {
             $errores['tarea'] = 'La clave foránea que relaciona con la tarea es obligatoria y debe ser un número entero positivo.';
         }
 

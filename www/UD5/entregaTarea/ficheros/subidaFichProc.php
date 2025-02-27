@@ -62,7 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     $fichero = new Fichero($nombreArchivo, $archivo, $descripcion, $id_tarea);
 
+    //var_dump(Fichero::validar($fichero));
+
     //var_dump($fichero);
+    
+    Fichero::validar($fichero);
 
     if (!is_writable('../' . $directorioDestino))
     {
