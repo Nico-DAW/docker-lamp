@@ -21,12 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $id_tarea = $_POST['id_tarea'] ?? '';
     $location = 'subidaFichForm.php?id=' . $id_tarea;
 
+    /*
     // Validar campos no vacíos
     if (empty($nombreArchivo) || empty($descripcion) || !$archivo || empty($id_tarea))
     {
         array_push($messages, "Todos los campos son obligatorios.");
         $error = true;
     }
+    */
 
     // Validar archivo subido
     if ($archivo['error'] !== UPLOAD_ERR_OK)
@@ -35,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $error = true;
     }
 
+    /*
     // Validar tamaño del archivo
     if ($archivo['size'] > $maxFileSize)
     {
@@ -48,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         array_push($messages, "Todos los campos son obligatorios.");
         $error = true;
     }
-
+    */
+    
     $codigoAleatorio = bin2hex(random_bytes(8)); // 16 caracteres alfanuméricos
 
     $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);

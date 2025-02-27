@@ -1,11 +1,13 @@
 <?php 
 class Fichero{
 
-    private $id;
-    private $nombre;
-    private $file;
-    private $descripcion;
-    private $tarea;
+    // Podríamos definir $id como nullable ?int $id (lo que significa que puede ser un int o null.
+
+    private ?int $id;
+    private string $nombre;
+    private array $file;
+    private string $descripcion;
+    private int $tarea;
 
     //public const FORMATOS = ['png', 'jpg', 'pdf'];
     public const FORMATOS = ['image/jpeg', 'image/png', 'application/pdf'];
@@ -51,8 +53,9 @@ class Fichero{
         return $this->tarea;
     }
 
-    public function __construct($id, $nombre, $file, $descripcion, $tarea){
-        $this->id = $id;
+    //En el constructor no lo pasamos como parámetro y lo incializamos en null. De esta manera la BBDD lo generará automáticamente.
+    public function __construct(string $nombre, array $file, string $descripcion, int $tarea){
+        $this->id = null;
         $this->nombre = $nombre;
         $this->file = $file;
         $this->descripcion = $descripcion;
@@ -98,30 +101,33 @@ class Fichero{
   public static function validar(Fichero $fichero): array
     {
         $errores = [];
-        
+        // Al no pasar el $id como parametro no es necesario validarlo
+        /*
         if (empty($fichero->getId()) || !filter_var($fichero->getId(), FILTER_VALIDATE_INT) || $fichero->getId() < 0) {
             $errores['id'] = 'El id es obligatorio y debe ser un número entero positivo.';
         }
-
+        */
         if (empty($fichero->getNom()) || !is_string($fichero->getNom()) || strlen($fichero->getNom()) < 3) {
             $errores['nombre'] = 'El nombre es obligatorio, debe ser una cadena de texto y tener al menos 3 caracteres.';
         }
 
         $file = $fichero->getFile();
         //$file es un array de tipo $_FILE[]
-        if (empty($file['name']||!is_array($file))) {
+        if (!is_array($file) || empty($file['name'] )) {
             $errores['file'] = 'El archivo es obligatorio y debe ser un array del tipo $_FILE[].';
         }elseif ($file['size'] > self::MAX_SIZE) {
             $errores['file'] = 'El archivo no debe superar los 20MB.';
         }elseif (!in_array($file['type'], self::FORMATOS)) {
             $errores['file'] = 'El formato de archivo no es válido.';
+        }elseif ($fichero->getFile()['error'] !== UPLOAD_ERR_OK) {
+            $errores['file'] = "Error al subir el archivo.";
         }
 
         if (empty($fichero->getDesc()) || !is_string($fichero->getDesc()) || strlen($fichero->getDesc()) < 3) {
             $errores['descripcion'] = 'La descripción es obligatoria y debe ser una cadena de texto y tener al menos 3 caracteres.';
         }
-
-        if (empty($fichero->getTa()) || !filter_var($fichero->getTa(), FILTER_VALIDATE_INT) || $fichero->getTa() < 0) {
+        // En este caso mejor isset() Ya que si tarea = 0, empty($fichero->getTarea()) lo considera vacío.
+        if ($fichero->getTa()!==null || !filter_var($fichero->getTa(), FILTER_VALIDATE_INT) || $fichero->getTa() < 0) {
             $errores['tarea'] = 'La clave foránea que relaciona con la tarea es obligatoria y debe ser un número entero positivo.';
         }
 

@@ -1,7 +1,6 @@
 <?php
 
 require_once('../login/sesiones.php');
-include_once('Fichero.php');
 
 $directorioDestino = "files/"; // Carpeta donde se guardarán los archivos --> revisar permisos si da error
 $maxFileSize = 20 * 1024 * 1024; // Tamaño máximo del archivo en bytes (20 MB)
@@ -23,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $location = 'subidaFichForm.php?id=' . $id_tarea;
 
     // Validar campos no vacíos
-    /*
     if (empty($nombreArchivo) || empty($descripcion) || !$archivo || empty($id_tarea))
     {
         array_push($messages, "Todos los campos son obligatorios.");
@@ -50,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         array_push($messages, "Todos los campos son obligatorios.");
         $error = true;
     }
-    */
 
     $codigoAleatorio = bin2hex(random_bytes(8)); // 16 caracteres alfanuméricos
 
@@ -59,10 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $nombreFinal = $codigoAleatorio . '.' . $extension;
 
     $rutaDestino = $directorioDestino . $nombreFinal;
-
-    $fichero = new Fichero($nombreArchivo, $archivo, $descripcion, $id_tarea);
-
-    //var_dump($fichero);
 
     if (!is_writable('../' . $directorioDestino))
     {
