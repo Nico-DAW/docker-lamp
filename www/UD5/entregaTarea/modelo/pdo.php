@@ -1,5 +1,6 @@
 <?php
 include_once("../usuarios/usuario.php");
+include_once("../ficheros/Fichero.php");
 
 function conectaPDO()
 {
@@ -440,6 +441,7 @@ function borraFichero($id)
     }
 }
 
+/*
 function nuevoFichero($file, $nombre, $descripcion, $idTarea)
 {
     try
@@ -465,3 +467,35 @@ function nuevoFichero($file, $nombre, $descripcion, $idTarea)
         $con = null;
     }
 }
+*/
+
+    function nuevoFichero($fichero)
+{
+    try
+    {
+        $con = conectaPDO();
+        $stmt = $con->prepare("INSERT INTO ficheros (nombre, file, descripcion, id_tarea) VALUES (:nombre, :file, :descripcion, :idTarea)");
+        $file = $fichero->getFile();
+        $stmt->bindParam(':file', $file['name']);
+        $nombre = $fichero->getNom();
+        $stmt->bindParam(':nombre', $nombre);
+        $descripcion = $fichero->getDesc();
+        $stmt->bindParam(':descripcion', $descripcion);
+        $id_tarea = $fichero->getTa();
+        $stmt->bindParam(':idTarea', $id_tarea);
+        $stmt->execute();
+        
+        $stmt->closeCursor();
+
+        return [true, null];
+    }
+    catch (PDOException $e)
+    {
+        return [false, $e->getMessage()];
+    }
+    finally
+    {
+        $con = null;
+    }
+}
+

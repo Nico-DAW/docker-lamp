@@ -65,8 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     //var_dump(Fichero::validar($fichero));
 
     //var_dump($fichero);
-    
+
     Fichero::validar($fichero);
+
+    //necesario volver a atribuir permisos de escritura al directorio  chmod 777 www/files/
 
     if (!is_writable('../' . $directorioDestino))
     {
@@ -81,8 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             require_once('../modelo/pdo.php');
 
-            $resultado = nuevoFichero($rutaDestino, $nombreArchivo, $descripcion, $id_tarea);
-
+            //$resultado = nuevoFichero($rutaDestino, $nombreArchivo, $descripcion, $id_tarea);
+            $nombreChange = $fichero->getFile();
+            $nombreChange['name'] = $rutaDestino;
+            $fichero->setFile($nombreChange);
+            $resultado = nuevoFichero($fichero);
             if ($resultado[0])
             {
                 $response = 'success';
