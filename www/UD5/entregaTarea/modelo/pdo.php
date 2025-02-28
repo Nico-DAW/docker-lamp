@@ -366,6 +366,35 @@ function buscaUsername($username)
     
 }
 
+function listaFicheros($fichero)
+{
+    try
+    {
+        $con = conectaPDO();
+        $id_tarea = $fichero->getTa();
+        $sql = 'SELECT * FROM ficheros WHERE id_tarea = ' . $id_tarea;
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $ficheros = array();
+        while ($row = $stmt->fetch())
+        {
+            array_push($ficheros, $row);
+        }
+        return $ficheros;
+    }
+    catch (PDOException $e)
+    {
+        return array();
+    }
+    finally
+    {
+        $con = null;
+    }
+}
+
+/*
 function listaFicheros($id_tarea)
 {
     try
@@ -392,6 +421,7 @@ function listaFicheros($id_tarea)
         $con = null;
     }
 }
+*/
 
 function buscaFichero($id)
 {
@@ -419,6 +449,36 @@ function buscaFichero($id)
         $con = null;
     }
 }
+
+/*
+function buscaFichero($fichero)
+{
+    try
+    {
+        $con = conectaPDO();
+        $id =$fichero->getId();
+        $sql = 'SELECT * FROM ficheros WHERE id = ' . $id;
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $fichero = null;
+        if ($row = $stmt->fetch())
+        {
+            $fichero = $row;
+        }
+        return $fichero;
+    }
+    catch (PDOException $e)
+    {
+        return null;
+    }
+    finally
+    {
+        $con = null;
+    }
+}
+*/
 
 function borraFichero($fichero)
 {

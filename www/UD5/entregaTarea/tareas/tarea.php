@@ -51,7 +51,14 @@
                                 $id_usuario = $tarea['id_usuario'];
 
                                 require_once('../modelo/pdo.php');
-                                $ficheros = listaFicheros($id);
+                                include_once('../ficheros/Fichero.php');
+                                $arrayNull = ['name'=>'null'];
+                                /* 
+                                Lo único que nos interesa del siguiente objeto Fichero es el id de la
+                                tarea con la que se relaciona. El resto de propiedades son irrelevantes.
+                                */
+                                $fichero = new Fichero("null", $arrayNull, "null" ,$id);
+                                $ficheros = listaFicheros($fichero);
                             ?>
 
                             <div class="container my-4">
