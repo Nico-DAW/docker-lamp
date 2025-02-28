@@ -1,6 +1,7 @@
 <?php
 include_once("../usuarios/usuario.php");
 include_once("../ficheros/Fichero.php");
+include_once("DatabaseException.php");
 
 function conectaPDO()
 {
