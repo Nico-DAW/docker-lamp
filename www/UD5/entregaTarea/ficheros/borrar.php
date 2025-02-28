@@ -2,6 +2,7 @@
 require_once('../login/sesiones.php');
 require_once('../modelo/mysqli.php');
 require_once('../modelo/pdo.php');
+include_once('Fichero.php');
 
 $status = 'error';
 $messages = array();
@@ -18,7 +19,20 @@ if (!empty($_GET))
         {
             $ruta = '../' . $archivo['file'];
             $borrado = borrarArchivo($ruta);
-            if ($borrado) $borrado = borraFichero($archivo['id']);
+            
+          
+            $name = $archivo['nombre'];
+            //$file = $_FILES[];
+            $file=[];
+            $file['name'] = $archivo['file'];
+            //$file['name'] = $ruta;
+            $descripcion = $archivo['descripcion'];
+            $fichero = new Fichero($name, $file, $descripcion, $id_tarea); 
+            //var_dump($archivo['id']);
+            $fichero->setId($archivo['id']);
+            //$fichero->setId($archivo['id']);
+            //var_dump($borrado);
+            if ($borrado) $borrado = borraFichero($fichero);
 
             if ($borrado)
             {

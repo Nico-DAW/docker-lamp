@@ -420,6 +420,29 @@ function buscaFichero($id)
     }
 }
 
+function borraFichero($fichero)
+{
+    try
+    {
+        $con = conectaPDO();
+        $id = $fichero->getId();
+        $sql = 'DELETE FROM ficheros WHERE id = ' . $id;
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+
+        return true;
+    }
+    catch (PDOException $e)
+    {
+        return false;
+    }
+    finally
+    {
+        $con = null;
+    }
+}
+
+/*
 function borraFichero($id)
 {
     try
@@ -440,6 +463,7 @@ function borraFichero($id)
         $con = null;
     }
 }
+*/
 
 /*
 function nuevoFichero($file, $nombre, $descripcion, $idTarea)
