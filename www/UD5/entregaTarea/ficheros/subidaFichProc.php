@@ -2,6 +2,7 @@
 
 require_once('../login/sesiones.php');
 include_once('Fichero.php');
+include_once('FicherosDBImp.php');
 
 $directorioDestino = "files/"; // Carpeta donde se guardarán los archivos --> revisar permisos si da error
 $maxFileSize = 20 * 1024 * 1024; // Tamaño máximo del archivo en bytes (20 MB)
@@ -87,7 +88,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $nombreChange = $fichero->getFile();
             $nombreChange['name'] = $rutaDestino;
             $fichero->setFile($nombreChange);
+            /*
+            Anterior -->
             $resultado = nuevoFichero($fichero);
+            */
+
+                // Creamos una instancia de FicherosDBImp
+            $ficherosDB = new FicherosDBImp();
+            $resultado = $ficherosDB-> nuevoFichero($fichero);
+
             if ($resultado[0])
             {
                 $response = 'success';
