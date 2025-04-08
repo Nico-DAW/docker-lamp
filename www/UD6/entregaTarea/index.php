@@ -42,6 +42,53 @@ Flight::route('POST /register', function(){
     Flight::jsonp(['Usuario registrado correctamente.']);
 });
 
+/* Esto con GET no funciona... 
+Why it doesn’t work:
+- GET requests don't have a request body by standard — data should be sent via the query string, e.g. /login?username=foo&email=bar.
+- If you're expecting JSON in the body, you should use a POST or PUT route instead.
+
+
+Flight::route('GET /login', function(){
+    $data = json_decode(Flight::request()->getBody(), true);
+    $username = $data['username'];
+    $email = $data['email'];
+
+    echo "El usuario es: ".$username;
+});
+*/
+
+Flight::route('POST /login', function(){
+    $data = json_decode(Flight::request()->getBody(), true);
+    $username = $data['username'];
+    $email = $data['email'];
+
+    /*
+    Checkpoint:
+    echo "El usuario es: ".$username;
+    */
+
+    $sql = "SELECT * FROM usuarios WHERE email=:email";
+    $stmt = Flight::db()->prepare($sql);
+    $stmt->bindParam(":email", $email);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    /*
+    Checkpoint:
+    echo $resultado["nombre"];
+    */
+
+    if($username==$resultado['nombre'] && $email==$resultado['email']){
+        $token = bin2hex(random_bytes(32));
+        echo "Login correcto! ";
+        /*
+        Aqui el return genera error:
+        return $token;
+        */
+    }
+
+});
+
 /*
 Flight::route('GET/agenda',function(){
 
