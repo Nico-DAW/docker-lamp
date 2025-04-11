@@ -59,17 +59,19 @@ Flight::route('GET /login', function(){
 
 Flight::route('POST /login', function(){
     $data = json_decode(Flight::request()->getBody(), true);
-    $username = $data['username'];
+    //$username = $data['nombre'];
     $email = $data['email'];
+    $password = $data['password'];
 
     /*
     Checkpoint:
     echo "El usuario es: ".$username;
     */
 
-    $sql = "SELECT * FROM usuarios WHERE email=:email";
+    $sql = "SELECT * FROM usuarios WHERE email=:email AND password=:password";
     $stmt = Flight::db()->prepare($sql);
     $stmt->bindParam(":email", $email);
+    $stmt->bindParam(":password", $password);
     $stmt->execute();
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -84,7 +86,18 @@ Flight::route('POST /login', function(){
         /*
         Aqui el return genera error:
         return $token;
+        ...
+        En todo caso... tal y como se puede intuir en el video de la tutoría de la UD6
+        parece que se resulve realizando un INSERT... 
         */
+        $sql="UPDATE usuarios SET token=:token WHERE email=:email";
+        $stmt=Flight::db()->prepare($sql);
+        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        // echo "Token actualizado para el usuario";
+        Flight::jsonp(["Token actualizado para el usuario"]);
+
     }
 
 });
