@@ -60,7 +60,7 @@ Flight::route('POST /login', function(){
         Flight::jsonp(["Token actualizado para el usuario"]);
 
     }else{
-        Flight::jsonp(["El password es erróneo"]);
+        Flight::halt(401, 'El password es erróneo');
     }
 
 
