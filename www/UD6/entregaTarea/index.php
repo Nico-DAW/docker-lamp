@@ -1,6 +1,9 @@
 <?php
 
 require_once 'flight/Flight.php';
+require_once 'MyMiddleWare.php';
+
+$MyMiddleware = new MyMiddleware();
 
 $host=$_ENV['DATABASE_HOST'];
 $dbname=$_ENV['DATABASE_NAME'];
@@ -146,18 +149,8 @@ Flight::route('POST /contactos',function(){
 });
 
 Flight::route('PUT /contactos(/@id)',function($id = null){
-    $token=Flight::request()->getHeader('X-Token');
-    $sql="SELECT * from usuarios WHERE token=:token";
-    $stmt=Flight::db()->prepare($sql);
-    $stmt->bindParam(':token', $token);
-    $stmt->execute();
-
-    $usuario=$stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$usuario) {
-        Flight::halt(401, 'Token inválido o usuario no encontrado.');
-    }
-
-    Flight::set('user', $usuario);
+    $userCheck = Flight::get('user');
+    $idUser=$userCheck['id'];
     /* 
     El id del contacto a actualizar también se podría recuperar del body
     $idContacto = Flight::request()->data->idContacto; 
@@ -202,10 +195,39 @@ Flight::route('PUT /contactos(/@id)',function($id = null){
             Flight::halt(403, 'El usuario intenta acceder/modificar contactos que no le pertenecen');
         }
     }
+})->addMiddleware($MyMiddleware);
 
-   
 
-});
+Flight::route('DELETE /contactos(/@id)', function ($id = null) {
+    //echo 'TAREA UD6 - API AGENDA';
+    $userCheck = Flight::get('user');
+    $idUser=$userCheck['id'];
+
+    if(!$id){
+        Flight::halt(404, 'El id de contacto no existe o no está detallado en la ruta');
+    }else{
+        //Comprobamos que id del contacto pertenece al usuario
+
+        $sqlChkId="SELECT * FROM contactos WHERE usuario_id=:idUser AND id=:id";
+        $stmtId=Flight::db()->prepare($sqlChkId);
+        $stmtId->bindParam(':idUser', $idUser);
+        $stmtId->bindParam(':id', $id);
+        $stmtId->execute();
+        $resultMatch=$stmtId->fetch(PDO::FETCH_ASSOC);
+        
+        if($resultMatch){
+            $sql="DELETE FROM contactos WHERE usuario_id=:idUser AND id=:id";
+            $stmt=Flight::db()->prepare($sql);
+            $stmt->bindParam(':idUser', $idUser); 
+            $stmt->bindParam(':id', $id); 
+            $stmt->execute(); 
+            Flight::jsonp(["Contacto eliminado correctamente."]);
+        }else{
+            Flight::halt(403, 'El usuario intenta acceder/modificar contactos que no le pertenecen');
+        }
+    }
+
+})->addMiddleware($MyMiddleware);
 
 Flight::route('/', function () {
     echo 'TAREA UD6 - API AGENDA';
