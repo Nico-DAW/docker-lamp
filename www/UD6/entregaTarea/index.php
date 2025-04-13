@@ -68,25 +68,9 @@ Flight::route('POST /login', function(){
 
 
 Flight::route('GET /contactos(/@id)',function($id = null){
-    $token=Flight::request()->getHeader('X-Token');
-    $sql="SELECT * from usuarios WHERE token=:token";
-    $stmt=Flight::db()->prepare($sql);
-    $stmt->bindParam(':token', $token);
-    $stmt->execute();
-    /* Aquí si se emplease fetchAll se devolveria un array de arrays un array de usuarios... 
-    Y el token es único (para un sólo usuario). Por eso fetch()
-    */
-    $usuario=$stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$usuario) {
-        Flight::halt(401, 'Token inválido o usuario no encontrado.');
-    }
-
-    Flight::set('user', $usuario);
-    /*
-    Comprobación de que se ha creado $user -->
     $userCheck = Flight::get('user');
-    Flight::jsonp([$userCheck['nombre']]);
-    */
+    $idUser=$userCheck['id'];
+    $token=$userCheck['token'];
     if($id){
         $sqlContactos="SELECT c.* from contactos c JOIN usuarios u ON u.id=c.usuario_id WHERE u.token=:token AND c.id=:id";
         $stmt=Flight::db()->prepare($sqlContactos);
@@ -110,30 +94,15 @@ Flight::route('GET /contactos(/@id)',function($id = null){
             Flight::jsonp([$contactosId]);
     }
 
-});
+})->addMiddleware($MyMiddleware);
 
 Flight::route('POST /contactos',function(){
-    $token=Flight::request()->getHeader('X-Token');
-    $sql="SELECT * from usuarios WHERE token=:token";
-    $stmt=Flight::db()->prepare($sql);
-    $stmt->bindParam(':token', $token);
-    $stmt->execute();
-
-    $usuario=$stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$usuario) {
-        Flight::halt(401, 'Token inválido o usuario no encontrado.');
-    }
-
-    Flight::set('user', $usuario);
+    $userCheck = Flight::get('user');
+    $idUser=$userCheck['id'];
 
     $nombre = Flight::request()->data->nombre;
     $telefono = Flight::request()->data->telefono;
     $email = Flight::request()->data->email;
-
-    $userCheck = Flight::get('user');
-    //Flight::jsonp([$userCheck['nombre']]);
-
-    $idUser = $userCheck['id'];
 
     $sql="INSERT INTO contactos (nombre, telefono, email, usuario_id) VALUES (:nombre, :telefono, :email, :idUser)";
     $stmt=Flight::db()->prepare($sql);
@@ -146,7 +115,7 @@ Flight::route('POST /contactos',function(){
 
     Flight::jsonp(["Contacto agregado correctamente."]);
 
-});
+})->addMiddleware($MyMiddleware);
 
 Flight::route('PUT /contactos(/@id)',function($id = null){
     $userCheck = Flight::get('user');
@@ -160,13 +129,6 @@ Flight::route('PUT /contactos(/@id)',function($id = null){
     $telefono = Flight::request()->data->telefono;
     $email = Flight::request()->data->email;
     $fecha = Flight::request()->data->fecha;
-
-    
-    $userCheck = Flight::get('user');
-    /*
-    Flight::jsonp([$userCheck['nombre']]);
-    */
-    $idUser=$userCheck['id'];
 
     if(!$id){
         Flight::halt(404, 'El id de contacto no existe o no está detallado en la ruta');
