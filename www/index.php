@@ -7,7 +7,11 @@
     <body>
         <div class="container-fluid">
             <?php
-                echo "<h1>¡Bienvenido al módulo de DWCS 2025-26!</h1>";
+                echo "<h1>¡Bienvenido!</h1>";
+                //$x=1;
+                for($x=1; $x<5; $x++){
+                    echo "<li>Fila {$x}</li>";
+                }
             ?>            
         </div>
     </body>
