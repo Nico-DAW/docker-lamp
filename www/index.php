@@ -8,9 +8,8 @@
         <div class="container-fluid">
             <?php
                 echo "<h1>¡Bienvenido!</h1>";
-                //$x=1;
                 for($x=1; $x<5; $x++){
-                    echo "<li>Fila {$x}</li>";
+                    echo "<li>Fila $x</li>";
                 }
             ?>            
         </div>
