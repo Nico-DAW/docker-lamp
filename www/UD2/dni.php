@@ -17,23 +17,35 @@ $inputdni=$_POST['dni'];
 
 function comprobar_dni($id){
     $idnum=substr($id,0,8);
-    $idchar=substr($id,8,1);
+    //Convertir la letra a mayuscula
+    $idchar=strtoupper(substr($id,8,1));
     $msg;
-
-    $dniarr=[0=>'T',1=>'R',2=>'W',3=>'A',4=>'G',5=>'M',6=>'Y',7=>'F',8=>'P',9=>'R',10=>'R',11=>'R',12=>'R',13=>'R',14=>'R',15=>'R',16=>'R',17=>'R',18=>'R',2=>'R',18=>'R',20=>'R',21=>'R',22=>'R',23=>'R'];
-
-
-
+    $resto;
+    $dniarr=[0=>'T',1=>'R',2=>'W',3=>'A',4=>'G',5=>'M',6=>'Y',7=>'F',8=>'P',9=>'D',10=>'X',11=>'B',12=>'N',13=>'J',14=>'Z',15=>'S',16=>'Q',17=>'V',18=>'H',19=>'L',20=>'C',21=>'K',22=>'E'];
+    /*
+    Comprobaciones
     echo $idnum."<br>";
     echo $dniarr[1]."<br>";
+    */
 
     if(!ctype_digit($idchar)&&ctype_digit($idnum)){
-        /*if(){
-
-        }
-        */
-        $msg="Número de DNI válido";
+        //"Número de DNI válido";
+        $resto=$idnum%23;
+            foreach($dniarr as $key=>$value){ 
+                // Comprobaciones --> echo $key." ".$resto." ". $value."<br/>";
+                /* 
+                    Esta condición se cumple siempre... 
+                    if($key===$resto&&$dniarr[$resto]==$value){
+                */
+                if($key===$resto&&$value==$idchar){
+                    $msg="Número de DNI válido";
+                    return $msg;
+                }else{
+                    $msg="La letra del DNI no se corresponde con el número facilitado";
+                }
+            }
     }else{
+        //"Número de DNI inválido";
         $msg="Debe introducir un número de DNI válido";
     }
     return $msg;
