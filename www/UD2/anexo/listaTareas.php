@@ -18,7 +18,7 @@
                     <h2>Nueva Tarea</h2>
                 </div>
                 <div class="container">
-                    <p>Aquí va el contenido </p>
+                    <p></p>
                     <div class="table">
                         <table class="table table-striped table-hover">
                             <thead class="thead">
@@ -29,14 +29,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    ...
-                                    <td></td>
-                                </tr>
+                                <?php include_once('utils.php') ?>
+                                    <?php listarTareas($tareasarr);?>
                             </tbody>
                         </table>
                     </div>
+                    </br>
                 </div>
             </main>
         </div>
