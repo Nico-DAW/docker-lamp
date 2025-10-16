@@ -18,22 +18,25 @@
                     <h2>Nueva Tarea</h2>
                 </div>
                 <div class="container">
-                    <form class="mb-5" action=nueva.php method='POST'>
-                        <div class="mb-3">
-                            <label class="form-label">Descripción</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Estado</label>
-                            <select class="form-select">
-                                <option>En curso</option>
-                                <option>Finalizada</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>
-
-
+                    <p>Aquí va el contenido </p>
+                    <div class="table">
+                        <table class="table table-striped table-hover">
+                            <thead class="thead">
+                                <tr>                            
+                                    <th>Identificador</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    ...
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </main>
         </div>
