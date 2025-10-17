@@ -19,6 +19,6 @@ Por tanto-->
 
 function listarTareas($tareasarr){
     return $tareasarr;
-}
+};
 
 ?>

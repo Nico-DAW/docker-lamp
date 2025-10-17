@@ -18,14 +18,17 @@
                     <h2>Nueva Tarea</h2>
                 </div>
                 <div class="container">
-                    <form class="mb-5" action=nueva.php method='POST'>
+                    <form class="mb-5" action="nueva.php" method='POST'>
                         <div class="mb-3">
                             <label class="form-label">Descripción</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="descripcion">
                         </div>
+                        <?php if(isset($_GET['mensaje'])){
+                          echo "Bananas!";
+                        }?>
                         <div class="mb-3">
                             <label class="form-label">Estado</label>
-                            <select class="form-select">
+                            <select class="form-select" name="estado">
                                 <option>En curso</option>
                                 <option>Finalizada</option>
                             </select>
