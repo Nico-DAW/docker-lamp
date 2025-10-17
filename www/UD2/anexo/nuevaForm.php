@@ -20,12 +20,10 @@
                 <div class="container">
                     <form class="mb-5" action="nueva.php" method='POST'>
                         <div class="mb-3">
+
                             <label class="form-label">Descripción</label>
                             <input type="text" class="form-control" name="descripcion">
                         </div>
-                        <?php if(isset($_GET['mensaje'])){
-                          echo "Bananas!";
-                        }?>
                         <div class="mb-3">
                             <label class="form-label">Estado</label>
                             <select class="form-select" name="estado">
@@ -34,9 +32,13 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
+                        <br>
+                        <div class="mb-3">
+                        <?php if(isset($_GET['mensaje'])){
+                            echo $_GET['mensaje'];}
+                        ?>
+                    </div>
                     </form>
-
-
                 </div>
             </main>
         </div>
