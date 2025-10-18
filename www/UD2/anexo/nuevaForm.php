@@ -33,13 +33,16 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                         <br>
+                        &nbsp;
                         <div class="mb-3">
                         <?php if(isset($_GET['mensaje'])){
-                            echo $_GET['mensaje'];}
+                            echo '<div class="alert alert-info" role="alert">'.$_GET['mensaje'].'</div>';
+                         }
                         ?>
                     </div>
                     </form>
                 </div>
+
             </main>
         </div>
     </div>
