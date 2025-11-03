@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tienda - UD3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .sidebar .nav-link {
+            color: #198754;
+        }
+        .sidebar .nav-link:hover {
+            color: darkgreen; /* optional hover effect */
+        }
+        .bg-dark {
+            background-color: #c4c8cc !important;
+        }
+    </style>
 </head>
 <body>
-    <h2>Anexo 1!</h2>
-    <?php include_once("lib/db.php"); 
+    
+    <?php 
+    include_once("header.php");
+    include_once("lib/db.php"); 
+    include_once("menu.php"); 
+        /*
         $conexion = conecta();
         $crea = crea_db($conexion, "tienda");
+        */
+    include_once("footer.php");
     ?>
 </body>
 </html>

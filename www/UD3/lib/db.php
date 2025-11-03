@@ -46,4 +46,20 @@ function selecciona_db($conexion, $db){
     $conexion->select_db($db);
 }
 
+function crea_tabla_usuarios($conexion){
+    $sql="
+CREATE TABLE IF NOT EXISTS usuarios(
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    nombre VARCHAR(50) NOT NULL,
+    apellidos VARCHAR(100) NOT NULL,
+    edad INT NOT NULL, 
+    provincia VARCHAR(50) NOT NULL
+);";
+    //$conexion->query($sql);
+    /* No haría falta devolver algo pero en este caso es una buena práctica 
+    porque devolviendo algo podemos comprobar si se ha creado o no la tabla... 
+    Si no devolvemos algo no lo podremos comprobar => */
+    ejecuta($conexion, $sql);
+}
+
 ?>
