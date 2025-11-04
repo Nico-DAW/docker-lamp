@@ -22,7 +22,7 @@ function valida($name, $sname, $age, $district){
        }elseif (empty($sname)){
         $mensaje="Debe definir un apellido";
         $arr=[false,$mensaje];
-       }elseif (empty($edad)){
+       }elseif (empty($age)){
         $mensaje="Debe definir una edad";
         $arr=[false,$mensaje];
        }else{

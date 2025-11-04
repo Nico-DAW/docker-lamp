@@ -1,5 +1,6 @@
 <?php
-include('lib/utils.php');
+include_once('lib/utils.php');
+include_once('lib/db.php');
 
 $arr=[];
 $mensaje="";
@@ -21,6 +22,11 @@ if($verify){
     guarda($description, $flow);
 }
 */
+
+if($verify){
+    $arrValues=[$name,$sname,$age,$district];
+    $mensaje=guarda($arrValues);
+}
 
 /*
 Comprobación

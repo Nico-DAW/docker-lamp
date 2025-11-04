@@ -62,4 +62,19 @@ CREATE TABLE IF NOT EXISTS usuarios(
     ejecuta($conexion, $sql);
 }
 
+function guarda($arrValues){
+    $conexion=conecta();
+    selecciona_db($conexion,'tienda');
+    $stmt=$conexion->prepare("INSERT INTO usuarios(nombre,apellidos,edad,provincia)VALUES(?,?,?,?);");
+    $stmt->bind_param('ssis',$arrValues[0],$arrValues[1],$arrValues[2],$arrValues[3]);
+    $stmt->execute();
+
+    $mensaje="Se ha registrado el usuario en la BBDD"; 
+
+    $stmt->close();
+    $conexion->close();
+
+    return $mensaje;
+}
+
 ?>
