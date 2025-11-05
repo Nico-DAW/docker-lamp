@@ -77,4 +77,21 @@ function guarda($arrValues){
     return $mensaje;
 }
 
+function lista_usuarios(){
+    $conexion = conecta();
+    selecciona_db($conexion, 'tienda');
+    $sql="SELECT nombre, apellidos, edad, provincia FROM usuarios;";
+
+    $resultados = $conexion->query($sql);
+     $arrSelect = [];
+    if($resultados->num_rows > 0){
+        while($row = $resultados->fetch_assoc()){
+            //En este caso array_push() no es necesario se puede directamente $arrSelect[]=$row;
+            //array_push($arrSelect,[$row['nombre'], $row['apellidos'], $row['edad'], $row['provincia']]);
+            $arrSelect[] = $row; 
+        }
+    }
+        return $arrSelect;
+}
+
 ?>

@@ -18,16 +18,21 @@
     </style>
 </head>
 <body>
-    
+ <div class="container-fluid">
+    <div class="row">
     <?php 
     include_once("header.php");
     include_once("lib/db.php"); 
     include_once("menu.php"); 
-        /*
+        
         $conexion = conecta();
         $crea = crea_db($conexion, "tienda");
-        */
+        selecciona_db($conexion, 'tienda');
+        crea_tabla_usuarios($conexion);
+        
     include_once("footer.php");
     ?>
+    </div>
+  </div>
 </body>
 </html>
