@@ -38,6 +38,8 @@
                                     <th>Apellidos</th>
                                     <th>Edad</th>
                                     <th>Provincia</th>
+                                    <th>Editar</th>
+                                    <th>Borrar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,19 +50,29 @@
                                         echo '<div class="alert alert-info" role="alert">'."No hay resultados que mostrar".'</div>';
                                       }
 
-                                      /*foreach($usuarios as $key=>$value){
+                                      /*
+                                      foreach($usuarios as $key=>$value){
                                         echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3]."</td></tr>";
                                       }
                                         debug------------->
                                         print_r($usuarios);
                                       */
                                       foreach($usuarios as $key=>$value){
-                                        echo "<tr><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['edad']."</td><td>".$value['provincia']."</td></tr>";
+                                        //Aqui es necesario sumar 1 porque AUTO_INCREMENT en Mysql empieza en 1 y los arrays en 0
+                                        $key=$key+1;
+                                        echo "<tr><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['edad']."</td><td>".$value['provincia']."</td><td><a class='btn btn-success' href='#'>Editar</a>"."</td><td><a class='btn btn-outline-success' href='borrar.php?id=$key'>Borrar</a>"."</td></tr>";
                                       }  
                                       
                                 ?>
                             </tbody>
                         </table>
+                    </div>
+                    <div>
+                        <?php 
+                        if(isset($_GET['mensaje'])){
+                            echo '<div class="alert alert-info" role="alert">'.$_GET['mensaje'].'</div>';
+                         }
+                        ?>
                     </div>
                     </br>
                 </div>

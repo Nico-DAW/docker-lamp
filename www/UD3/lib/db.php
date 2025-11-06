@@ -94,4 +94,23 @@ function lista_usuarios(){
         return $arrSelect;
 }
 
+/*
+Mejor no hacerlo así, es preferible establecer también como parámetro la conexión porque así cerramos la conexión una vez la función termina de ejecutarse. 
+
+function borrar($id){
+    $conexion=conecta();
+    selecciona_db($conexion, 'tienda');
+    $sql="DELETE FROM usuarios WHERE id=".$id;
+    ejecuta($conexion, $sql);
+}
+
+*/
+
+function borrar($conexion, $id){
+    selecciona_db($conexion, 'tienda');
+    $sql = "DELETE FROM usuarios WHERE id=".$id;
+    $resultado = ejecuta($conexion, $sql);
+    return $resultado;
+}
+
 ?>

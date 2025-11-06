@@ -1,0 +1,1 @@
+<?php /* Es necesaria esta página o podemos utilizar registroUsuarios.php */
