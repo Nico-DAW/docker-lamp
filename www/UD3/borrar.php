@@ -10,7 +10,7 @@
             $mensaje = "Se ha eliminado al usuario satisfactoriamente";
         }
     };
-
+    $conexion->close(); 
     header('Location: http://localhost/UD3/listaUsuarios.php?mensaje='.urlencode($mensaje));
     exit();
 ?>

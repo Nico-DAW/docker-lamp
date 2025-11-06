@@ -58,9 +58,14 @@
                                         print_r($usuarios);
                                       */
                                       foreach($usuarios as $key=>$value){
-                                        //Aqui es necesario sumar 1 porque AUTO_INCREMENT en Mysql empieza en 1 y los arrays en 0
-                                        $key=$key+1;
-                                        echo "<tr><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['edad']."</td><td>".$value['provincia']."</td><td><a class='btn btn-success' href='#'>Editar</a>"."</td><td><a class='btn btn-outline-success' href='borrar.php?id=$key'>Borrar</a>"."</td></tr>";
+                                        /* 
+                                        Aqui es necesario sumar 1 porque AUTO_INCREMENT en Mysql empieza en 1 y los arrays en 0 ..... MAL NO VALE
+                                        ... hay que hacerlo de otra manera... En el momento en el que se borra un regitro el ID en la BBDD cambia y
+                                        deja de corresponderse con orden de un array que siempre empieza en 0. Por tanto... recuperaremos directamente
+                                        ID en la consulta....
+                                        */
+
+                                        echo "<tr><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['edad']."</td><td>".$value['provincia']."</td><td><a class='btn btn-success' href='#'>Editar</a>"."</td><td><a class='btn btn-outline-success' href='borrar.php?id=".$value['id']."'>Borrar</a>"."</td></tr>";
                                       }  
                                       
                                 ?>

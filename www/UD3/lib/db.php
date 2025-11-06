@@ -80,7 +80,7 @@ function guarda($arrValues){
 function lista_usuarios(){
     $conexion = conecta();
     selecciona_db($conexion, 'tienda');
-    $sql="SELECT nombre, apellidos, edad, provincia FROM usuarios;";
+    $sql="SELECT id, nombre, apellidos, edad, provincia FROM usuarios;";
 
     $resultados = $conexion->query($sql);
      $arrSelect = [];
