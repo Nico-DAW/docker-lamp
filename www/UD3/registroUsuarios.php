@@ -36,11 +36,20 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h2>Registro Usuarios</h2>
                 </div>
+                <?php 
+                if(isset($_GET['id'])&&!empty($_GET['id'])){
+                    //echo $_GET['id']; 
+                    $conexion = conecta();
+                    $idUser = $_GET['id'];
+                    $usuario = lista_usuario($conexion, $idUser);
+                    //print_r($usuario);
+                } 
+                ?>
                 <div class="container">
                     <form class="mb-5" action="nueva.php" method='POST'>
                         <div class="mb-3">
                             <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="nombre">
+                            <input type="text" class="form-control" name="nombre" value="<?php echo (isset($usuario)&&!empty($usuario))?$usuario['nombre']:''?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Apellidos</label>

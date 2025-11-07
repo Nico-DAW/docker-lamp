@@ -65,7 +65,7 @@
                                         ID en la consulta....
                                         */
 
-                                        echo "<tr><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['edad']."</td><td>".$value['provincia']."</td><td><a class='btn btn-success' href='#'>Editar</a>"."</td><td><a class='btn btn-outline-success' href='borrar.php?id=".$value['id']."'>Borrar</a>"."</td></tr>";
+                                        echo "<tr><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['edad']."</td><td>".$value['provincia']."</td><td><a class='btn btn-success' href='registroUsuarios.php?id=".$value['id']."'>Editar</a>"."</td><td><a class='btn btn-outline-success' href='borrar.php?id=".$value['id']."'>Borrar</a>"."</td></tr>";
                                       }  
                                       
                                 ?>
