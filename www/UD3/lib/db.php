@@ -77,6 +77,21 @@ function guarda($arrValues){
     return $mensaje;
 }
 
+function update($arrValues){
+    $conexion=conecta();
+    selecciona_db($conexion,'tienda');
+    $stmt=$conexion->prepare("UPDATE usuarios SET nombre=?,apellidos=?,edad=?,provincia=? WHERE id=?;");
+    $stmt->bind_param('ssisi',$arrValues[1],$arrValues[2],$arrValues[3],$arrValues[4],$arrValues[0]);
+    $stmt->execute();
+
+    $mensaje="Se ha actualizado el usuario en la BBDD"; 
+
+    $stmt->close();
+    $conexion->close();
+
+    return $mensaje;
+}
+
 function lista_usuarios(){
     $conexion = conecta();
     selecciona_db($conexion, 'tienda');
@@ -109,7 +124,7 @@ function borrar($id){
 function lista_usuario($id){
     $conexion = conecta();
     selecciona_db($conexion, 'tienda');
-    $sql='SELECT id, nombre, apellidos, edad, provincia FROM usuarios WHERE id=4';
+    $sql="SELECT id, nombre, apellidos, edad, provincia FROM usuarios WHERE id=$id";
 
     $resultados = $conexion->query($sql);
     $arrSelect = [];

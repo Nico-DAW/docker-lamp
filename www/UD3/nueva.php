@@ -9,6 +9,11 @@ $sname=$_POST['apellidos'];
 $age=$_POST['edad']; 
 $district=$_POST['provincia']; 
 $verify=false;
+$id="";
+
+if(isset($_POST['id'])&&!empty($_POST['id'])){
+    $id=$_POST['id'];
+}
 
 $arr=valida($name, $sname, $age, $district);
 
@@ -23,9 +28,12 @@ if($verify){
 }
 */
 
-if($verify){
+if($verify&&empty($id)){
     $arrValues=[$name,$sname,$age,$district];
     $mensaje=guarda($arrValues);
+}else{
+    $arrValues=[$id,$name,$sname,$age,$district];
+    $mensaje=update($arrValues);
 }
 
 /*

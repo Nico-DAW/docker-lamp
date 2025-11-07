@@ -16,17 +16,6 @@
                     Lista Usuarios
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="listaUsuarios.php">
-                    Modifica Usuarios
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="listaUsuarios.php">
-                    Elimina Usuarios
-                </a>
-            </li>
-            
         </ul>
     </div>
 </nav>

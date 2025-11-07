@@ -39,29 +39,32 @@
                 <?php 
                 if(isset($_GET['id'])&&!empty($_GET['id'])){
                     //echo $_GET['id']; 
-                    $conexion = conecta();
+                    //$conexion = conecta();
                     $idUser = $_GET['id'];
-                    $usuario = lista_usuario($conexion, $idUser);
+                    $usuario = lista_usuario($idUser);
                     //print_r($usuario);
                 } 
                 ?>
                 <div class="container">
                     <form class="mb-5" action="nueva.php" method='POST'>
                         <div class="mb-3">
+                            <input type="hidden" name="id" value="<?php echo (isset($usuario)&&!empty($usuario))?$idUser:''?>">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Nombre</label>
                             <input type="text" class="form-control" name="nombre" value="<?php echo (isset($usuario)&&!empty($usuario))?$usuario['nombre']:''?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" name="apellidos">
+                            <input type="text" class="form-control" name="apellidos" value="<?php echo (isset($usuario)&&!empty($usuario))?$usuario['apellidos']:''?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Edad</label>
-                            <input type="text" class="form-control" name="edad">
+                            <input type="text" class="form-control" name="edad" value="<?php echo (isset($usuario)&&!empty($usuario))?$usuario['edad']:''?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Provincia</label>
-                            <input type="text" class="form-control" name="provincia">
+                            <input type="text" class="form-control" name="provincia" value="<?php echo (isset($usuario)&&!empty($usuario))?$usuario['provincia']:''?>">
                         </div>
                         <button type="submit" class="btn btn-success">Enviar</button>
                         <br>
