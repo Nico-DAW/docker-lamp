@@ -38,7 +38,7 @@
                     <?php 
                     require_once('lib/init.php');
                     ?>
-                     <form class="mb-5">
+                     <form class="mb-5" action="nuevo.php" method="post">
                         <div class="mb-3">
                             <label class="form-label" for="nombre">Nombre</label>
                             <input type="text" class="form-control" name="nombre">
@@ -73,6 +73,34 @@
                             <input type="number" class="form-control" name="phone">
                         </div>
                         <button type="submit" class="btn btn-danger">Enviar</button>
+                        <div class="mb-3">
+                            <br>
+                            <?php 
+                                if(isset($_GET)&&!empty($_GET)){
+                                $avisos=[];
+
+                                if($_GET['mensajeBday']&&!empty($_GET['mensajeBday'])){
+                                    $avisos[] = '<div class="alert alert-info" role="alert">'.$_GET['mensajeBday'].'</div>'; 
+                                };
+                                
+                                if($_GET['mensajeDistr']&&!empty($_GET['mensajeDistr'])){
+                                    $avisos[] = '<div class="alert alert-info" role="alert">'.$_GET['mensajeDistr'].'</div>'; 
+                                }
+                                
+                                if($_GET['mensajeMov']&&!empty($_GET['mensajeMov'])){
+                                    $avisos[] = '<div class="alert alert-info" role="alert">'.$_GET['mensajeMov'].'</div>';
+                                }
+                                
+                                if($_GET['mensajeGoodWay']&&!empty($_GET['mensajeGoodWay'])){
+                                    $avisos[] = '<div class="alert alert-info" role="alert">'.$_GET['mensajeGoodWay'].'</div>';
+                                }
+
+                                foreach($avisos as $aviso){
+                                    echo $aviso;
+                                }
+                            }
+                            ?>
+                        </div>
                     </form>
                 </div>
             </main>
