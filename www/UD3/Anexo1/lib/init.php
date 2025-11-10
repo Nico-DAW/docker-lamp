@@ -86,3 +86,17 @@ function createAdmin($conexion){
     
     ejecuta($conexion, $sql);
 }
+
+function guardarDonante($conexion, $nombre, $apellidos, $edad, $grupo, $cp, $movil){
+    //$sql = ;
+    $stmt = $conexion->prepare("INSERT INTO donantes(nombre,apellidos,edad,grupo,cp,movil) VALUES (:nombre,:apellidos,:edad,:grupo,:cp,:movil)");
+    $stmt->bindParam(':nombre',$nombre);
+    $stmt->bindParam(':apellidos',$apellidos);
+    $stmt->bindParam(':edad',$edad,PDO::PARAM_INT);
+    $stmt->bindParam(':grupo',$grupo);
+    $stmt->bindParam(':cp',$cp,PDO::PARAM_INT);
+    $stmt->bindParam(':movil',$movil);
+
+    $stmt->execute();
+    $stmt->closeCursor();
+}

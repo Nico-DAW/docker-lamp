@@ -1,5 +1,6 @@
 <?php
 require_once("lib/utils.php");
+require_once("lib/init.php");
 
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
@@ -46,6 +47,9 @@ if(!empty($mensajeBday)&&!empty($checkDistr)&&!empty($checkMov)){
     $mensajeGoodWay = "Se ha almacenado en nuevo usuario en la BBDD;";
     //("Location:http://localhost/UD3/Anexo1/nuevoDonante.php?mensajeGoodWay=".$mensajeGoodWay);
     //Aqui guardamos en la BBDD => definir la función gurdar en lib->init.php
+    $conexion = conecta();
+    selecciona_db($conexion,"donacion");
+    guardarDonante($conexion, $nombre, $apellidos, $edad, $grupo, $cp, $phone);
     header("Location:http://localhost/UD3/Anexo1/nuevoDonante.php?mensajeBday=&mensajeDistr=&mensajeMov=&mensajeGoodWay=".$mensajeGoodWay);
     exit();
 }
