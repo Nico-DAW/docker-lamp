@@ -39,6 +39,9 @@
                     require_once('lib/init.php');
                     $conexion = conecta(); 
                     create_db($conexion); 
+                    selecciona_db($conexion, "donacion");
+                    createDonantes($conexion);
+                    createHistorico($conexion);
                     ?>
                 </div>
             </main>
