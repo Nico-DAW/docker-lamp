@@ -12,7 +12,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="listarDonantes.php">
                     Listar Donantes
                 </a>
             </li>

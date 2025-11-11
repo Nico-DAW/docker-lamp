@@ -100,3 +100,13 @@ function guardarDonante($conexion, $nombre, $apellidos, $edad, $grupo, $cp, $mov
     $stmt->execute();
     $stmt->closeCursor();
 }
+
+function listarDonantes($conexion){
+    //Estas consultas deberían hacerse dentro de un try/catch  
+    $sql = "SELECT nombre, apellidos, edad, grupo, cp, movil FROM donantes;";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+    $resultados = $stmt->fetchAll();
+    return $resultados;
+}
