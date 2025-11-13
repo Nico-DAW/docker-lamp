@@ -59,6 +59,20 @@
                         </thead>
                         <tbody>
 
+                            <?php 
+
+                                foreach($donantes as $donante){
+
+
+                                    echo $donante['nombre']."<br>";
+
+
+                                    echo "<tr><td>".$donante['nombre']."</td><td>".$donante['apellidos']."</td><td>".$donante['edad']."</td><td>".$donante['grupo']."</td><td>".$donante['cp']."</td><td>".$donante['movil']."</td><td><a class='btn btn-danger' href='#'>Donar</a></td><td>";
+
+                                }
+
+                            ?>
+
                         </tbody>
                         </table>
                     </div>
