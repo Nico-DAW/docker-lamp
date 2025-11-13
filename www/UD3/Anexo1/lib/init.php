@@ -112,10 +112,22 @@ function listarDonantes($conexion){
 }
 
 function getFechaNext($conexion, $id){
-    $sql = "SELECT FechaNext FROM historico WHERE id=".$id; 
+    $sql = "SELECT FechaNext FROM historico WHERE donante=:donante"; 
     $stmt = $conexion->prepare($sql);
-        $stmt->execute();
+    $stmt->bindParam(':donante', $id);
+    $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $resultados = $stmt->fetchAll();
     return $resultados; 
+}
+
+function guardaFecha($conexion, $id, $fecha){
+    $sql = "INSERT INTO historico(donante, fecha, fechaNext) VALUES (:donante, :fecha, :fechaNext)";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bindParam(':donante', $id);
+    $stmt->bindParam(':fecha', $fecha);
+    $fechaNext=$fecha+;
+
+    $stmt->execute();
+    
 }

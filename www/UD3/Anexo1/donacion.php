@@ -53,13 +53,27 @@
                         </div>
                         <div class="mb-3">
                             <?php
+                            /* 
+                            (( Una reflexión en el camino -> en PHP empty(0) es true ))
+                            Una manera de obtener la última fecha de donación de un usuario en caso de que exista. 
+                            */
                                 $conexion = conecta();
-                                if(!empty(getFechaNext($conexion, $_GET['id']))){
+                                $lastFecha = 0; 
+                                selecciona_db($conexion,"donacion");
+                                if(!empty($_GET['id'])){
                                     $fechas = getFechaNext($conexion, $_GET['id']);
-
-                                    
+                                    $fechasLenght = count($fechas);
+                                    if($fechasLenght != 0){
+                                        $lastFecha = $fechas[$fechasLenght];
+                                        echo $lastFecha;
+                                    }
                                 };
-
+                            /*
+                            La otra manera es una consulta cruzada (que definiriamos en init.php -> en alguna función
+                            ejemplo -> getFechaNext($conexion, $id)) o en la que devulve los valores en header(Location: )
+                            SELECT id,nombre,apellidos,fechaNext FROM `donantes` d,`historico` h WHERE d.id=h.donante AND h.donante=;
+                            Se retomará en este punto. Ahora se creara el metodo guardar donacion. 
+                            */
                             ?>
                             <label class="form-label" for="fecha">Fecha donación</label>
                             <input type="date" class="form-control" name="fecha">
