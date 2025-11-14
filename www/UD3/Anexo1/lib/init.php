@@ -112,12 +112,16 @@ function listarDonantes($conexion){
 }
 
 function getFechaNext($conexion, $id){
-    $sql = "SELECT FechaNext FROM historico WHERE donante=:donante"; 
+    $sql = "SELECT MAX(FechaNext) FROM historico WHERE donante=:donante"; 
     $stmt = $conexion->prepare($sql);
     $stmt->bindParam(':donante', $id);
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $resultados = $stmt->fetchAll();
+    /* 
+    Al devolver un único resultado podemos hacer un fetch() en vez de un fetchAll(). Un fetch() devuelve 
+    un único resultado (clave->valor) mientras que fetchAll() devuelve un array de claves->valores.
+    */
+    $resultados = $stmt->fetch();
     return $resultados; 
 }
 
@@ -126,7 +130,9 @@ function guardaFecha($conexion, $id, $fecha){
     $stmt = $conexion->prepare($sql);
     $stmt->bindParam(':donante', $id);
     $stmt->bindParam(':fecha', $fecha);
-    $fechaNext=$fecha+;
+    //$fechaNext=$fecha+;
+    $fechaNext = date("Y-m-d", strtotime($fecha . " +4 months"));
+    $stmt->bindParam(':fechaNext', $fechaNext);
 
     $stmt->execute();
     

@@ -61,11 +61,21 @@
                                 $lastFecha = 0; 
                                 selecciona_db($conexion,"donacion");
                                 if(!empty($_GET['id'])){
-                                    $fechas = getFechaNext($conexion, $_GET['id']);
+                                    $fecha = getFechaNext($conexion, $_GET['id']);
+                                    /* Esto sería sino hiciésemos un MAX en la consulta -> 
+                                    function getFechaNext($conexion, $id){
+                                        $sql = "SELECT MAX(FechaNext) FROM historico WHERE donante=:donante";
+                                        ... 
                                     $fechasLenght = count($fechas);
                                     if($fechasLenght != 0){
                                         $lastFecha = $fechas[$fechasLenght];
                                         echo $lastFecha;
+                                    }
+                                    */
+                                    foreach($fecha as $key=>$value){
+                                        echo "Bananas!"; 
+                                        //print_r($value); 
+                                        $lastFecha=$value;
                                     }
                                 };
                             /*
@@ -76,7 +86,7 @@
                             */
                             ?>
                             <label class="form-label" for="fecha">Fecha donación</label>
-                            <input type="date" class="form-control" name="fecha">
+                            <input type="date" class="form-control" name="fecha" min="<?php echo (isset($lastFecha)&&!empty($lastFecha))?$lastFecha:date("Y-m-d");?>">
                         </div>
 
                         <button type="submit" class="btn btn-danger">Enviar</button>
