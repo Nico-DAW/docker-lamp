@@ -61,7 +61,7 @@
                             <?php 
 
                                 foreach($donantes as $donante){
-                                    echo "<tr><td>".$donante['nombre']."</td><td>".$donante['apellidos']."</td><td>".$donante['edad']."</td><td>".$donante['grupo']."</td><td>".$donante['cp']."</td><td>".$donante['movil']."</td><td>"."<a class='btn btn-danger' href=donacion.php?id=".$donante['id']."&nombre=".$donante['nombre']."&apellidos=".$donante['apellidos']."> Donar </a>"."</td><td>"."<a class='btn btn-danger' href='#'> Eliminar </a>"."</td><td>"."<a class='btn btn-danger' href='#'> Registro </a>"."</td></tr>";
+                                    echo "<tr><td>".$donante['nombre']."</td><td>".$donante['apellidos']."</td><td>".$donante['edad']."</td><td>".$donante['grupo']."</td><td>".$donante['cp']."</td><td>".$donante['movil']."</td><td>"."<a class='btn btn-danger' href=donacion.php?id=".$donante['id']."&nombre=".$donante['nombre']."&apellidos=".$donante['apellidos']."> Donar </a>"."</td><td>"."<a class='btn btn-danger' href=eliminarDonante.php?id=".$donante['id']."> Eliminar </a>"."</td><td>"."<a class='btn btn-danger' href='#'> Registro </a>"."</td></tr>";
                                 }
 
                             ?>

@@ -137,3 +137,26 @@ function guardaFecha($conexion, $id, $fecha){
     $stmt->execute();
     
 }
+
+function eliminaDonante($id){
+    $conexion = conecta();
+    selecciona_db($conexion,"donacion");
+    $sql = "DELETE FROM donantes WHERE id=:id";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bindParam(":id", $id);
+    /*
+        El siguiente return sólo devuelve true o false no las filas afectadas... 
+        Incluso si no afecta a ninguna línea (es decir si $id no existe) devolvería true o false.
+        El true o false hace referencia a si la consulta se ejecutó correctamente o no. 
+        return $stmt->execute(); 
+        Por este motivo se devolverá rowCount()
+    */
+    $stmt->execute();
+    return $stmt->rowCount();
+    /* 
+    Valores posibles ahora serían:
+        0 → no se eliminó ningún registro
+        1 → se eliminó un registro
+        n → se eliminaron n registros (si tu condición puede eliminar más de uno)
+    */
+}

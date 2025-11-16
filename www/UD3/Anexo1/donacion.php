@@ -73,7 +73,6 @@
                                     }
                                     */
                                     foreach($fecha as $key=>$value){
-                                        echo "Bananas!"; 
                                         //print_r($value); 
                                         $lastFecha=$value;
                                     }
