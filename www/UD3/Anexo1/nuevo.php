@@ -30,6 +30,7 @@ if($checkBday[0] != true){
 $checkDistr = checkCp($cp);
 
 if($checkDistr[0] != true){
+    //var_dump($checkDistr[0]);
     $mensajeDistr = $checkDistr[1];
 }
 
@@ -39,7 +40,8 @@ if($checkMov[0] != true){
     $mensajeMov = $checkMov[1];
 }
 
-if(!empty($mensajeBday)&&!empty($checkDistr)&&!empty($checkMov)){
+//Corrección aquí OR en vez de AND (&&) y [1]
+if(!empty($mensajeBday[1])||!empty($checkDistr[1])||!empty($checkMov[1])){
     // Aquí podríamos emplear el urlencode();
     header("Location:http://localhost/UD3/Anexo1/nuevoDonante.php?mensajeBday=".$mensajeBday."&mensajeDistr=".$mensajeDistr."&mensajeMov=".$mensajeMov."&mensajeGoodWay="."");
     exit();

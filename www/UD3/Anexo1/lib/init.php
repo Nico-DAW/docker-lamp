@@ -95,7 +95,7 @@ function guardarDonante($conexion, $nombre, $apellidos, $edad, $grupo, $cp, $mov
     $stmt->bindParam(':edad',$edad,PDO::PARAM_INT);
     $stmt->bindParam(':grupo',$grupo);
     $stmt->bindParam(':cp',$cp,PDO::PARAM_INT);
-    $stmt->bindParam(':movil',$movil);
+    $stmt->bindParam(':movil',$movil,PDO::PARAM_INT);
 
     $stmt->execute();
     $stmt->closeCursor();
