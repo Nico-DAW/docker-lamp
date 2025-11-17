@@ -29,11 +29,17 @@ La activación se realizará al inicio del script -> <?php ya que se activarán 
 
 function creaDB(){
     $conexion = conecta(); 
-    $sql = "CREATE DATABSE IF NOT EXISTS tareas";
+    $sql = "CREATE DATABASE IF NOT EXISTS tareas";
     try{
         $conexion->query($sql);
+        //$conexion->set_charset("utf8mb4");
+        $conexion->select_db("tareas");
         echo "Base de datos creada correctamente";
     }catch(mysqli_sql_exception $e){
         echo "Error: ".$e->getMessage();
+    }finally{
+        if (isset($conexion)){
+            $conexion->close();
+        }
     }
 }
