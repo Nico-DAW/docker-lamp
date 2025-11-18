@@ -43,7 +43,7 @@ function creaDB(){
         Aqui no matamos el proceso (die) devolvemos un array con 2 valores (false y un mensaje).
         die("Se ha producido un error al intentar conectarse a la BBDD ".$conexion->connect_error);
         */
-        return [false, $conexion->connect_error]
+        return [false, $conexion->connect_error];
     }else{
     $sql = "CREATE DATABASE IF NOT EXISTS tareas";
 
