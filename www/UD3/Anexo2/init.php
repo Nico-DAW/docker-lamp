@@ -48,14 +48,23 @@ function creaDB(){
     $sql = "CREATE DATABASE IF NOT EXISTS tareas";
 
         $conexion->query($sql);
+        /*
+        Aquí $conexion->query($sql);
+        Puede devolver true, false o un mysqli_result (conjunto de valores)
+        En cualquier caso no detiene la ejecución del script. 
+        */
         //$conexion->set_charset("utf8mb4");
         $conexion->select_db("tareas");
-        echo "Base de datos creada correctamente";
+        /*
+        $conexion->select_db("tareas");
+        devuelve true si existe la BD y false en caso contrario.
+        */
+        return[true,"Base de datos creada correctamente"];
         }
     }catch(mysqli_sql_exception $e){
-        echo "Error: ".$e->getMessage();
+        return[false, "Error: ".$e->getMessage()];
     }finally{
-        if (isset($conexion)){
+        if (isset($conexion)&&$conexion->errno!=0)){
             $conexion->close();
         }
     }
