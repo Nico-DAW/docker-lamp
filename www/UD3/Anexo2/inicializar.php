@@ -15,11 +15,22 @@
             <?php include_once("menu.php");?>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h2>Título del contenido</h2>
+                    <h2>Inicializar</h2>
                 </div>
                 <div class="container">
-                    <p>Aquí va el contenido </p>
-     
+                    <?php 
+                        require_once("modelo/init.php");
+                        $resultDb = creaDB();
+                        if($resultDb[2] == true){
+                            echo "<div class=alert alert-danger role='alert'>".$resultDb[1]."</div>";
+                        }else{
+                            if($resultDb[0] == false){
+                                echo "<div class='alert alert-warning' role='alert'>".$resultDb[1]."</div>";
+                            }else{
+                                echo "<div class='alert alert-success' role='alert'>".$resultDb[1]."</div>";
+                            }
+                        }
+                    ?>
                 </div>
             </main>
         </div>

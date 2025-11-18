@@ -37,15 +37,26 @@ La activación se realizará al inicio del script -> <?php ya que se activarán 
 function creaDB(){
     try{
     //Hacemos aqui la comprobación de si la conexión es erróneo o no:   
-    $conexion = conecta(); 
+    $conexion = conecta();
+    $error = false; 
     if($conexion->connect_error){
         /* 
-        Aqui no matamos el proceso (die) devolvemos un array con 2 valores (false y un mensaje).
+        Aqui no matamos el proceso (die) devolvemos un array con 2 valores (true/false y un mensaje).
         die("Se ha producido un error al intentar conectarse a la BBDD ".$conexion->connect_error);
         */
-        return [false, $conexion->connect_error];
+        $error = true;
+        return [false, $conexion->connect_error, $error];
     }else{
-    $sql = "CREATE DATABASE IF NOT EXISTS tareas";
+        /*
+        En el enunciado se pide que se compruebe si la BD datos existe, para realizar esta comprbación es 
+        necesario realizar una consulta -> $sqlCheck = "SELECT ..."
+        */
+        $sqlCheck = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='tareas'";
+        $check = $conexion->query($sqlCheck);
+        if($check&&$check->num_rows>0){
+            return [false, "La BBDD no se ha creado porque ya existía", $error];
+        }else{
+        $sql = "CREATE DATABASE IF NOT EXISTS tareas";
 
         $conexion->query($sql);
         /*
@@ -59,12 +70,13 @@ function creaDB(){
         $conexion->select_db("tareas");
         devuelve true si existe la BD y false en caso contrario.
         */
-        return[true,"Base de datos creada correctamente"];
+        return[true,"Base de datos creada correctamente", $error];
+        }
         }
     }catch(mysqli_sql_exception $e){
         return[false, "Error: ".$e->getMessage()];
     }finally{
-        if (isset($conexion)&&$conexion->errno!=0)){
+        if (isset($conexion)&&$conexion->errno!=0){
             $conexion->close();
         }
     }

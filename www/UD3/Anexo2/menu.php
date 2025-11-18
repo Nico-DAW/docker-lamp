@@ -7,6 +7,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="inicializar.php">
+                    Inicializar
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="listaTareas.php">
                     Mis tareas
                 </a>
