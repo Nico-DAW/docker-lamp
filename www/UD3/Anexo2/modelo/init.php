@@ -74,7 +74,8 @@ function creaDB(){
         }
         }
     }catch(mysqli_sql_exception $e){
-        return[false, "Error: ".$e->getMessage()];
+        $error = true;
+        return[false, "Error: ".$e->getMessage(), $error];
     }finally{
         if (isset($conexion)&&$conexion->errno!=0){
             $conexion->close();

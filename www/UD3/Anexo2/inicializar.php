@@ -22,7 +22,7 @@
                         require_once("modelo/init.php");
                         $resultDb = creaDB();
                         if($resultDb[2] == true){
-                            echo "<div class=alert alert-danger role='alert'>".$resultDb[1]."</div>";
+                            echo "<div class='alert alert-danger' role='alert'>".$resultDb[1]."</div>";
                         }else{
                             if($resultDb[0] == false){
                                 echo "<div class='alert alert-warning' role='alert'>".$resultDb[1]."</div>";
