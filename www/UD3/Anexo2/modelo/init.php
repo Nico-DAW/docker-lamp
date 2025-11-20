@@ -86,19 +86,33 @@ function creaDB(){
 function creaTareas(){
     $conexion = conecta();
     $conexion->select_db("tareas");
-    if(!$conexion->connect_error){
+    $error = false;
+    if($conexion->connect_error){
+        return [false, $conexion->connect_error, $error];
+    };
         $sql = "SHOW TABLES LIKE 'tareas';";
-        if($conexion->query($sql)){
-            $sqlTareas = "CREATE TABLE IF NOT EXISTS tareas(
+        $check = $conexion->query($sql);
+        if($check->num_rows == 0){
+            //var_dump($check);
+            $sqlTareas = "CREATE TABLE tareas(
             id INT AUTO_INCREMENT PRIMARY KEY,
             titulo VARCHAR(50), 
             descripcion VARCHAR(250),
             estado VARCHAR(50), 
             id_usuario INT
             );";
-            return [true, $conexion->query($sqlTareas)];
+            /* En este caso mysqli lanza excepciones porque está configurado para que las lance... 
+               PHP 8+ lanza excepciones por defecto en MySQLi
+               Como esto es así tenemos que capturarla para que no se detenga el script
+            */
+            try{
+                $creaTabla = $conexion->query($sqlTareas); 
+            }catch(mysqli_sql_exception $e){
+                $error = true;
+                return [false, "Sa ha producido un error al intentar crear la tabla ".$e, $error];
+            }
+            return [true, "La tabla tareas se ha creado correctamente", $error];
         }else{
-            return [false, $conexion->connect_error];
+            return [false, "La tabla ya existe", $error];
         }
-    }
 }

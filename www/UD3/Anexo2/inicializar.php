@@ -33,10 +33,14 @@
 
                         $creaTabla = creaTareas();
 
-                        if($creaTabla != false){
+                        if($creaTabla[0] != false){
                             echo "<div class='alert alert-success' role='alert'>"."Se ha creado la tabla tareas correctamente"."</div>";
                         }else{
-                            echo "<div class='alert alert-warning' role='alert'>"."La tabla tareas estaba creada o se ha producido un error al intentar crearla"."</div>";
+                            if($creaTabla[2] == true){
+                                echo "<div class='alert alert-danger' role='alert'>"."Se ha producido un error al intentar crear la tabla"."</div>";
+                            }else{
+                                echo "<div class='alert alert-warning' role='alert'>"."La tabla tareas estaba creada"."</div>";
+                            }
                         }
                     ?>
                 </div>
