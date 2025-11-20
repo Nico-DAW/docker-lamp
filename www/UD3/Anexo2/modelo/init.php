@@ -86,14 +86,19 @@ function creaDB(){
 function creaTareas(){
     $conexion = conecta();
     $conexion->select_db("tareas");
-        $sql = "SELECT TABLES LIKE 'tareas';"
     if(!$conexion->connect_error){
-        $sql = "CREATE TABLE IF NOT EXISTS tareas(
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        titulo VARCHAR(50), 
-        descripcion VARCHAR(250),
-        estado VARCHAR(50), 
-        id_usuario INT
-        );";
+        $sql = "SHOW TABLES LIKE 'tareas';";
+        if($conexion->query($sql)){
+            $sqlTareas = "CREATE TABLE IF NOT EXISTS tareas(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            titulo VARCHAR(50), 
+            descripcion VARCHAR(250),
+            estado VARCHAR(50), 
+            id_usuario INT
+            );";
+            return [true, $conexion->query($sqlTareas)];
+        }else{
+            return [false, $conexion->connect_error];
+        }
     }
 }

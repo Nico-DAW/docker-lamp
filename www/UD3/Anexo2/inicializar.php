@@ -30,6 +30,14 @@
                                 echo "<div class='alert alert-success' role='alert'>".$resultDb[1]."</div>";
                             }
                         }
+
+                        $creaTabla = creaTareas();
+
+                        if($creaTabla != false){
+                            echo "<div class='alert alert-success' role='alert'>"."Se ha creado la tabla tareas correctamente"."</div>";
+                        }else{
+                            echo "<div class='alert alert-warning' role='alert'>"."La tabla tareas estaba creada o se ha producido un error al intentar crearla"."</div>";
+                        }
                     ?>
                 </div>
             </main>
