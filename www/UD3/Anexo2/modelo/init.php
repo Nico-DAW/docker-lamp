@@ -83,6 +83,7 @@ function creaDB(){
     }
 }
 
+/*
 function creaTareas(){
     $conexion = conecta();
     $conexion->select_db("tareas");
@@ -101,10 +102,10 @@ function creaTareas(){
             estado VARCHAR(50), 
             id_usuario INT
             );";
-            /* En este caso mysqli lanza excepciones porque está configurado para que las lance... 
-               PHP 8+ lanza excepciones por defecto en MySQLi
-               Como esto es así tenemos que capturarla para que no se detenga el script
-            */
+                 // En este caso mysqli lanza excepciones porque está configurado para que las lance... 
+                // PHP 8+ lanza excepciones por defecto en MySQLi
+               // Como esto es así tenemos que capturarla para que no se detenga el script
+
             try{
                 $creaTabla = $conexion->query($sqlTareas); 
             }catch(mysqli_sql_exception $e){
@@ -115,4 +116,52 @@ function creaTareas(){
         }else{
             return [false, "La tabla ya existe", $error];
         }
+}
+    */
+
+//Reescribo la función crearTareas() aplicando en try desde el principio
+
+function creaTareas(){
+
+    try{
+    $error = false;
+    $conexion = conecta();
+    if($conexion->connect_error){
+        return[false, "Se ha producido un error al intentar conectarse a la BBDD ".$conexion->connect_error, $error];
+    }
+
+    $conexion->select_db("tareas");
+    //Si error se define aqui (try) el if de arriba no lo ve... (el catch y finally si lo ven)
+    // $error = false;
+
+    $sql = "SHOW TABLES LIKE 'tareas'";
+    $resultado = $conexion->query($sql);
+    
+    if($resultado->num_rows>0){
+        return [false, "La tabla ya existe", $error];
+    }
+
+    $sql = "CREATE TABLE tareas(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            titulo VARCHAR(50), 
+            descripcion VARCHAR(250),
+            estado VARCHAR(50), 
+            id_usuario INT
+            );";
+    
+    if(!$conexion->query($sql)){
+        return [false, "Se ha producido un error al intentar crear la tabla", $error];
+    };
+
+    return [true, "Se ha creado la tabla correctamente" , $error];
+
+    }catch(mysqli_sql_exception $e){
+        $error = true;
+        return [false, "Error SQL: ".$e->getMessage(), $error];
+    }finally{
+        if(isset($conexion) && $conexion->errno == 0){
+            $conexion->close();
+        }
+    }
+
 }
