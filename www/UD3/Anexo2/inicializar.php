@@ -31,6 +31,18 @@
                             }
                         }
 
+                        $creaUsers = creaUsuarios();
+
+                        if($creaUsers[0] != false){
+                            echo "<div class='alert alert-success role='alert'>".$creaUsers[1]."</div>";
+                        }else{
+                            if($creaUsers[2] == true){
+                                echo "<div class='alert alert-danger' role='alert'>".$creaUsers[1]."</div>";
+                            }else{
+                                echo "<div class='alert alert-warning' role='alert'>"."La tabla usuarios estaba creada"."</div>";
+                            }
+                        }
+
                         $creaTabla = creaTareas();
 
                         if($creaTabla[0] != false){
@@ -40,18 +52,6 @@
                                 echo "<div class='alert alert-danger' role='alert'>"."Se ha producido un error al intentar crear la tabla"."</div>";
                             }else{
                                 echo "<div class='alert alert-warning' role='alert'>"."La tabla tareas estaba creada"."</div>";
-                            }
-                        }
-
-                        $creaUsers = creaUsuarios();
-
-                        if($creaUsers[0] != false){
-                            echo "<div class='alert alert-success role='alert'>".$createUsers[1]."</div>";
-                        }else{
-                            if($creaUsers[2] == true){
-                                echo "<div class='alert alert-danger' role='alert'>".$creaUsers[1]."</div>";
-                            }else{
-                                echo "<div class='alert alert-warning' role='alert'>"."La tabla usuarios estaba creada"."</div>";
                             }
                         }
 

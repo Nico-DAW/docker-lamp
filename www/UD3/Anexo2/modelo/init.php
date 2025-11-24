@@ -91,6 +91,8 @@ function creaUsuarios(){
             $error = true;
             return [false, "Se ha producido un error al intentar conectarse a la BBDD ".$conexion->connect_error, $error];
         }
+        // Si quitamos la linea a continuación podemos comprobar error. 
+        $conexion->select_db("tareas");
         $sql="SHOW TABLES LIKE 'usuarios';";
         $resultados = $conexion->query($sql);
 
@@ -184,11 +186,12 @@ function creaTareas(){
             titulo VARCHAR(50), 
             descripcion VARCHAR(250),
             estado VARCHAR(50), 
-            id_usuario INT
-            );";
+            id_usuario INT,
+            CONSTRAINT tar_id_fk FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+            )";
     
     if(!$conexion->query($sql)){
-        return [false, "Se ha producido un error al intentar crear la tabla", $error];
+        return [false, "Se ha producido un error al intentar crear la tabla ".$conexion->error, $error];
     };
 
     return [true, "Se ha creado la tabla correctamente" , $error];
