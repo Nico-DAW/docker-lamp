@@ -83,6 +83,44 @@ function creaDB(){
     }
 }
 
+function creaUsuarios(){
+    try{
+        $error = false;
+        $conexion = conecta();
+        if($conexion->connect_error){
+            $error = true;
+            return [false, "Se ha producido un error al intentar conectarse a la BBDD ".$conexion->connect_error, $error];
+        }
+        $sql="SHOW TABLES LIKE 'usuarios';";
+        $resultados = $conexion->query($sql);
+
+        if($resultados->num_rows!=0){
+            return [false, "La tabla usuarios ya existía", $error];
+        }
+
+        $sql = "CREATE TABLE usuarios(
+        id INT AUTO_INCREMENT PRIMARY KEY, 
+        username VARCHAR(50),
+        nombre VARCHAR(50), 
+        apellidos VARCHAR(100),
+        contrasena VARCHAR(100)
+        );";
+
+        if($conexion->query($sql)){
+            return [true, "Se ha creado la tabla Usuarios", $error];
+        }
+
+        
+    }catch(mysqli_sql_exception $e){
+        $error = true;
+        return [false, "Se ha producido un error al intentar crear la tabla ".$e->getMessage(), $error];
+    }finally{
+        if(isset($conexion)&&$conexion->errno != 0){
+            $conexion->close();
+        }
+    }
+}
+
 /*
 function creaTareas(){
     $conexion = conecta();
@@ -165,3 +203,4 @@ function creaTareas(){
     }
 
 }
+
