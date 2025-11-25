@@ -15,11 +15,16 @@
                 <a class="nav-link" href="listaTareas.php">
                     Mis tareas
                 </a>
+            </li>
              <li class="nav-item">
                 <a class="nav-link" href="nuevaForm.php">
                     Nueva tarea
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="usuarios.php">
+                    Lista de usuarios
+                </a>
             </li>
         </ul>
     </div>
