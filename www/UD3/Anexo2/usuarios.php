@@ -23,11 +23,13 @@
                         <table class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>                            
-                                    <th>id</th>
-                                    <th>username</th>
-                                    <th>nombre</th>
-                                    <th>apellidos</th>
-                                    <th>contraseña</th>
+                                    <th>Id</th>
+                                    <th>Username</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Contraseña</th>
+                                    <th>Borrar</th>
+                                    <th>Editar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,10 +38,11 @@
                                     require_once('modelo/pdo.php');
 
                                     $usuarios = listaUsuarios();
-                                    var_dump($usuarios);
-                                    if($usuarios[0]==true){
+                                    //var_dump($usuarios);
+                                    if($usuarios[0]==true&&!empty($usuarios[1])){
+                                    // En el if tenemos que contemplar &&!empty($usuarios[1]) ya que al inicio de la aplicación no exiten usuarios registrados. 
                                     foreach($usuarios[1] as $key=>$value){
-                                      echo "<tr><td>".$value['id']."</td><td>".$value['username']."</td><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['contrasena']."</td><td>"."</td></tr>";
+                                      echo "<tr><td>".$value['id']."</td><td>".$value['username']."</td><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['contrasena']."</td><td><a class='btn btn-outline-danger' href='#'>Borrar</a></td><td><a class='btn btn-outline-success' href='#'>Editar</a></td></tr>";
                                     }}else{
                                         echo "<tr><td>No se han encontrado resultados</td><td></td><td></td><td></td><td></td></tr>";
                                     }
