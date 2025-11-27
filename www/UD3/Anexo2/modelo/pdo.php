@@ -33,3 +33,16 @@ function listaUsuarios(){
     }
    
 }
+
+function borraUser($id){
+    try{
+      $conexion = conPDO();
+      $sql = "DELETE FROM usuarios WHERE id=:id";
+      $stmt = $conexion->prepare($sql);
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+      $stmt->execute();
+      return [true, "Se ha borrado el usuario satisfactoriamente"];
+    }catch(PDOException $e){
+      return [false, "Se ha producido un error al borrar el usuario ".$e->getMessage()];
+    }
+}

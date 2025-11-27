@@ -33,31 +33,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Una manera de listar los usuarios es la siguiente -->
+                                <!-- La otra manera de listar los usuarios es como se avanzó en usuarios.php intercalando PHP con HTML. En este caso
+                                 podemos dejar estructuras de control abiertas... y cerrarlas más adelante -->
                                 <?php 
                                     include_once('utils.php');
                                     require_once('modelo/pdo.php');
 
                                     $usuarios = listaUsuarios();
                                     //var_dump($usuarios);
-                                    if($usuarios[0]==true&&!empty($usuarios[1])){
+                                    if($usuarios[0]==true&&!empty($usuarios[1])):
                                     // En el if tenemos que contemplar &&!empty($usuarios[1]) ya que al inicio de la aplicación no existen usuarios registrados. 
-                                    foreach($usuarios[1] as $key=>$value){
-                                      echo "<tr><td>".$value['id']."</td><td>".$value['username']."</td><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['contrasena']."</td><td><a class='btn btn-outline-danger' href='borraUsuario.php?id=".$value['id']."'>Borrar</a></td><td><a class='btn btn-outline-success' href='#'>Editar</a></td></tr>";
-                                    }}else{
-                                      echo "<tr><td>No se han encontrado resultados</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
-                                    }
+                                    foreach($usuarios[1] as $key=>$value): 
                                 ?>
-                                <!-- Es decir un bloque php en el que se incluye con echo etiquetas y valores. Pero también existe otra manera de hacerlo que es intercalar PHP con HTML ver usuariox.php -->
+
+                                      <tr>
+                                          <td><?= $value['id'] ?></td>
+                                          <td><?= $value['username'] ?></td>
+                                          <td><?= $value['nombre'] ?></td>
+                                          <td><?= $value['apellidos'] ?></td>
+                                          <td><?= $value['contrasena'] ?></td>
+                                          <td><a class='btn btn-outline-danger' href='#'>Borrar</a></td>
+                                          <td><a class='btn btn-outline-success' href='#'>Editar</a></td>
+                                      </tr>
+                                    <?php
+                                    endforeach;
+                                    else:
+                                    ?>
+                                      <tr>
+                                         <td>No se han encontrado resultados</td>
+                                         <td></td>
+                                         <td></td>
+                                         <td></td>
+                                         <td></td>
+                                      </tr>
+                                    <?php 
+                                     endif; 
+                                    ?>
+                                
                             </tbody>
                         </table>
-                                <?php 
-                                if(isset($_GET['borra'])&&$_GET['borra']==true){
-                                    echo "<div class='alert alert-success' role='alert'> Se borrado el usuario correctamente </div>";
-                                }elseif(isset($_GET['borra'])&&$_GET['borra']==false){
-                                    echo "<div class='alert alert-success' role='alert'> Se ha producido un error al intentar borrar al usuario </div>";
-                                }
-                                ?>
                     </div>
                     </br>
                 </div>
