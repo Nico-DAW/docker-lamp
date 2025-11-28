@@ -18,7 +18,7 @@
                     <h2>Nuevo usuario</h2>
                 </div>
                 <div class="container">
-                    <form action="" method="POST">
+                    <form action="nuevoUsuario2.php" method="POST">
                         <div class="mb-3">
                         <input type='hidden' name='id'/>
                         </div>
@@ -45,7 +45,15 @@
 
 
                     </form>
-     
+                    <?php 
+                     if(isset($_GET['msgs'])&&!empty($_GET['msgs'])){
+                        $msgs = $_GET['msgs'];
+                        //var_dump($_GET['msgs']);
+                        foreach($msgs as $msg){
+                            echo "<div class='alert alert-danger role='alert'>$msg</div>";
+                        }
+                     }
+                    ?>
                 </div>
             </main>
         </div>

@@ -36,7 +36,7 @@ A ver... así por defecto no se va a poder hacer... Ya que no se puede enviar ar
 
 
 if(!empty($msgs)){
-    header('Location:https://localhost/UD3/Anexo2/nuevoUsuarioFrom.php?msgs='.$msgs);
+    header('Location:http://localhost/UD3/Anexo2/nuevoUsuarioForm.php?msgs='.$msgs);
     exit();
 }
 
@@ -46,10 +46,10 @@ podemos emplear la función http_build_query(['msgs'=>$msgs]); Por tanto nos que
 
 if(!empty($msgs)){
     $query =  http_build_query(['msgs'=>$msgs]);
-    header('Location:https://localhost/UD3/Anexo2/nuevoUsuarioFrom.php?msgs='.$msgs);
+    header('Location:http://localhost/UD3/Anexo2/nuevoUsuarioForm.php?msgs='.$query);
     exit();
 }
 
 /*
-Los mensajes los recuperariamos en la vista con un bucle. 
+Los mensajes los recuperariamos en la vista con un bucle. El código aquí es muy repetitivo y se puede optimizar ver nuevoUsuario2.php
 */
