@@ -21,6 +21,11 @@
                     Nueva tarea
                 </a>
             </li>
+              <li class="nav-item">
+                <a class="nav-link" href="nuevoUsuarioForm.php">
+                    Nuevo usuario
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="usuarios.php">
                     Lista de usuarios

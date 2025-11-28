@@ -46,3 +46,20 @@ function borraUser($id){
       return [false, "Se ha producido un error al borrar el usuario ".$e->getMessage()];
     }
 }
+
+function nuevoUsuario($username,$nombre,$apellidos,$contrasena){
+    try{
+        $conexion = conPDO();
+        $stmt = $conexion->prepare("INSERT INTO usuarios(username,nombre,apellidos,contrasena)VALUES(:username,:nombre,:apellidos,:contrasena)");
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':apellidos', $apellidos);
+        $stmt->bindParam(':contrasena', $contrasena);
+
+        $stmt->execute();
+
+        return [true,"Se ha registrado el usuairo satisfactoriamente"];
+    }catch(PDOException $e){
+        return [false,"Se ha producido un error al intentar registrar al usuario"];
+    }
+}
