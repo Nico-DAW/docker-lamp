@@ -53,6 +53,18 @@
                             echo "<div class='alert alert-danger role='alert'>$msg</div>";
                         }
                      }
+                     /*
+                     if(isset($_GET['success'])&&!empty($_GET['success'])){
+                        $success = $_GET['success'];
+                        echo "<div class='alert alert-success role='alert'>$success</div>";
+                     }
+                     */
+                    if(isset($_GET['success'])&&!empty($_GET['success'])){
+                        $success = $_GET['success'];
+                        $msg = ''; 
+                        $success[0]?$msg = "<div class='alert alert-success role='alert'>$success[1]</div>" : $msg = "<div class='alert alert-danger role='alert'>$success[1]</div>";
+                        echo $msg;
+                    }
                     ?>
                 </div>
             </main>

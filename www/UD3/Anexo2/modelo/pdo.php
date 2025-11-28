@@ -61,5 +61,9 @@ function nuevoUsuario($username,$nombre,$apellidos,$contrasena){
         return [true,"Se ha registrado el usuairo satisfactoriamente"];
     }catch(PDOException $e){
         return [false,"Se ha producido un error al intentar registrar al usuario"];
+    }finally{
+        if(isset($conexion)){
+         $conexion = null;
+        }
     }
 }

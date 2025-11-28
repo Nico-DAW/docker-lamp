@@ -1,5 +1,5 @@
 <?php
-
+require_once('modelo/pdo.php');
 // Como comenté en nuevoUsuario1.php el código es muy repetitivo y se puede optimizar... 
  $username = '';
  $nombre = '';
@@ -43,9 +43,12 @@ if(!empty($msgs)){
 OJO!!! con -> header('Location:http://localhost/UD3/Anexo2/nuevoUsuarioForm.php?'.$query);
 Si después del interrogante metes msgs= -> 'Location:http://localhost/UD3/Anexo2/nuevoUsuarioForm.php?msgs=' no se mostrará el primer valor
 porque la query string se estaría creando de forma incorrecta. Es por eso por lo que justo después del ? se concatena directamente la $query.
-*/
 
-
-/*
 Los mensajes los recuperariamos en la vista con un bucle. El código aquí es muy repetitivo y se puede optimizar ver nuevoUsuario2.php
 */
+$registraUsuario = nuevoUsuario($username, $nombre, $apellidos, $contrasena);
+
+
+$success = http_build_query(['success'=>$registraUsuario]);
+
+header('Location:http://localhost/UD3/Anexo2/nuevoUsuarioForm.php?'.$success);
