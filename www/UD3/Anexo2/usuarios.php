@@ -52,11 +52,11 @@
                             </tbody>
                         </table>
                                 <?php 
-                                if(isset($_GET['borra'])&&$_GET['borra']==true){
-                                    echo "<div class='alert alert-success' role='alert'> Se borrado el usuario correctamente </div>";
-                                }elseif(isset($_GET['borra'])&&$_GET['borra']==false){
-                                    echo "<div class='alert alert-success' role='alert'> Se ha producido un error al intentar borrar al usuario </div>";
-                                }
+                                    if(isset($_GET['borra'])&&$_GET['borra']==true){
+                                        echo "<div class='alert alert-success' role='alert'> Se borrado el usuario correctamente </div>";
+                                    }elseif(isset($_GET['borra'])&&$_GET['borra']==false){
+                                        echo "<div class='alert alert-success' role='alert'> Se ha producido un error al intentar borrar al usuario </div>";
+                                    }
                                 ?>
                     </div>
                     </br>
