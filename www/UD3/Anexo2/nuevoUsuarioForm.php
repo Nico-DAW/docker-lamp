@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UD2. Tarea</title>
+    <title>UD3. Tarea</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -20,23 +20,23 @@
                 <div class="container">
                     <form action="nuevoUsuario2.php" method="POST">
                         <div class="mb-3">
-                        <input type='hidden' name='id'/>
+                        <input type='hidden' name='id' value=<?php isset($_GET['id'])&&!empty($_GET['id'])?$_GET['id']:null?>/>
                         </div>
                         <div class="mb-3">
                         <label class="form-label" for='username'>Username</label>
-                        <input class="form-control" type='text' name='username'/>
+                        <input class="form-control" type='text' name='username' value=<?php isset($_GET['username'])&&!empty($_GET['username'])?>>
                         </div>
                         <div class="mb-3">
                         <label class="form-label" for='nombre'>Nombre</label>
-                        <input class="form-control" type='text' name='nombre'/>
+                        <input class="form-control" type='text' name='nombre' value=<?php isset($_GET['nombre'])&&!empty($_GET['nombre'])?>>
                         </div>
                         <div class="mb-3">
                         <label class="form-label" for='apellidos'>Apellidos</label>
-                        <input class="form-control" type='text' name='apellidos'/>
+                        <input class="form-control" type='text' name='apellidos' value=<?php isset($_GET['apellidos'])&&!empty($_GET['apellidos'])?>>
                         </div>
                         <div class="mb-3">
                         <label class="form-label" for='contrasena'>Contraseña</label>
-                        <input class="form-control" type='text' name='contrasena'/>
+                        <input class="form-control" type='text' name='contrasena' value=<?php isset($_GET['contrasena'])&&!empty($_GET['contrasena'])?>>
                         </div>
                         <div class="mb-3">
                         <button class="btn btn-primary"type="submmit">Enviar</button>
