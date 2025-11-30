@@ -43,7 +43,7 @@
                                     if($usuarios[0]==true&&!empty($usuarios[1])){
                                     // En el if tenemos que contemplar &&!empty($usuarios[1]) ya que al inicio de la aplicación no existen usuarios registrados. 
                                     foreach($usuarios[1] as $key=>$value){
-                                      echo "<tr><td>".$value['id']."</td><td>".$value['username']."</td><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['contrasena']."</td><td><a class='btn btn-outline-danger' href='borraUsuario.php?id=".$value['id']."'>Borrar</a></td><td><a class='btn btn-outline-success' href='nuevoUsuarioForm.php?id=".$value['id']."&edit=true'>Editar</a></td></tr>";
+                                      echo "<tr><td>".$value['id']."</td><td>".$value['username']."</td><td>".$value['nombre']."</td><td>".$value['apellidos']."</td><td>".$value['contrasena']."</td><td><a class='btn btn-outline-danger' href='borraUsuario.php?id=".$value['id']."'>Borrar</a></td><td><a class='btn btn-outline-success' href='nuevoUsuarioForm.php?id=".$value['id']."&username=".$value['username']."&nombre=".$value['nombre']."&apellidos=".$value['apellidos']."&contrasena=".$value['contrasena']."&edit=true'>Editar</a></td></tr>";
                                     }}else{
                                       echo "<tr><td>No se han encontrado resultados</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
                                     }

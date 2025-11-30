@@ -46,9 +46,17 @@ porque la query string se estaría creando de forma incorrecta. Es por eso por l
 
 Los mensajes los recuperariamos en la vista con un bucle. El código aquí es muy repetitivo y se puede optimizar ver nuevoUsuario2.php
 */
-$registraUsuario = nuevoUsuario($username, $nombre, $apellidos, $contrasena);
+$success ='';
+
+if(isset($_GET['edit'])&&!empty($_GET['edit'])){
+    //var_dump($_GET['id']);
+    $actualizaUsuario = actualizaUsuario($_GET['id'],$username, $nombre, $apellidos, $contrasena);
+    $success = http_build_query(['success'=>$actualizaUsuario]);
+}else{
+    $registraUsuario = nuevoUsuario($username, $nombre, $apellidos, $contrasena);
+    $success = http_build_query(['success'=>$registraUsuario]);
+};
 
 
-$success = http_build_query(['success'=>$registraUsuario]);
 
 header('Location:http://localhost/UD3/Anexo2/nuevoUsuarioForm.php?'.$success);
