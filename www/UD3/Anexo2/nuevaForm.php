@@ -41,7 +41,7 @@
                             require_once('modelo/mysqli.php');
                             $users = listaUsuarios();
                             
-                            var_dump($users); 
+                            //var_dump($users); 
                             if(!empty($users)&&$users[0]==true):
                                 foreach($users[1] as $user): 
                             ?>
