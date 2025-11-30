@@ -25,12 +25,16 @@ function listaUsuarios(){
     //Aquí ya empleamos el try/catch
     try{
         $conexion = conMysqli();
+        //contemplamos la posibilidad  de que pueda existir un error al establecer la conexion
+        if($conexion->connnect_error){
+            [false, "Se ha producido un error al intentar conectarse a la BBDD"];
+        }else{
         $sql="SELECT id, username FROM usuarios";
         $resultados=$conexion->query($sql);
         // MYSQLI_ASSOC es sin comillas
         $resultados->fetch_all(MYSQLI_ASSOC);
         return [true, $resultados];
-
+    }
     }catch(mysqli_sql_exception $e){
         return [false, "Se ha producido un error al intentar ejecutar la consulta: ".$e];
     }finally{
