@@ -20,7 +20,10 @@
                 <div class="container">
                     <form class="mb-5" action="nueva.php" method='POST'>
                         <div class="mb-3">
-
+                            <label class="form-label">Título</label>
+                            <input type="text" class="form-control" name="titulo">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Descripción</label>
                             <input type="text" class="form-control" name="descripcion">
                         </div>
@@ -30,6 +33,26 @@
                                 <option>En curso</option>
                                 <option>Finalizada</option>
                             </select>
+                        </div>
+                        <div class="mb-3">
+                        <label class="form-label">Usuario</label>
+                        <select class="form-select" name='usuario'>
+                            <?php
+                            require_once('modelo/mysqli.php');
+                            $users = listaUsuarios();
+                            
+                            var_dump($users); 
+                            if(!empty($users)&&$users[0]==true):
+                                foreach($users[1] as $user): 
+                            ?>
+                            <option><?= $user['username'] ?></option>
+                            <?php 
+                                endforeach;
+                            else:
+                               echo "<option>Es necesario crear incialmente un usuario</option>";
+                            endif;
+                            ?>
+                        </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                         <br>
