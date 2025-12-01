@@ -26,7 +26,7 @@ function listaUsuarios(){
     try{
         $conexion = conMysqli();
         //contemplamos la posibilidad  de que pueda existir un error al establecer la conexion
-        if($conexion->connnect_error){
+        if($conexion->connect_error){
             return [false, "Se ha producido un error al intentar conectarse a la BBDD"];
         }else{
             $sql="SELECT id, username FROM usuarios";
@@ -50,13 +50,13 @@ function nuevaTarea($titulo,$descripcion,$estado,$userId){
     if($conexion->connect_error){
         return[false,"Se ha producido un error al  intentar conectarse a la BBDD ".$conexion->connect_error];
     }
-    $sql="INSERT INTO tareas(titulo,descripcion,estado,id_usuario) VALUES (:titulo,:descripcion,:estado,:id_usuario)";
+    $sql="INSERT INTO tareas(titulo,descripcion,estado,id_usuario) VALUES (?,?,?,?)";
     $stmt=$conexion->prepare($sql);
     $stmt->bind_param('sssi',$titulo,$descripcion,$estado,$userId);
     $stmt->execute();
         return[true, "Se ha incluido satisfactoriamente la tarea en la BBDD"];
     }catch(mysqli_sql_exception $e){
-        return[false, "Se ha producido un error al intentar registrar la tarea en la BBDD ".$e->getMessage()]
+        return[false, "Se ha producido un error al intentar registrar la tarea en la BBDD ".$e->getMessage()];
     }finally{
         if(isset($conexion)&&$conexion->errno==0){
             $conexion->close(); 
