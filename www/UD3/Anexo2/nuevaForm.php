@@ -58,6 +58,7 @@
                             if(!empty($users)&&$users[0]==true):
                                 foreach($users[1] as $user): 
                             ?>
+                            <!-- Aquí podemos enviar el id por value -->
                             <option value=<?= $user['username'] ?><?php echo isset($username)&&$username==$user['username']?'selected':'';?>><?= $user['username']?></option>
                             <?php 
                                 endforeach;
