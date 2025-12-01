@@ -3,8 +3,11 @@ include('utils.php');
 
 $arr=[];
 $mensaje="";
+$titulo=$_POST['titulo'];
 $description=$_POST['descripcion'];
-$flow=$_POST['estado']; 
+$flow=$_POST['estado'];
+$idUser=$_POST['id_usuario'];
+
 $verify=false;
 
 /* Las siguientes funciones las había definido aquí pero siguiendo el enunciado del ejercicio hay que hacerlo en utils.php
@@ -36,7 +39,7 @@ function valida($description, $flow){
 
 */
 
-$arr=valida($description, $flow);
+$arr=valida($titulo, $description, $flow, $idUser);
 
 $verify=$arr[0];
 $mensaje=$arr[1];

@@ -28,6 +28,7 @@ function check($campo){
     return $campo;
 }
 
+/*
 function valida($description, $flow){
     if(!empty($description)&&!empty($flow)){
         $description=check($description);
@@ -50,5 +51,46 @@ function guarda($descripcion, $estado){
     global $tareasarr;
     array_push($tareasarr,[$descripcion, $estado]);
 }
+*/
 
+/*
+// Esto es un intento de pero aquí el rollo es hacerlo con un array asociativo
+function valida($titulo,$descripcion,$estado,$id_usuario){
+    $required = [$titulo,$descripcion,$estado,$id_usuario];
+    $errores=[];
+    $valores=[];
+    foreach($required as $field){
+        if(empty($field)){
+            $errores[]=$field;
+        }else{
+            $valores[]=check($field);
+        }
+    };
+    if(!empty($errores)){
+        return [false, $errores];
+    }
+    return [true, $valores];
+}
+*/
+function valida($titulo,$descripcion,$estado,$id_usuario){
+    $required = [
+        'titulo'=>$titulo,
+        'descripcion'=>$descripcion,
+        'estado'=>$estado,
+        'id_usuario'=>$id_usuario,
+        ];
+    $errores=[];
+    $valores=[];
+    foreach($required as $key=>$value){
+        if(empty($value)){
+            $errores[]=$key;
+        }else{
+            $valores[]=check($value);
+        }
+    };
+    if(!empty($errores)){
+        return [false, $errores];
+    }
+    return [true, $valores];
+}
 ?>

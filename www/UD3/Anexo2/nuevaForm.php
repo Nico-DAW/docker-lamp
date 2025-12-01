@@ -21,17 +21,30 @@
                     <form class="mb-5" action="nueva.php" method='POST'>
                         <div class="mb-3">
                             <label class="form-label">Título</label>
-                            <input type="text" class="form-control" name="titulo">
+                            <input type="text" class="form-control" name="titulo" value=<?php echo isset($titulo)&&!empty($titulo)?$titulo:'';?>>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion">
+                            <input type="text" class="form-control" name="descripcion" value=<?php echo isset($descripcion)&&!empty($descripcion)?$descripcion:'';?>>
                         </div>
+                        <!-- 
+                            Ejemplo de formulario con botones de radio (radio buttons)
+                            <div class="mb-3">
+                                <div class="form-check form-check-inline">
+                                <label for="male">Masculino</label>
+                                <input class="form-check-input" type='radio' name="gender" id="male" value="Masculino">
+                                </div>
+                                <div class="form-check form-check-inline">
+                                <label for="female">Femenino</label>
+                                <input class="form-check-input" type='radio' name="gender" id="female" value="Femenino">
+                                </div>
+                            </div>
+                        -->
                         <div class="mb-3">
                             <label class="form-label">Estado</label>
                             <select class="form-select" name="estado">
-                                <option>En curso</option>
-                                <option>Finalizada</option>
+                                <option value="en_curso">En curso</option>
+                                <option value="end">Finalizada</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -45,7 +58,7 @@
                             if(!empty($users)&&$users[0]==true):
                                 foreach($users[1] as $user): 
                             ?>
-                            <option><?= $user['username'] ?></option>
+                            <option value=<?= $user['username'] ?><?php echo isset($username)&&$username==$user['username']?'selected':'';?>><?= $user['username']?></option>
                             <?php 
                                 endforeach;
                             else:
