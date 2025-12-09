@@ -59,7 +59,7 @@
                                 foreach($users[1] as $user): 
                             ?>
                             <!-- Aquí podemos enviar el id por value -->
-                            <option value=<?= $user['username'] ?><?php echo isset($username)&&$username==$user['username']?'selected':'';?>><?= $user['username']?></option>
+                            <option value=<?= $user['id'] ?><?php echo isset($username)&&$username==$user['username']?'selected':'';?>><?= $user['username']?></option>
                             <?php 
                                 endforeach;
                             else:
@@ -72,8 +72,12 @@
                         <br>
                         &nbsp;
                         <div class="mb-3">
-                        <?php if(isset($_GET['mensaje'])){
-                            echo '<div class="alert alert-info" role="alert">'.$_GET['mensaje'].'</div>';
+                        <?php if(isset($_GET['mensajes'])&&is_string($_GET['mensajes'])){
+                            echo '<div class="alert alert-info" role="alert">'.$_GET['mensajes'].'</div>';
+                         }elseif(isset($_GET['mensajes'])&&is_array($_GET['mensajes'])){
+                            foreach($_GET['mensajes'] as $key=>$value){
+                                echo '<div class="alert alert-danger" role="alert">'."Es necesario definir ".$value.'</div>';
+                            }
                          }
                         ?>
                     </div>

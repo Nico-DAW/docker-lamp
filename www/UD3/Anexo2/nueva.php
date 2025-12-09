@@ -1,12 +1,13 @@
 <?php
 include('utils.php');
+require('modelo/mysqli.php');
 
 $arr=[];
 $mensaje="";
 $titulo=$_POST['titulo'];
 $description=$_POST['descripcion'];
 $flow=$_POST['estado'];
-$idUser=$_POST['id_usuario'];
+$idUser=$_POST['usuario'];
 
 $verify=false;
 
@@ -42,19 +43,33 @@ function valida($description, $flow){
 $arr=valida($titulo, $description, $flow, $idUser);
 
 $verify=$arr[0];
-$mensaje=$arr[1];
+$valores=$arr[1];
 
 // Si la información es válida => true simulamos el almacenado en el array
-
+/*
 if($verify){
     guarda($description, $flow);
+}
+*/
+if($verify){
+//var_dump($valores);
+$conversion=intval($valores[3]);
+//var_dump($valores[2]);
+$resultado=nuevaTarea($valores[0],$valores[1],$valores[2],$conversion);
+$mensaje=$resultado[1];
+}else{
+$mensaje=$valores;
 }
 
 /*
 Comprobación
 var_dump($tareasarr);
 */
-
+/*
 header("Location: http://localhost/UD2/anexo/nuevaForm.php?mensaje=".urlencode($mensaje));
+exit();
+*/
+$query = http_build_query(['mensajes'=>$mensaje]);
+header("Location: http://localhost/UD3/Anexo2/nuevaForm.php?".$query);
 exit();
 ?>
