@@ -28,6 +28,8 @@
     // echo $file_type;
 
     // print_r($_FILES["uploadImage"]);
+
+    //var_dump($_FILES["uploadImage"]);
     
     if(!file_exists($target_file)){
         if($_FILES["uploadImage"]["size"]>50000){
