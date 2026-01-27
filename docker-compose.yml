@@ -27,6 +27,12 @@ services:
             - "host.docker.internal:host-gateway"
         env_file:
             - .env
+        environment:
+            APP_ENV: development
+            APP_DEBUG: "true"
+            DATABASE_HOST: db
+            DATABASE_USER: root
+            DATABASE_PASSWORD: test
     phpmyadmin:
         image: phpmyadmin:5.2.1
         links: 
