@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SERVER["REQUEST_METHOD"]=='POST'){
+if($_SERVER["REQUEST_METHOD"])=='POST'{
 // echo "Pamplinas!";
 $email = $_POST['correo'];
 $pass = $_POST['pass'];

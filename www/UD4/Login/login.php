@@ -4,6 +4,9 @@ if(isset($_SESSION['email'])){
  header("Location:index.php");
  exit();
 }
+
+include_once('model/init.php');
+inicializa(); 
 ?>
 
 <!DOCTYPE html>
