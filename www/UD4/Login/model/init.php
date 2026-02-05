@@ -49,11 +49,15 @@ function inicializa(){
             Por lo que... si queremos comprobar si devuelve resultados. Las comprobaciones 
             se hacen con fetch()  --->
         */
-            if($stmt->fetch()){
-                echo "Bananas!";
-            }else {
-                echo "Apples!";
-            }
+        if($stmt->fetch()){
+            // Si devuelve resultados es que la BBDD existe. Sino la creamos
+            echo "Bananas!";
+        }else {
+            $sql = "CREATE DATABASE IF NOT EXISTS loginud4";
+            $stmt = $conexion->prepare($sql);
+            $stmt->execute();
+            echo "Se ha creado correctamente la BBDD";
+        }
     }catch(PDOException $e){
         echo "Se ha producido un error en la consulta a la BBDD". $e->getMessage();
     }
