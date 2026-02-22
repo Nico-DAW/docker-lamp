@@ -18,6 +18,9 @@
     // print_r($_SESSION);
     // Los valores almacenados en la variable de sesion $_SESSION se almacenan en en el servidor no en el navegador. 
     echo $_GET['mensaje'];
+    print_r($_SESSION);
     ?>
+    <br>
+    <a href="elimina.php">Elimina Cookie</a>
 </body>
 </html>

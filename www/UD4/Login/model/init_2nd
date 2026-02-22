@@ -14,25 +14,31 @@ function inicializa(){
     try{
         $conexion = conPDO();
         $sql = "SHOW DATABASES LIKE 'loginud4'";
-        $stmt = $conexion->query($sql);
+        $stmt = $conexion->exec($sql);
+        $conexion=null;
+        
+        // Por qué pasa esto (importante entenderlo)
+        // exec() devuelve número de filas afectadas
+        // SHOW, SELECT, DESCRIBE:
+        // - no afectan filas
+        // - ⇒ resultado: 0
+        // Las filas devueltas solo se pueden leer con query() + fetch()
 
-        /*
-           En PDO para comprobar si se devuelven resultados se puede emplear rowCount() (En Mysqli num_rows (propiedad)) pero
-           no siempre es fiable. Es más fiable hacer un query() y despues un fetch().
-           fetch() devulve o un array con resultados o false. 
-        */
+        //Regla de ORO en PDO : 
+        //Regla de oro PDO 🧠
+        // Guárdatela porque evita muchos bugs:
+        // exec() → modifica cosas
+        // query() → lee cosas
+        // fetch() → solo con query()
 
-        if($stmt->fetch()){
-            echo "La BBDD ya existe!";
+        if($stmt>0){
+            echo "Bananas!";
         }else {
+            $conexion = conPDO();
             $sql = "CREATE DATABASE IF NOT EXISTS loginud4";
             $conexion->exec($sql);
             echo "Se ha creado correctamente la BBDD";
         }
-
-        // Acordarse de cerrar la conexion en PDO con null 
-        $conexion = null;
-
     }catch(PDOException $e){
         echo "Se ha producido un error en la consulta a la BBDD". $e->getMessage();
     }

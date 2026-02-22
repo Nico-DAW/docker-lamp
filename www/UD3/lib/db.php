@@ -22,7 +22,7 @@ function conecta(){
 
     $conexion = new mysqli('db', 'root', 'test');
     if($conexion->connect_errno != null){
-        die("Se ha producido un error al intentar establecer la consexión con la BBDD".$connect_error);
+        die("Se ha producido un error al intentar establecer la consexión con la BBDD".$conexion->connect_error);
     }else{
         return $conexion;
     }
