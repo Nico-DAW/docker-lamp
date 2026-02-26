@@ -17,4 +17,12 @@ $usuarios = [
     'paco'=>['clave'=>'abc.1234', 'rol'=>'admin']
 ];
 
+function estaLogueado(){
+    return isset($_SESSION['nombre']);
+};
+
+function getRol(){
+    return $_SESSION['rol'];
+}
+
 ?>
