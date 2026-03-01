@@ -1,4 +1,4 @@
-<?php $url_completa= 'http://'.$_SERVER['HTTP_HOST']."/Soluciones/UD3/Anexo2/"; ?>
+<?php $url_completa= 'http://'.$_SERVER['HTTP_HOST']."/UD4/Tareas/Tarea/"; ?>
 <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
     <div class="position-sticky">
         <ul class="nav flex-column">
