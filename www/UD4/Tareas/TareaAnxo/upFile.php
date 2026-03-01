@@ -16,7 +16,11 @@ requiereAdmin();
         <ul>
             <li>is_dir()</li>
             <li>mkdir()</li>
-            <li>file_exists($target_file)</li>
+            <li>$target_dir="uploads/";</li>
+            <li>$target_file=$target_dir.basename($_FILES["fileToUpload"]['name'])</li>
+            <li>!file_exists($target_file)</li>
+            <li>move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$target_file)</li>
+            <li>$fileType=strtolower(pathinfo($target_file,PATHINFO_EXTENSION))</li>
         </ul>
     </p>
 </body>
