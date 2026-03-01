@@ -21,6 +21,7 @@ requiereAdmin();
             <li>!file_exists($target_file)</li>
             <li>move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$target_file)</li>
             <li>$fileType=strtolower(pathinfo($target_file,PATHINFO_EXTENSION))</li>
+            <li>recordar también que la carpeta de subida tiene que tener permisos de escritura chmod 777 ruta desde terminal</li>
         </ul>
     </p>
 </body>
