@@ -30,8 +30,18 @@ function requiereLogin(){
     }
 }
 
+function requiereAdmin(){
+    if($_SESSION['rol']!='admin'){
+        header("Location:panel.php?error=".urlencode("Requiere admin"));
+        exit();
+    }
+}
+
 function getRol(){
     return $_SESSION['rol'];
 }
 
+//Si la cookie está definida el valor que posea y sino por defect claro. 
+$tema = $_COOKIE['tema']??'claro';
+//setcookie('claro','',time()-86400,'/');
 ?>

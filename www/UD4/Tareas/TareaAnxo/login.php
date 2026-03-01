@@ -10,10 +10,20 @@ require_once('config.php');
     <style>
         .error{
             color:red;
-        };
+        }
+
+        .claro{
+            background: #f5f5f5; 
+            color: #333;
+        }
+
+        .oscuro{
+            background: #333; 
+            color: #f5f5f5;
+        }
     </style>
 </head>
-<body>
+<body class="<?=  $tema ?>">
     <h2>Página de Login</h2>
     
     <!-- Comprobaciones

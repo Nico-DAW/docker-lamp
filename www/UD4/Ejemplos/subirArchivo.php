@@ -19,6 +19,7 @@
 </form>
 
 <?php 
+/* 
     $target_dir = "uploads/";
     $target_file = $target_dir.basename($_FILES["uploadImage"]["name"]);
     $file_type = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -49,7 +50,7 @@
     }else{
         echo "El archivo ya existe";
     }
-/* 
+
 Recordar las propiedades de $_FILES -> 
 
 // Si el input es <input type="file" name="foto" />
