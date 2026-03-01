@@ -13,13 +13,22 @@ Definimos los posibles usuarios en un array. Un simulación. Lo suyo sería recu
 de un BBDD.
 */
 $usuarios = [
-    'raquel'=>['clave'=>'1234.abc', 'rol'=>'player'],
-    'paco'=>['clave'=>'abc.1234', 'rol'=>'admin']
+    'raquel'=>['clave'=>'1234.', 'rol'=>'player'],
+    'paco'=>['clave'=>'abcd.', 'rol'=>'admin']
 ];
 
+//Función para comprobar si está logueado 
 function estaLogueado(){
     return isset($_SESSION['nombre']);
 };
+
+//Función para requerir login
+function requiereLogin(){
+    if(!isset($_SESSION['nombre'])){
+        header("Location:login.php?error=".urlencode("Requiere login"));
+        exit();
+    }
+}
 
 function getRol(){
     return $_SESSION['rol'];

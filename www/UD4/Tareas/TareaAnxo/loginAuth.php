@@ -13,9 +13,10 @@ if($_SERVER['REQUEST_METHOD']=='POST' && !empty($_POST['nombre']) && !empty($_PO
     foreach($usuarios as $key=>$value){
         //if($key==$_POST['nombre']&&$value['clave']==$_POST['pass']){
         //echo $key;
+        //Esta manera de hacerlo demuestra comprensión en como funciona un array asociativo. 
         if($key==$_POST['nombre']&&$value['clave']==$_POST['pass']){
             $_SESSION['nombre']=$_POST['nombre'];
-            $_SESSION['pass']=$_POST['pass'];
+            //$_SESSION['pass']=$_POST['pass'];
             $_SESSION['rol']=$value['rol'];
             //var_dump($value);
 
@@ -33,4 +34,14 @@ if($_SERVER['REQUEST_METHOD']=='POST' && !empty($_POST['nombre']) && !empty($_PO
     header("Location:login.php?error=".$error);
     exit();
 }
+
+/*
+//La comprobación que hace Anxo está muy bien (aunque no comprueba que los campos estén ciumplimentados con empty()).
+$nombre = $_POST['nombre']??'';
+$pass = $_POST['pass']??'';
+
+if(isset($usuarios[$nombre]&&$usuarios[$nombre]['clave']===$pass)){...}
+*/
+
+
 ?>

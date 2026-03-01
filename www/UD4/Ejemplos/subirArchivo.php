@@ -49,7 +49,16 @@
     }else{
         echo "El archivo ya existe";
     }
+/* 
+Recordar las propiedades de $_FILES -> 
 
+// Si el input es <input type="file" name="foto" />
+$_FILES['foto']['name'];
+$_FILES['foto']['type'];
+$_FILES['foto']['tmp_name'];
+$_FILES['foto']['size'];
+$_FILES['foto']['error'];
+*/
 ?>
     
 </body>
