@@ -27,6 +27,8 @@
                         $apellidos = $_POST['apellidos'];
                         $username = $_POST['username'];
                         $contrasena = $_POST['contrasena'];
+                        $rol = $_POST['rol'];
+                        var_dump($rol);
                         $error = false;
                         //verificar nombre
                         if (!validarCampoTexto($nombre))
@@ -52,10 +54,16 @@
                             $error = true;
                             echo '<div class="alert alert-danger" role="alert">El campo contraseña es obligatorio y debe ser compleja.</div>';
                         }
+                        //verificar rol
+                        if (!esRolValido($rol))
+                        {
+                            $error = true;
+                            echo '<div class="alert alert-danger" role="alert">El campo rol es obligatorio.</div>';
+                        }
                         if (!$error)
                         {
                             require_once('../modelo/pdo.php');
-                            $resultado = nuevoUsuario(filtraCampo($nombre), filtraCampo($apellidos), filtraCampo($username), $contrasena);
+                            $resultado = nuevoUsuario(filtraCampo($nombre), filtraCampo($apellidos), filtraCampo($username), $contrasena, filtraCampo($rol));
                             if ($resultado[0])
                             {
                                 echo '<div class="alert alert-success" role="alert">Usuario guardado correctamente.</div>';
