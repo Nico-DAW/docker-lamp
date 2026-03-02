@@ -24,8 +24,10 @@ function esNumeroValido($campo)
 }
 
 function esRolValido($campo)
-{
-    return (!empty(filtraCampo($campo)) && in_array($campo, ['0','1'], true));
+{   
+    //Cuidado aquí Amego!!! empty(0) y empty('0') devuelven true.... 
+    $campo=filtraCampo($campo);
+    return in_array($campo, ['0','1'], true);
 }
 
 

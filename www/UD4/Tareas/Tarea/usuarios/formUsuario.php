@@ -14,7 +14,7 @@
     <label for="rol" class="form-label">Rol</label>
     <!--
     Así podríamos hacerlo pero la mejor manera de hacerlo sería por medio de un select.
-    <input type="text" class="form-control" id="rol" name="rol" value="<?php echo isset($rol) ? ($rol) : '' ?>" required>
+    <input type="text" class="form-control" id="rol" name="rol" value="<?php //echo isset($rol) ? ($rol) : '' ?>" required>
     -->
     <select class="form-select" id="rol" name="rol" required>
         <option value="" <?= isset($rol) ? '' : 'selected' ?>disabled>Seleccione el tipo de usuario</option>
