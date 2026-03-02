@@ -17,8 +17,8 @@
     <input type="text" class="form-control" id="rol" name="rol" value="<?php //echo isset($rol) ? ($rol) : '' ?>" required>
     -->
     <select class="form-select" id="rol" name="rol" required>
-        <option value="" <?= isset($rol) ? '' : 'selected' ?>disabled>Seleccione el tipo de usuario</option>
-        <option value="0" <?= isset($rol) && $rol == 0 ? 'selected' : '' ?>>Usuario registrado</option>
-        <option value="1" <?= isset($rol) && $rol == 1 ? 'selected' : '' ?>>Administrador</option>
+        <option value="" <?=  isset($rol) ? '' : 'selected' ?>disabled>Seleccione el tipo de usuario</option>
+        <option value="0" <?= isset($rol) && $rol == '0' ? 'selected' : '' ?>>Usuario registrado</option>
+        <option value="1" <?= isset($rol) && $rol == '1' ? 'selected' : '' ?>>Administrador</option>
     </select>
 </div>
