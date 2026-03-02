@@ -27,7 +27,7 @@ function creaDB()
         $username = $_ENV['DATABASE_USER'];
         $password = $_ENV['DATABASE_PASSWORD'];
         $dbname = $_ENV['DATABASE_NAME'];
-        
+
         $conexion = conecta($servername, $username, $password, null);
 
         if ($conexion->connect_error)
