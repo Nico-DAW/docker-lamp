@@ -84,7 +84,7 @@ function createTablaUsuarios()
                 return [false, 'La tabla "usuarios" ya existía.'];
             }
 
-            $sql = 'CREATE TABLE `usuarios` (`id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(50) NOT NULL , `nombre` VARCHAR(50) NOT NULL , `apellidos` VARCHAR(100) NOT NULL , `contrasena` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ';
+            $sql = 'CREATE TABLE `usuarios` (`id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(50) NOT NULL , `nombre` VARCHAR(50) NOT NULL , `apellidos` VARCHAR(100) NOT NULL , `contrasena` VARCHAR(100) NOT NULL ,`rol` TINYINT(1) NOT NULL DEFAULT 0,  PRIMARY KEY (`id`)) ';
             if ($conexion->query($sql))
             {
                 return [true, 'Tabla "usuarios" creada correctamente'];
