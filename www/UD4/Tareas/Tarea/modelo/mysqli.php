@@ -21,8 +21,15 @@ function cerrarConexion($conexion)
 function creaDB()
 {
     try {
-        $conexion = conecta('db', 'root', 'test', null);
+        //$conexion = conecta('db', 'root', 'test', null);
+        //Como hemos creado las variables de entorno vamos a probarlas... 
+        $servername = $_ENV['DATABASE_HOST'];
+        $username = $_ENV['DATABASE_USER'];
+        $password = $_ENV['DATABASE_PASSWORD'];
+        $dbname = $_ENV['DATABASE_NAME'];
         
+        $conexion = conecta($servername, $username, $password, null);
+
         if ($conexion->connect_error)
         {
             return [false, $conexion->error];

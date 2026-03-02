@@ -1,11 +1,16 @@
 <?php
 
 function conectaPDO()
-{
+{   /*
     $servername = 'db';
     $username = 'root';
     $password = 'test';
     $dbname = 'tareas';
+    */
+    $servername = $_ENV['DATABASE_HOST'];
+    $username = $_ENV['DATABASE_USER'];
+    $password = $_ENV['DATABASE_PASSWORD'];
+    $dbname = $_ENV['DATABASE_NAME'];
 
     $conPDO = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
