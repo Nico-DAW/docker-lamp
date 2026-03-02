@@ -183,3 +183,35 @@ function buscaUsuario($id)
     }
     
 }
+
+function buscaUser($username, $pass)
+{
+
+    try
+    {
+        $con = conectaPDO();
+        $stmt = $con->prepare('SELECT * FROM usuarios WHERE username = :username AND contrasena = :contrasena');
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':contrasena', $pass);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        if ($stmt->rowCount() == 1)
+        {
+            return $stmt->fetch();
+        }
+        else
+        {
+            return null;
+        }
+    }
+    catch (PDOException $e)
+    {
+        return null;
+    }
+    finally
+    {
+        $con = null;
+    }
+    
+}
