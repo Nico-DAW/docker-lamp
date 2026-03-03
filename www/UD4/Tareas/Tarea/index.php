@@ -1,3 +1,4 @@
+<?php require('utils.php')?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
                 </div>
 
                 <div class="container justify-content-between">
-                    <p>Aquí va el contenido </p>                    
+                    <p>Bienvenido <?= $_SESSION['username']; ?>! Tienes permisos de <?= $_SESSION['rol'] == 1 ? 'Administrador' : 'Usuario'; ?></p>                  
                 </div>
             </main>
         </div>

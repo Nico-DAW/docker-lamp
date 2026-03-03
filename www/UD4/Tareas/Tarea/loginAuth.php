@@ -18,8 +18,11 @@ if(empty($user)||empty($pass)){
 }
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
-  if(buscaUser($user,$pass)){
+  $userLogin = buscaUser($user,$pass);
+  if($userLogin){
     $success = "Login realizado correctamente";
+    $_SESSION['username'] = $user;
+    $_SESSION['rol'] = $userLogin['rol'];
     header("Location:index.php?success=".urlencode($success));
     exit();
   }else{
