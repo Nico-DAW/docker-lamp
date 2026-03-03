@@ -42,6 +42,9 @@
                    Salir
                 </a>
             </li>
+            <?php if($_SESSION['rol']==1):?>
+                <p>Content just for Administrators</p>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>
