@@ -1,4 +1,7 @@
-<?php require('utils.php')?>
+<?php 
+require_once("utils.php");
+requiereLogin();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +25,7 @@
                 </div>
 
                 <div class="container justify-content-between">
-                    <p>Bienvenido <?= $_SESSION['username']; ?>! Tienes permisos de <?= $_SESSION['rol'] == 1 ? 'Administrador' : 'Usuario'; ?></p>                  
+                    <p>Bienvenido <?= $_SESSION['username']; ?>! Tienes permisos de <?= $_SESSION['rol'] == 1 ? 'Administrador' : 'Usuario'; ?></p>
                 </div>
             </main>
         </div>

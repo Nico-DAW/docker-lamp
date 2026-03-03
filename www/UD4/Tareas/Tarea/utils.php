@@ -36,3 +36,11 @@ function validaContrasena($campo)
 {
     return (!empty($campo) && validarLargoCampo($campo, 7));
 }
+
+function requiereLogin(){
+    if(!isset($_SESSION['username'])){
+        //Si... Amego... cuidado con las rutas... 
+        header("Location:/UD4/Tareas/Tarea/login.php?error=".urlencode("Es necesario login."));
+        exit();
+    }
+}

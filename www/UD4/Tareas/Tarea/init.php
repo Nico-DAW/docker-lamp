@@ -1,3 +1,7 @@
+<?php 
+require_once("utils.php");
+requiereLogin();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
