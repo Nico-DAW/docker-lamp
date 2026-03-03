@@ -37,7 +37,11 @@
                    Buscador de tareas (PDO)
                 </a>
             </li>
-            
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo $url_completa.'logout.php'?>">
+                   Salir
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
