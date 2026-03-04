@@ -9,8 +9,19 @@ requiereLogin();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UD3 (Anexo 2)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .claro{
+            background-color: #ffffff;
+            color: #2b2b2b;
+        }
+
+        .oscuro{
+            background-color: #2b2b2b;
+            color: #ffffff;
+        }
+    </style>
 </head>
-<body>
+<body class=<?= $tema ?>>
 
     <?php include_once('vista/header.php'); ?>
 

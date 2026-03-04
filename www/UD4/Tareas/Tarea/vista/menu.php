@@ -43,7 +43,22 @@
                 </a>
             </li>
             <?php if($_SESSION['rol']==1):?>
-                <p>Content just for Administrators</p>
+                <hr>
+                <p>Just for Administrators</p>
+                <form method='POST'>
+                    <div>
+                    <select name=tema id=tema>
+                        <option value="claro">Claro</option>
+                        <option value="oscuro">Oscuro</option>
+                    </select>
+                    </div>
+                    <br>
+                    <div>
+                        <input type="submit" value="Enviar"/>
+                    </div>
+                    <br>
+                </form>
+                <br>
             <?php endif; ?>
         </ul>
     </div>

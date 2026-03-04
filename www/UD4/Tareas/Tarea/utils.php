@@ -44,3 +44,14 @@ function requiereLogin(){
         exit();
     }
 }
+
+// Como utils lo requerimos en todas las vistas... podemos implementar la cookie aquí:
+
+$tema = $_COOKIE['tema']??'claro'; 
+
+if($_SERVER['REQUEST_METHOD']=='POST'&&isset($_POST['tema'])){
+    $tema = $_POST['tema'];
+    setcookie('tema',$tema,time()+360,"/");
+}
+
+//$tema = $_SESSION['tema'];
