@@ -64,3 +64,5 @@ foreach ($animals as $animal) {
 }
 ?>
 <p style="margin-top: 2rem;"><a href="index.php">← Volver al menú</a></p>
+
+

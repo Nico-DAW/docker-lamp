@@ -1,5 +1,5 @@
 <?php
-abstract class Animal {
+abstract class Animalito {
     private $edad;
 
     public function setEdad($edad) {
@@ -18,7 +18,7 @@ abstract class Animal {
     abstract public function sonido($sound);
 }
 
-class Colebra extends Animal{
+class Colebra extends Animalito{
     private $tipo;
 
     public function getTipo(){
