@@ -20,6 +20,10 @@ class Strawberry extends Fruit {
         // OK: intro() es protected, accesible desde clase hija
         $this->intro();
     }
+
+    public function intro(){
+        echo "Soy {$this->name} de color {$this->color}. Y este método es modificado en clase hija.<br>";
+    }
 }
 
 /** @disregard P1005 */

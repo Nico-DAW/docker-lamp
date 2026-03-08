@@ -35,8 +35,5 @@ ten en cuenta que esta clase los atributos son privados. No se les podría asign
 hacemos a continuación y sinembargo funciona.
 */
 $autoUno->potencia=100;
-
 echo $autoUno->potencia;
-
-
 ?>
