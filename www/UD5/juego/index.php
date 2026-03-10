@@ -1,3 +1,7 @@
+<?php 
+require_once("config/utils.php");
+compruebaSesion();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +11,7 @@
 </head>
 <body>
     <h2>Mis juegos</h2>
+    <hr>
     <p>Dasboard juegos</p>
 </body>
 </html>

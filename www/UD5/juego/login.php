@@ -1,11 +1,59 @@
+<?php 
+require_once("config/utils.php");
+//compruebaSesion();
+if(!isset($_SESSION['username'])&&isset($_POST['username'])){
+    if(compruebaLogin($_POST['username'],$_POST['pass'])){
+        header("Location:index.php?mensaje=".urlencode("Usuario logueado correctamente."));
+        exit();
+    }else{
+        header("Location:login.php?mensaje=".urlencode("Se requiere login."));
+        exit();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>UD5-Juego</title>
+    <style>
+        .centra{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card{
+            width: 250px;
+            border-radius: 10px;
+            border: 1px solid;
+            text-align: center;
+            padding:10px;
+        }
+
+        input[type=submit]{
+            margin: 20px;
+        }
+
+    </style>
 </head>
 <body>
-    <h2>Formulario de acceso</h2>
+    <div class="centra">
+        <div class="card">
+            <h2>Login</h2>
+            <form action="<?= $_SERVER['PHP_SELF']?>" method="POST">
+                <div>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username"/>
+                </div>
+                <div>
+                <label for="pass">Password</label>
+                <input type="text" name="pass" id="pass"/>
+                </div>
+                <input type="submit" value="Enviar"/>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
