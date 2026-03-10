@@ -1,22 +1,12 @@
 <?php 
 require_once("config/utils.php");
 //compruebaSesion();
-if(!isset($_SESSION['username'])&&isset($_POST['username'])){
-    if(compruebaLogin($_POST['username'],$_POST['pass'])){
-        header("Location:index.php?mensaje=".urlencode("Usuario logueado correctamente."));
-        exit();
-    }else{
-        header("Location:login.php?mensaje=".urlencode("Se requiere login."));
-        exit();
-    }
+if(isset($_SESSION['username'])){
+   header("Location:index.php?mensaje=".urlencode("Usuario logueado correctamente."));
+   exit();
 }
 /* 
-Aquí se comprueba el login en la propia página con $_SERVER['PHP_SELF']. Hacer la comprobación en la 
-propia página quizá no sea lo más elegante. Voy a hacer una v2 del proyecto validando en un archivo
-loginAuth.php.
-
-El flujo normal es... Si la variable de sesion está definida (con un if()) se va a panel y sino 
-se permite al usuario que continue en la página de login hasta que se loguee (submit). 
+Más limpio y compresible que en la primera version.
 */
 ?>
 <!DOCTYPE html>
@@ -50,7 +40,7 @@ se permite al usuario que continue en la página de login hasta que se loguee (s
     <div class="centra">
         <div class="card">
             <h2>Login</h2>
-            <form action="<?= $_SERVER['PHP_SELF']?>" method="POST">
+            <form action="loginAuth.php" method="POST">
                 <div>
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username"/>
