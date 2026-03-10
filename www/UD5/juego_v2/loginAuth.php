@@ -7,7 +7,7 @@ existe. En el segundo caso es una comprobación más exclusiva de loginAuth.php 
 y hacer la comprobación directamente en la página. Pero bueno... como ya está hecha trabajo que me ahorro.
 */
 if($_SERVER['REQUEST_METHOD']=='POST'){
-    if(compruebaLogin($POST['username'], $POST['password'])){
+    if(compruebaLogin($_POST['username'], $_POST['pass'])){
         header("Location:index.php?mensaje=".urlencode("Usuario logueado correctamente."));
         exit();
     }else{
