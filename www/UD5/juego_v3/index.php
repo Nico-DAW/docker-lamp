@@ -2,6 +2,7 @@
 require_once("config/utils.php");
 require_once("config/database.php");
 require_once("models/Autorizacion.php");
+require_once("models/Comunicacion.php");
 Conexion::singleInst()->getConnection();
 Conexion::singleInst()->creaDB("juegos");
 //Conexion::singleInst()->creaTablas();
@@ -92,9 +93,17 @@ Autoriza::compruebaSesion();
                  </tr>
             </thead>
             <tbody>
-                <tr><td> Titulo de ejemplo</td>
-                <td> Ejemplo de descripcion</td>
-                <td> 160h</td></tr>
+                <?php
+                $conn = new Comunica();
+                $juegos = $conn->getGames();
+                foreach($juegos as $juego):
+                ?>
+                <tr>
+                    <td><?= $juego["titulo"] ?></td>
+                    <td><?= $juego["descripcion"] ?></td>
+                    <td><?= $juego["horas"] ?></td>
+                </tr>
+                <?php endforeach; ?>
             </tbody>
          </table>
      </div>
