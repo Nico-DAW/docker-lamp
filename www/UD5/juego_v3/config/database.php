@@ -118,6 +118,39 @@ class Conexion{
            foreach($datos as $dato){
                 $stmt->execute([$dato["username"],$dato["pass"],$dato["rol"]]);
            }
+
+           $datos = [
+                [
+                   "titulo"=>"Monkey Island",
+                   "descripcion"=>"Guybrush Threepwood, un aprendiz de pirata que busca fama y amor, enfrentándose al pirata fantasma LeChuck en el Caribe.",
+                   "horas"=>150,
+                   "id_jugador"=>1
+                ],
+                [
+                   "titulo"=>"Maniac Mansion",
+                   "descripcion"=>"Dave Miller intenta rescatar a su novia de un científico loco controlado por un meteorito que colisionó cerca de la mansión veinte años atrás.",
+                   "horas"=>200,
+                   "id_jugador"=>1
+                ],
+                [
+                   "titulo"=>"Indiana Jones y la Ultima Cruzada",
+                   "descripcion"=>"Indiana Jones acaba de regresar con la Cruz de Coronado, y es asaltado por Donovan, quien le habla del Santo Grial y la pérdida de su padre.",
+                   "horas"=>50,
+                   "id_jugador"=>2
+                ],
+                [
+                   "titulo"=>"Runaway, A Road Adventure",
+                   "descripcion"=>"Sin saber cómo o por qué, Brian, un estudiante a punto de graduarse en la Universidad, es atacado por gángsters de la Mafia.",
+                   "horas"=>100,
+                   "id_jugador"=>2
+                ]
+           ];
+
+           $sql = "INSERT INTO juegos(titulo, descripcion, horas, id_jugador) VALUES (?,?,?,?)";
+           $stmt = self::$con->prepare($sql);
+           foreach($datos as $dato){
+                $stmt->execute([$dato["titulo"],$dato["descripcion"],$dato["horas"],$dato["id_jugador"]]);
+           }
     }
 
 }
