@@ -1,6 +1,7 @@
 <?php 
 require_once("config/utils.php");
-compruebaSesion();
+require_once("models/Autorizacion.php");
+Autoriza::compruebaSesion();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -24,13 +24,21 @@ class Autoriza{
         return false;
     }
 
-    public function logout(){
+    public static function logout(){
         session_start();
         session_unset();
         session_destroy();
 
         header("Location:login.php?mensaje=".urlencode("Se ha realizado el logout satisfactoriamente"));
         exit();
+    }
+
+    //El resto de funciones de comprobación también podríamos definirlas en esta clase
+    public static function compruebaSesion(){
+        if(!isset($_SESSION['username'])&&empty($_SESSION['username'])){
+            header("Location:login.php?mensaje=".urlencode("Se requiere login."));
+            exit();
+        }
     }
 }
 

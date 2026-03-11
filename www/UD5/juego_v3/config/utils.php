@@ -25,14 +25,14 @@ $usuarios = [
         "Rol"=>"User"
     ]
 ];
-*/
+
 function compruebaSesion(){
     if(!isset($_SESSION['username'])&&empty($_SESSION['username'])){
         header("Location:login.php?mensaje=".urlencode("Se requiere login."));
         exit();
     }
 }
-/*
+
 function compruebaLogin($username, $password){
  //Comprobamos que los campos se hayan cumplimentado   
  global $usuarios;
