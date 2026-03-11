@@ -88,6 +88,36 @@ class Conexion{
             //execute() mal requiere prepare para consultas con parámetros => exec()
             //self::$con->execute($sql);
             self::$con->exec($sql);
+
+            $sql = "SELECT * FROM jugadores";
+            $resultados = self::$con->query($sql);
+            //self::$con->setFetchMode(PDO::FETCH_ASSOC);
+            //var_dump($resultados->fetch(PDO::FETCH_ASSOC));
+            if(!$resultados->fetch(PDO::FETCH_ASSOC)){
+                $this->insertaDatos();
+            }
+            
+    }
+
+    private function insertaDatos(){
+           $datos = [
+                [
+                    "username"=>"P12",
+                    "pass"=>"1234",
+                    "rol"=>"admin"
+                ],
+                [
+                    "username"=>"MA",
+                    "pass"=>"qwer",
+                    "rol"=>"user"
+                ]
+           ];
+
+           $sql = "INSERT INTO jugadores(username, pass, rol) VALUES (?,?,?)";
+           $stmt = self::$con->prepare($sql);
+           foreach($datos as $dato){
+                $stmt->execute([$dato["username"],$dato["pass"],$dato["rol"]]);
+           }
     }
 
 }
