@@ -32,12 +32,27 @@ compruebaSesion();
             color: #ffff;
             font-weight: bold;
         }
+
+        .dashboard{
+            margin:auto;
+            width:70%;
+        }
+
     </style>
 </head>
 <body>
     <?php require_once("views/header.php");?>
-    <h2>Mis juegos</h2>
-    <hr>
-    <p>Dasboard juegos</p>
+    <div class="dashboard">
+     <div>
+         <h2>Bienvenido <?=  $_SESSION['username']?></h2>
+         <hr>
+         <p>Panel de juegos</p>
+     </div>
+    <?php if($_SESSION['rol']=="Admin"):?>
+    <div>
+         <p>Panel de administración</p>
+         <a href=""><button>Crear nuevo juego</button></a>
+    </div>
+    <?php endif;?>
 </body>
 </html>
