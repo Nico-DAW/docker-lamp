@@ -3,10 +3,9 @@ require_once("config/utils.php");
 require_once("config/database.php");
 require_once("models/Autorizacion.php");
 require_once("models/Comunicacion.php");
-Conexion::singleInst()->getConnection();
-Conexion::singleInst()->creaDB("juegos");
-//Conexion::singleInst()->creaTablas();
+
 Autoriza::compruebaSesion();
+Autoriza::compruebaAdmin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,35 +82,7 @@ Autoriza::compruebaSesion();
      <div>
          <h2>Bienvenido <?=  $_SESSION['username']?></h2>
          <hr>
-         <p>Panel de juegos</p>
-         <table>
-            <thead>
-                 <tr>
-                     <th> Titulo</th>
-                     <th> Descripcion</th>
-                     <th> Tiempo de juego</th>
-                 </tr>
-            </thead>
-            <tbody>
-                <?php
-                $conn = new Comunica();
-                $juegos = $conn->getGames();
-                foreach($juegos as $juego):
-                ?>
-                <tr>
-                    <td><?= $juego["titulo"] ?></td>
-                    <td><?= $juego["descripcion"] ?></td>
-                    <td><?= $juego["horas"] ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-         </table>
+         <p> Nuevo Juego </p>
      </div>
-    <?php if($_SESSION['rol']=="Admin"):?>
-    <div>
-         <p>Panel de administración</p>
-         <a href="newJuego.php"><button>Crear nuevo juego</button></a>
-    </div>
-    <?php endif;?>
 </body>
 </html>

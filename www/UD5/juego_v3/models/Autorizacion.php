@@ -40,6 +40,14 @@ class Autoriza{
             exit();
         }
     }
+
+    public static function compruebaAdmin(){
+        //var_dump($_SESSION['rol']);
+        if($_SESSION['rol'] != "Admin"){
+            header("Location:index.php?mensaje=".urlencode("Se requiere ser administrador."));
+            exit();
+        }
+    }
 }
 
 ?>

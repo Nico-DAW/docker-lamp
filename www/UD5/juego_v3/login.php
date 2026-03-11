@@ -16,6 +16,10 @@ Más limpio y compresible que en la primera version.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UD5-Juego</title>
     <style>
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
         .centra{
             display:flex;
             justify-content: center;

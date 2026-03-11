@@ -133,7 +133,7 @@ class Conexion{
                    "id_jugador"=>1
                 ],
                 [
-                   "titulo"=>"Indiana Jones y la Ultima Cruzada",
+                   "titulo"=>"Indiana Jones & Last Crusade",
                    "descripcion"=>"Indiana Jones acaba de regresar con la Cruz de Coronado, y es asaltado por Donovan, quien le habla del Santo Grial y la pérdida de su padre.",
                    "horas"=>50,
                    "id_jugador"=>2
