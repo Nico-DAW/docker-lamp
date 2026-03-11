@@ -46,6 +46,7 @@ class Conexion{
             $con = self::$con;
             $sql = "CREATE DATABASE IF NOT EXISTS ".$db;
             $con->exec($sql);
+            $this->creaTablas();
         }catch(Exception $e){
             echo "Se ha producido un error al intentar crear la BBDD ".$e->getMessage();
         }
@@ -63,6 +64,31 @@ class Conexion{
     en la clase private. En el ejercicio de Villa Olimpica a continuación de estos métodos definidos se crean métodos privados para la 
     creación de tablas y la inserción de datos.
     */
+
+    private function creaTablas(){
+            self::$con->exec("USE juegos");
+
+            $sql = "CREATE TABLE IF NOT EXISTS jugadores(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(100),
+            pass VARCHAR(25),
+            rol VARCHAR(25)
+            )";
+            
+            self::$con->exec($sql);
+
+            $sql = "CREATE TABLE IF NOT EXISTS juegos(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            titulo VARCHAR(100),
+            descripcion VARCHAR(255),
+            horas INT,
+            id_jugador INT,
+            FOREIGN KEY (id_jugador) REFERENCES jugadores(id) ON DELETE CASCADE
+            )";
+            //execute() mal requiere prepare para consultas con parámetros => exec()
+            //self::$con->execute($sql);
+            self::$con->exec($sql);
+    }
 
 }
 

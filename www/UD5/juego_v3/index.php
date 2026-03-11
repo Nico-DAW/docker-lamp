@@ -4,6 +4,7 @@ require_once("config/database.php");
 require_once("models/Autorizacion.php");
 Conexion::singleInst()->getConnection();
 Conexion::singleInst()->creaDB("juegos");
+//Conexion::singleInst()->creaTablas();
 Autoriza::compruebaSesion();
 ?>
 <!DOCTYPE html>
