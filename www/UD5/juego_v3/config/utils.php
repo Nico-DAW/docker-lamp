@@ -7,7 +7,7 @@ que realice las comprobaciones necesarias. Esto se verá en la version v3
 */
 
 session_start();
-
+/*
 $usuarios = [
     [
         "Nombre"=>"Pepe",
@@ -25,14 +25,14 @@ $usuarios = [
         "Rol"=>"User"
     ]
 ];
-
+*/
 function compruebaSesion(){
     if(!isset($_SESSION['username'])&&empty($_SESSION['username'])){
         header("Location:login.php?mensaje=".urlencode("Se requiere login."));
         exit();
     }
 }
-
+/*
 function compruebaLogin($username, $password){
  //Comprobamos que los campos se hayan cumplimentado   
  global $usuarios;
@@ -52,5 +52,5 @@ function compruebaLogin($username, $password){
     return false;
  }
 }
-
+*/
 ?>
