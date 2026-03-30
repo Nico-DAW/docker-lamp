@@ -20,7 +20,7 @@ $usuarios = [
 ];
 
 function compruebaSesion(){
-    if(!isset($_SESSION['username'])&&empty($_SESSION['username'])){
+    if(!isset($_SESSION['username'])||empty($_SESSION['username'])){
         header("Location:login.php?mensaje=".urlencode("Se requiere login."));
         exit();
     }
