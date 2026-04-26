@@ -22,7 +22,7 @@ Flight::route('POST /', function() {
     Flight::json($request);
 });
 */
-
+/*
 Flight::route('POST /', function() {
     $id = Flight::request()->data->id;
     $nombre = Flight::request()->data->nombre;
