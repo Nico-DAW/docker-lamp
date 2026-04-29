@@ -116,6 +116,8 @@ Flight::route('DELETE /', function(){
 Flight::start();
 */
 
+/*
+
 require("flight/Flight.php");
 
 Flight::register('db','PDO',array("mysql:host=db;dbname=dbname","root","test"));
@@ -129,6 +131,22 @@ Flight::route('PUT /', function(){
     $stmt->execute();
 
     Flight::json(["Se ha actualizado el registro"]);
+});
+
+Flight::start();
+*/
+
+require_once("flight/Flight.php");
+
+Flight::register('db', 'PDO', array("mysql:host=db; dbname=dbname", "root", "test"));
+
+Flight::route('GET /@id',function($id){
+    $sql="SELECT * FROM Modulo WHERE id=:id";
+    $stmt=Flight::db()->prepare($sql);
+    $stmt->bindParam(':id',$id);
+    $stmt->execute();
+    $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    Flight::json([$datos]);
 });
 
 Flight::start();
