@@ -23,5 +23,14 @@ abstract class Volumen{
 
 class Cubo extends Volumen{
     private $color;
+
+    public function __construct($nombre,$tipo,$color){
+        parent::__construct($nombre,$tipo);
+        $this->color = $color; 
+    }
+
+    public function getColor(){
+        return $this->color; 
+    }
 }
 ?>

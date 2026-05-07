@@ -1,5 +1,5 @@
 <?php 
 require("abstractaVolumen.php");
-$caja = new Cubo("Box","Cubo1");
-echo $caja->getNombre();
+$caja = new Cubo("Box","Cubo1","Rosa");
+echo "El nombre del volumen es: ".$caja->getNombre()." y el color es: ". $caja->getColor();
 ?>
