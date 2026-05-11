@@ -65,8 +65,12 @@ class Single{
     if(self::$instance == null){
         self::$instance = new self();
     }
-
+    /* 
+    En un método estático no se puede usar $this. Se debe devolver la conexión
+    desde la instancia creada. Lo sigueinte daría error: 
     return $this->conn;
+    */
+    return self::$instance->conn;
 
    }
 }
