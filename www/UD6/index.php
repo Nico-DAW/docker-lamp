@@ -1,4 +1,29 @@
 <?php
+
+require("flight/Flight.php");
+
+Flight::register('db','PDO',array("mysql:host=db;dbname=dbname","root","test"));
+
+
+Flight::route('POST /',function(){
+    $id = Flight::request()->data->id;
+    $nombre = Flight::request()->data->nombre;
+    $alias = Flight::request()->data->abreviatura; 
+
+    $sql = "INSERT INTO Modulo (id, nombre, abreviatura) VALUES (:id, :nombre, :abreviatura)";
+    $stmt = Flight::db()->prepare($sql);
+
+    $stmt->bindParam(":id",$id);
+    $stmt->bindParam(":nombre",$nombre);
+    $stmt->bindParam(":abreviatura",$alias);
+
+    $stmt->execute();
+
+    echo "Apples!!!"; 
+});
+
+Flight::start();
+
 /*
 First aproach -> 
 
@@ -134,7 +159,7 @@ Flight::route('PUT /', function(){
 });
 
 Flight::start();
-*/
+
 
 require_once("flight/Flight.php");
 
@@ -150,3 +175,4 @@ Flight::route('GET /@id',function($id){
 });
 
 Flight::start();
+*/
