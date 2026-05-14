@@ -1,5 +1,43 @@
 <?php
+/*
+//Repaso GET con mensaje si no encuentra el registro
+require_once("flight/Flight.php");
 
+Flight::register('db', 'PDO', array("mysql:host=db;dbname=dbname","root","test"));
+
+Flight::route('GET /@id',function($id){
+    $sql = "SELECT * FROM Modulo WHERE id=:id";
+    $stmt = Flight::db()->prepare($sql);
+    $stmt->bindParam(":id",$id);
+    $stmt->execute();
+
+    $resultado = $stmt->fetchAll();
+    if($resultado==null){
+        Flight::json("No hay resultados para el id");
+        return;
+    }
+    Flight::json($resultado);
+});
+
+Flight::start();
+
+//Repaso DELETE
+require("flight/Flight.php");
+Flight::register('db', 'PDO', array("mysql:host=db;dbname=dbname","root","test"));
+
+Flight::route('DELETE /',function(){
+    $sql = "DELETE FROM Modulo WHERE id=:id";
+    $stmt = Flight::db()->prepare($sql);
+    $id = Flight::request()->data->id;
+    $stmt->bindParam(":id",$id);
+
+    $stmt->execute();
+});
+
+Flight::start();
+*/
+
+/*
 require("flight/Flight.php");
 
 Flight::register('db','PDO',array("mysql:host=db;dbname=dbname","root","test"));
@@ -19,12 +57,13 @@ Flight::route('POST /',function(){
 
     $stmt->execute();
 
-    echo "Apples!!!"; 
+    //echo "Apples!!!"; 
 });
 
 Flight::start();
 
-/*
+
+
 First aproach -> 
 
 //Incluimos la librería de flight
