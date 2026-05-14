@@ -28,12 +28,52 @@ Flight::route('POST /login',function(){
         Flight::json(["Se ha actualizado el token"]);
         return;
     }
-    Flight::json(["No hay ususarios con ese id"]);
+    Flight::json(["No hay usuarios con ese id"]);
 });
 
+
+//Previamente habiamos repasado GET vamos a recuperar el ejemplo 
+
+//En esta ocasion vamos a comprobar con un Middleware que el usuario está autenticado: 
+//Para la comprobación vamos a crear un Middleware
+
+class MiddlewareAuth{
+    //Como es de comprobación en este caso sólo necesitamos el método before()
+    public function before(){
+        $headToken = Flight::request()->getHeader('X-Token');
+        $resultado = null; 
+        if(!empty($headToken)){
+            $sql = "SELECT * FROM users WHERE token=:token";
+            $stmt = Flight::db()->prepare($sql);
+            $stmt->bindParam(":token",$headToken);
+            $stmt->execute(); 
+            $resultado = $stmt->fetchAll();
+        }
+
+        if($resultado == null){
+            //jsonHalt() inerrumpe la ejecución
+            Flight::jsonHalt(['error'=>'No hay token definido. Sin token no se permite la consulta'], 403);
+        }
+        
+        Flight::set('user', $resultado);
+    }
+}
+
+$middle = new MiddlewareAuth(); 
+
+Flight::route('GET /',function(){
+    $sql = "SELECT * FROM users WHERE id=1";
+    $stmt = Flight::db()->prepare($sql);
+    $stmt->execute();
+    $resultado = $stmt->fetchAll(); 
+    Flight::json($resultado);
+})->addMiddleware($middle);
+
 Flight::start();
-/*
+
 //Repaso GET con mensaje si no encuentra el registro
+/*
+Esto aquí es redundante: 
 require_once("flight/Flight.php");
 
 Flight::register('db', 'PDO', array("mysql:host=db;dbname=dbname","root","test"));
