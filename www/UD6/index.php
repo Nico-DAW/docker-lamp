@@ -1,4 +1,37 @@
 <?php
+//Ejemplo de login. Creo una BBDD en PHPMYDAMIN y la pueblo con 5 registros. 
+require_once("flight/Flight.php");
+
+Flight::register('db', 'PDO', array("mysql:host=db;dbname=flightusers","root","test"));
+
+//Ojo a este detalle -> En FlightPHP, Flight::request()->data normalmente se usa para POST/PUT, no para GET.
+//Si pones GET aquí no devolverá datos
+
+Flight::route('POST /login',function(){
+    $id = Flight::request()->data->id;
+    $sql = "SELECT * FROM users WHERE id=:id";
+    $stmt = Flight::db()->prepare($sql);
+    $stmt->bindParam(":id",$id); 
+    $stmt->execute();
+    $resultados = $stmt->fetch();
+    //Aquí también se podría verificar el password 
+    //Algo así como: if ($datos && password_verify($password, $datos['password'])){...}
+    //Una vez comprobado que el usuario existe. Se genera un token y se almacena como pide el ejercicio
+    if($resultados){
+        $token = bin2hex(random_bytes(32));
+        $sql = "UPDATE users SET token=:token WHERE id=:id";
+        $stmt = Flight::db()->prepare($sql);
+        $id = $resultados["id"];
+        $stmt->bindParam(":token",$token);
+        $stmt->bindParam(":id",$id);
+        $stmt->execute();
+        Flight::json(["Se ha actualizado el token"]);
+        return;
+    }
+    Flight::json(["No hay ususarios con ese id"]);
+});
+
+Flight::start();
 /*
 //Repaso GET con mensaje si no encuentra el registro
 require_once("flight/Flight.php");
